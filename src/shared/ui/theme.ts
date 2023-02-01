@@ -4,15 +4,15 @@ export const theme = {
   name: "theme",
   palette: {
     background: {
-      primary: "#ffffff",
+      primary: "#f5f5f5",
       secondary: "#f7f7f7",
     },
     text: {
-      primary: "#4a4e4d",
+      primary: "#313052",
       secondary: "#FFFFFF",
     },
     accent: {
-      blue: "#0e9aa7",
+      primary: "#313052",
       turquoise: "#3da4ab",
       yellow: "#f6cd61",
       orange: "#fe8a71",
@@ -21,22 +21,22 @@ export const theme = {
   typography: {
     title: {
       size: "19.2px",
-      fontFamily: "OPEN_SANS_SEMIBOLD",
+      fontFamily: "Roboto",
       letterSpacing: "1px",
     },
     largeTitle: {
       size: "30px",
-      fontFamily: "OPEN_SANS_BOLD",
+      fontFamily: "Roboto",
       letterSpacing: "1px",
     },
     body10: {
       size: "10px",
-      fontFamily: "OPEN_SANS_REGULAR",
+      fontFamily: "Roboto",
       letterSpacing: "1px",
     },
     body12: {
       size: "10px",
-      fontFamily: "OPEN_SANS_MEDIUM",
+      fontFamily: "Roboto",
       letterSpacing: "1px",
     },
   },
