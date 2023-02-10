@@ -39,6 +39,11 @@ export const theme = {
       fontFamily: "Roboto",
       letterSpacing: "1px",
     },
+    body16: {
+      size: "16px",
+      fontFamily: "Roboto",
+      letterSpacing: "1px",
+    },
     title2: {
       size: "32px",
       fontFamily: "Roboto",

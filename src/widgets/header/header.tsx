@@ -3,6 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { navItems } from "./nav-items";
 import { Icon, Item } from "./ui/atoms";
 
+const Wrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+`;
+
 const Container = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.palette.background.primary};
@@ -21,20 +27,22 @@ const NavPanel = styled.div`
 export const Header = () => {
   const location = useLocation();
   return (
-    <Container>
-      <Icon />
-      <NavPanel>
-        {navItems.map((item) => (
-          <Item
-            key={item.id}
-            iconName={item.iconName}
-            title={item.title}
-            id={item.id}
-            link={item.link}
-            isActive={item.link === location.pathname}
-          />
-        ))}
-      </NavPanel>
-    </Container>
+    <Wrapper>
+      <Container>
+        <Icon />
+        <NavPanel>
+          {navItems.map((item) => (
+            <Item
+              key={item.id}
+              iconName={item.iconName}
+              title={item.title}
+              id={item.id}
+              link={item.link}
+              isActive={item.link === location.pathname}
+            />
+          ))}
+        </NavPanel>
+      </Container>
+    </Wrapper>
   );
 };

@@ -1,7 +1,18 @@
 import { styled, Typography } from "@shared/ui";
 import MOPS from "../../../../../../public/assets/mops-bg.jpg";
 
-const Container = styled.div``;
+type TContainerAttrs = {
+  url: string;
+};
+
+const Container = styled.div<TContainerAttrs>`
+  background-image: url(${(props) => props.url});
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 750px;
+`;
 
 const Text = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.secondary};
@@ -13,14 +24,13 @@ const TextBlock = styled.div`
   height: 313px;
   z-index: 1;
   position: absolute;
-  top: 400px;
+  top: 350px;
   left: 59px;
 `;
 
 export const BackgroundPicture = () => {
   return (
-    <Container>
-      <img src={MOPS} width={"100%"} />
+    <Container url={MOPS}>
       <TextBlock>
         <Text variant="largeTitle">
           ТВОЙ ЛУЧШИЙ ДРУГ ЗАСЛУЖИВАЕТ ЛУЧШУЮ ЕДУ
