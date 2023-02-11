@@ -1,5 +1,5 @@
-import { styled, Typography } from "@shared/ui";
-import { Header } from "widgets";
+import { Separator, styled, Typography } from "@shared/ui";
+import { Footer, Header } from "widgets";
 import { BackgroundPicture, Products } from "./ui";
 
 const Container = styled.div`
@@ -12,6 +12,9 @@ export const Home = () => {
       <Header />
       <BackgroundPicture />
       <Products />
+      <Separator />
+      <Footer />
+      <Separator />
     </Container>
   );
 };

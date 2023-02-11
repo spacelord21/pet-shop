@@ -1,6 +1,6 @@
 import { styled } from "@shared/ui";
 import { useLocation, useNavigate } from "react-router-dom";
-import { navItems } from "./nav-items";
+import { navItems } from "../nav-items";
 import { Icon, Item } from "./ui/atoms";
 
 const Wrapper = styled.div`

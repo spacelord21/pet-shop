@@ -22,7 +22,7 @@ export const theme = {
     title: {
       size: "21px",
       fontFamily: "Roboto",
-      letterSpacing: "1px",
+      letterSpacing: "0px",
     },
     largeTitle: {
       size: "45px",

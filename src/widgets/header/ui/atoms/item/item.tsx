@@ -1,6 +1,6 @@
 import { styled, Typography } from "@shared/ui";
 import { Icon } from "@iconify/react";
-import { TItemType } from "widgets/header/nav-items";
+import { TItemType } from "widgets/nav-items";
 import { useTheme } from "styled-components";
 
 type TIsActiveItem = {
@@ -35,7 +35,7 @@ export const Item = ({ title, iconName, id, link, isActive }: TItemProps) => {
   const theme = useTheme();
   return (
     <Container href={link} isActive={isActive}>
-      <Text variant="title">{title}</Text>
+      <Text variant="title">{title.toLocaleUpperCase()}</Text>
       <Icon
         icon={iconName}
         color={theme.palette.accent.primary}
