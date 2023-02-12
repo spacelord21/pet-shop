@@ -10,12 +10,21 @@ const Container = styled.div`
 
 const Title = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
+  margin-left: 37%;
+  margin-bottom: ${({ theme }) => theme.spacing(3)}px;
+`;
+
+const Block = styled.div`
+  width: 100%;
+  height: ${({ theme }) => theme.spacing(12)}px;
+  opacity: 0;
 `;
 
 export const ProductsPage = () => {
   return (
     <Container>
       <Header />
+      <Block />
       <Title variant="largeTitle">НАШИ ПРОДУКТЫ</Title>
       <Products />
       <Separator />
