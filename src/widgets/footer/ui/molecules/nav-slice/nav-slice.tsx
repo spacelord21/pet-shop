@@ -7,12 +7,15 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: ${({ theme }) => theme.spacing(1)}px;
+  width: 33%;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const NavSlice = () => {
   const location = useLocation();
   return (
-    <Container>
+    <Container className="nav-slice">
       {navItems.map((item) => (
         <NavItem
           title={item.title}

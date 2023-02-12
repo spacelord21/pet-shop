@@ -1,5 +1,5 @@
 import { TProduct } from "@entities/products/types";
-import { OutlineButton, styled, Typography } from "@shared/ui";
+import { OutlineButton, PrimaryButton, styled, Typography } from "@shared/ui";
 
 const Container = styled.div`
   flex: 0 0 32%;
@@ -32,7 +32,7 @@ export const ProductCard = ({ imageUrl, price, title }: TProductCardProps) => {
         <Title variant="body16">{title}</Title>
         <Title variant="body16">100 грамм - {price}₽</Title>
       </ContentBody>
-      <OutlineButton
+      <PrimaryButton
         onClick={() => {}}
         children={<ButtonContent variant="body16">ДОБАВИТЬ</ButtonContent>}
       />

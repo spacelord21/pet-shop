@@ -4,9 +4,10 @@ import { ContactsSlice, NavSlice, SocialNetworkSlice } from "./ui";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-around;
-  height: 300px;
+  height: 230px;
+  background-color: ${({ theme }) => theme.palette.background.primary};
 `;
 
 export const Footer = () => {

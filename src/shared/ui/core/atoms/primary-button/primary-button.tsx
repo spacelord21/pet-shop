@@ -12,10 +12,13 @@ const Button = styled.button`
   height: 50px;
   width: 230px;
   &:hover {
-    background-color: ${({ theme }) => theme.palette.background.primary};
-    color: ${({ theme }) => theme.palette.text.primary};
+    opacity: 0.5;
     transition: 0.5s ease;
     border: none;
+  }
+  &:not(:hover) {
+    opacity: 1;
+    transition: 0.7s ease;
   }
 `;
 

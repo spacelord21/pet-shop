@@ -6,7 +6,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-left: 10%;
+  margin-left: 13%;
 `;
 
 const Wrapper = styled.div`
@@ -26,7 +26,6 @@ const Title = styled(Typography)`
 export const Products = () => {
   return (
     <Wrapper>
-      <Title variant="title2">ПРОДУКТЫ</Title>
       <Container>
         {productData.map((product) => (
           <ProductCard

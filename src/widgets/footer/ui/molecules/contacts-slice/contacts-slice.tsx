@@ -5,6 +5,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 33%;
 `;
 
 const Title = styled(Typography)`
@@ -17,7 +18,7 @@ const Text = styled(Typography)`
 `;
 
 const NumberLink = styled.a`
-  margin-top: ${({ theme }) => theme.spacing(2)}px;
+  /* margin-top: ${({ theme }) => theme.spacing(2)}px; */
   text-decoration: none;
 `;
 

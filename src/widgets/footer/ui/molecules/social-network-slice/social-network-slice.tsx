@@ -12,11 +12,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 33%;
 `;
 
 const Title = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
-  margin-top: -${({ theme }) => theme.spacing(3)}px;
 `;
 
 export const SocialNetworkSlice = () => {
