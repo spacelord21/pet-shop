@@ -4,17 +4,20 @@ import { ReactNode } from "react";
 type TButtonProps = {
   children: string | ReactNode;
   onClick: () => void;
+  width?: number;
+  height?: number;
 };
 
-const Button = styled.button`
+type TStyledButtonProps = Pick<TButtonProps, "width" | "height">;
+
+const Button = styled.button<TStyledButtonProps>`
   background-color: ${({ theme }) => theme.palette.background.primary};
   color: ${({ theme }) => theme.palette.text.primary};
-  height: 50px;
-  width: 230px;
+  height: ${({ height }) => height ?? 50}px;
+  width: ${({ width }) => width ?? 230}px;
   border: 0.3px solid black;
   &:hover {
-    background-color: ${({ theme }) => theme.palette.accent.primary};
-    color: ${({ theme }) => theme.palette.text.secondary};
+    opacity: 0.7;
     transition: 0.5s ease;
   }
   &:not(:hover) {
@@ -22,6 +25,15 @@ const Button = styled.button`
   }
 `;
 
-export const OutlineButton = ({ children, onClick }: TButtonProps) => {
-  return <Button onClick={onClick}>{children}</Button>;
+export const OutlineButton = ({
+  children,
+  onClick,
+  width,
+  height,
+}: TButtonProps) => {
+  return (
+    <Button onClick={onClick} width={width} height={height}>
+      {children}
+    </Button>
+  );
 };

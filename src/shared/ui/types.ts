@@ -4,4 +4,5 @@ export type TypographyVariants =
   | "body10"
   | "body12"
   | "title2"
-  | "body16";
+  | "body16"
+  | "body14";

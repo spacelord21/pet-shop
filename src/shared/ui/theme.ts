@@ -8,11 +8,13 @@ export const theme = {
       secondary: "#f7f7f7",
     },
     text: {
-      primary: "#313052",
+      primary: "#302F51",
       secondary: "#FFFFFF",
+      tertiary: "#57557D",
     },
     accent: {
       primary: "#313052",
+      secondary: "#57557D",
       turquoise: "#3da4ab",
       yellow: "#f6cd61",
       orange: "#fe8a71",
@@ -27,27 +29,32 @@ export const theme = {
     largeTitle: {
       size: "45px",
       fontFamily: "Roboto",
-      letterSpacing: "1px",
+      letterSpacing: "0px",
     },
     body10: {
       size: "10px",
       fontFamily: "Roboto",
-      letterSpacing: "1px",
+      letterSpacing: "0px",
     },
     body12: {
       size: "10px",
       fontFamily: "Roboto",
-      letterSpacing: "1px",
+      letterSpacing: "0px",
     },
     body16: {
       size: "16px",
       fontFamily: "Roboto",
-      letterSpacing: "1px",
+      letterSpacing: "0px",
     },
     title2: {
       size: "32px",
       fontFamily: "Roboto",
-      letterSpacing: "1px",
+      letterSpacing: "0px",
+    },
+    body14: {
+      size: "14px",
+      fontFamily: "Roboto",
+      letterSpacing: "0px",
     },
   },
   spacing: (multiplier: number) => THEME_GRID_STEP * multiplier,

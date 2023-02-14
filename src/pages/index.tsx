@@ -1,6 +1,8 @@
+import { productData } from "@entities/index";
 import { Route, Routes } from "react-router-dom";
 import { Bucket } from "./bucket";
 import { Home } from "./home";
+import { Product } from "./product";
 import { ProductsPage } from "./products-page";
 
 export const Routing = () => {
@@ -9,6 +11,13 @@ export const Routing = () => {
       <Route path="/" element={<Home />} />
       <Route path="/bucket" element={<Bucket />} />
       <Route path="/products" element={<ProductsPage />} />
+      {productData.map((product) => (
+        <Route
+          key={product.id}
+          path={`/product-${product.id}`}
+          element={<Product key={product.id} {...product} />}
+        />
+      ))}
     </Routes>
   );
 };
