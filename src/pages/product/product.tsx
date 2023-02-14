@@ -1,7 +1,7 @@
 import { TProduct } from "@entities/products/types";
 import { Separator, styled } from "@shared/ui";
 import { Footer, Header } from "widgets";
-import { ProductDetails, ProductTemplate } from "./ui";
+import { FeedBack, ProductDetails, ProductTemplate } from "./ui";
 
 const Container = styled.div`
   display: flex;
@@ -25,8 +25,7 @@ export const Product = (product: TProductProps) => {
       <Container>
         <Block />
         <ProductTemplate {...product} />
-        <Block />
-        <Block />
+        <FeedBack />
         <Separator />
       </Container>
       <Footer />
