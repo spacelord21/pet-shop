@@ -8,8 +8,8 @@ type TModalWindowProps = {
 };
 
 const Container = styled.div<Pick<TModalWindowProps, "isActive">>`
-  width: 100vh;
-  height: 100vh;
+  width: ${({ isActive }) => (isActive ? 100 : 0)}%;
+  height: ${({ isActive }) => (isActive ? 100 : 0)}vh;
   background-color: rgba(5, 5, 16, 0.16);
   position: fixed;
   top: 0;
@@ -18,7 +18,8 @@ const Container = styled.div<Pick<TModalWindowProps, "isActive">>`
   justify-content: center;
   align-items: center;
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};
-  transition: 0.5s;
+  z-index: 1000;
+  /* transition: 0.5s; */
 `;
 
 export const ModalWindow = ({
@@ -26,5 +27,9 @@ export const ModalWindow = ({
   setIsActive,
   children,
 }: TModalWindowProps) => {
-  return <Container isActive={isActive}>{children}</Container>;
+  return (
+    <Container isActive={isActive} className={isActive ? "active" : "inactive"}>
+      {children}
+    </Container>
+  );
 };
