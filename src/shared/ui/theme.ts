@@ -18,6 +18,7 @@ export const theme = {
       turquoise: "#3da4ab",
       yellow: "#f6cd61",
       orange: "#fe8a71",
+      grey: "#808080",
     },
   },
   typography: {

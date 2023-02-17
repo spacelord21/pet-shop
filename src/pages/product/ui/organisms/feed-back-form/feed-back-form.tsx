@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { styled, Typography } from "@shared/ui";
+import { StarRating, styled, Typography } from "@shared/ui";
 import { useState } from "react";
 import { useTheme } from "styled-components";
 import { TextArea } from "../../atoms";
@@ -38,6 +38,7 @@ export const FeedBackForm = ({ setIsActive }: TFeedBackFormProps) => {
   const [disadvantages, setDisadvantages] = useState("");
   const [comment, setComment] = useState("");
   const [name, setName] = useState("");
+  const [rating, setRating] = useState(0);
   const theme = useTheme();
   return (
     <Container>
@@ -50,6 +51,7 @@ export const FeedBackForm = ({ setIsActive }: TFeedBackFormProps) => {
           />
         </IconWrapper>
       </Header>
+      <StarRating height={25} maxValue={5} readOnly={false} width={25} />
       <FeedBackField
         text={name}
         setText={setName}
