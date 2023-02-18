@@ -35,7 +35,6 @@ export const Star = ({
       }}
       onMouseLeave={() => setHoverFn!(localeRating ? localeRating : null)}
     >
-      <p>{value}</p>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={width}

@@ -2,10 +2,11 @@ import { styled } from "@shared/ui";
 
 type TTextAreaProps = {
   text: string;
-  setText: (value: string) => void;
+  setText: (value: React.ChangeEvent<HTMLTextAreaElement>) => void;
   title: string;
   isActive: boolean;
   isName: boolean;
+  name: string;
 };
 
 const Area = styled.textarea<Pick<TTextAreaProps, "isActive" | "isName">>`
@@ -40,9 +41,10 @@ export const TextArea = ({
   title,
   isActive,
   isName,
+  name,
 }: TTextAreaProps) => {
-  const handleChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
-    setText(event.currentTarget.value);
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(event);
   };
 
   return (
@@ -52,6 +54,7 @@ export const TextArea = ({
       onChange={handleChange}
       placeholder={title}
       isActive={isActive}
+      name={name}
     />
   );
 };

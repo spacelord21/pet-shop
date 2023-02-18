@@ -7,8 +7,9 @@ const Container = styled.div``;
 type TFeedBackFieldProps = {
   title: string;
   text: string;
-  setText: (value: string) => void;
+  setText: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   isName: boolean;
+  name: string;
 };
 
 export const FeedBackField = ({
@@ -16,6 +17,7 @@ export const FeedBackField = ({
   text,
   setText,
   isName,
+  name,
 }: TFeedBackFieldProps) => {
   const [isActive, setIsActive] = useState(false);
   return (
@@ -26,6 +28,7 @@ export const FeedBackField = ({
         setText={setText}
         isActive={isActive}
         isName={isName}
+        name={name}
       />
     </Container>
   );

@@ -10,7 +10,7 @@ type TModalWindowProps = {
 const Container = styled.div<Pick<TModalWindowProps, "isActive">>`
   width: ${({ isActive }) => (isActive ? 100 : 0)}%;
   height: ${({ isActive }) => (isActive ? 100 : 0)}vh;
-  background-color: rgba(5, 5, 16, 0.16);
+  background-color: ${({ theme }) => theme.palette.background.tertiary};
   position: fixed;
   top: 0;
   left: 0;
