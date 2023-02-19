@@ -8,11 +8,17 @@ export const useDropZone = () => {
     setIsDropActive(dragActive);
   }, []);
 
+  const removeFile = useCallback(
+    (number: number) => {
+      setFiles(files.filter((item, index) => index !== number));
+    },
+    [setFiles, files]
+  );
+
   const onFilesDrop = useCallback((newFiles: File[]) => {
-    const prevFiles: File[] = files;
-    newFiles.forEach((file) => prevFiles.push(file));
-    setFiles(prevFiles);
+    if (files.length === 3 || files.length + newFiles.length === 3) return;
+    setFiles((files) => [...files, ...newFiles]);
   }, []);
 
-  return { onDragStateChange, onFilesDrop, files };
+  return { onDragStateChange, onFilesDrop, files, removeFile };
 };

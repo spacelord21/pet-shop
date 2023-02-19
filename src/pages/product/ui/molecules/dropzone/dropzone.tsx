@@ -1,11 +1,21 @@
 import { styled } from "@shared/ui";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { isTupleTypeNode } from "typescript";
 
-const Container = styled.div`
+const Container = styled.div<{ isDragActive: boolean }>`
   width: 558px;
   height: ${({ theme }) => theme.spacing(8)}px;
   border-radius: 5px;
-  border: 1px solid ${({ theme }) => theme.palette.accent.secondary};
+  border: 2px dotted ${({ theme }) => theme.palette.accent.primary};
+  background-color: ${({ theme, isDragActive }) =>
+    isDragActive
+      ? theme.palette.accent.lightGreen
+      : theme.palette.background.quaternary};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 export type TDropZoneProps = {
@@ -107,6 +117,10 @@ export const DropZone = React.memo(
       };
     }, []);
 
-    return <Container ref={dropZoneRef}>{children}</Container>;
+    return (
+      <Container ref={dropZoneRef} isDragActive={isDragActive}>
+        {children}
+      </Container>
+    );
   }
 );

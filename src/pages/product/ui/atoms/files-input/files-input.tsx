@@ -3,22 +3,29 @@ import { styled, Typography } from "@shared/ui";
 const Input = styled.input`
   text-decoration: none;
   border: none;
-  color: ${({ theme }) => theme.palette.accent.orange};
-  opacity: 0;
-  position: relative;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  visibility: hidden;
 `;
-const Text = styled(Typography)`
+const Label = styled.label`
   color: ${({ theme }) => theme.palette.text.primary};
+  width: 100%;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-left: ${({ theme }) => theme.spacing(9)}px;
 `;
 
 type TFilesInputProps = {
   onChangeHandler: (files: File[]) => void;
+  withLabel?: boolean;
 };
 
-export const FilesInput = ({ onChangeHandler }: TFilesInputProps) => {
+export const FilesInput = ({
+  onChangeHandler,
+  withLabel,
+}: TFilesInputProps) => {
   const onFilesPut = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -32,9 +39,19 @@ export const FilesInput = ({ onChangeHandler }: TFilesInputProps) => {
   };
 
   return (
-    <>
-      <Text variant="body16">Перетащите или выберите файлы</Text>
-      <Input type="file" onChange={onFilesPut} accept=".jpg,.png,.gif,.jpeg" />
-    </>
+    <Container>
+      {withLabel ? (
+        <Label htmlFor="files">
+          Перетащите файлы, или выберите на компьютере
+        </Label>
+      ) : null}
+
+      <Input
+        type="file"
+        onChange={onFilesPut}
+        accept=".jpg,.png,.gif,.jpeg"
+        id="files"
+      />
+    </Container>
   );
 };

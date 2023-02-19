@@ -7,6 +7,7 @@ export const theme = {
       primary: "#FFFAF5",
       secondary: "#f7f7f7",
       tertiary: "#EDE9E470",
+      quaternary: "#D9D9D9",
     },
     text: {
       primary: "#302F51",
@@ -20,6 +21,8 @@ export const theme = {
       yellow: "#f6cd61",
       orange: "#fe8a71",
       grey: "#808080",
+      lightGreen: "#83f28f",
+      dark: "#232831",
     },
   },
   typography: {
@@ -55,6 +58,11 @@ export const theme = {
     },
     body14: {
       size: "14px",
+      fontFamily: "Roboto",
+      letterSpacing: "0px",
+    },
+    body24: {
+      size: "24px",
       fontFamily: "Roboto",
       letterSpacing: "0px",
     },

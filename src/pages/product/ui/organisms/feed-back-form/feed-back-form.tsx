@@ -4,10 +4,11 @@ import { PrimaryButton, StarRating, styled, Typography } from "@shared/ui";
 import React, { useCallback, useRef } from "react";
 import { useState } from "react";
 import { useTheme } from "styled-components";
-import { FilesInput, FilesLength, Header, TextArea } from "../../atoms";
+import { FilesInput, Header, TextArea } from "../../atoms";
 import { FeedBackField } from "../../molecules/feed-back-field";
-import { DropZone } from "../dropzone";
+import { DropZone } from "../../molecules/dropzone";
 import { useDropZone } from "./hooks";
+import { DropZoneContent } from "../dropzone-content/dropzone-content";
 
 const Container = styled.div`
   width: 678px;
@@ -17,6 +18,22 @@ const Container = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.palette.background.primary};
   border-radius: 10px;
+`;
+
+const StarRatingContainer = styled.div`
+  border: 1px solid ${({ theme }) => theme.palette.accent.primary};
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: ${({ theme }) => theme.spacing(0.5)}px;
+  justify-content: center;
+  margin-top: ${({ theme }) => theme.spacing(0.5)}px;
+  margin-bottom: ${({ theme }) => theme.spacing(0.5)}px;
+`;
+
+const Text = styled(Typography)`
+  color: ${({ theme }) => theme.palette.text.tertiary};
 `;
 
 type TFeedBackFormProps = {
@@ -31,7 +48,7 @@ export const FeedBackForm = React.memo(
       dignities: "",
       disadvantages: "",
     });
-    const { files, onDragStateChange, onFilesDrop } = useDropZone();
+    const { files, onDragStateChange, onFilesDrop, removeFile } = useDropZone();
 
     const feedBackChangeHandle = (
       event: React.ChangeEvent<HTMLTextAreaElement>
@@ -46,7 +63,10 @@ export const FeedBackForm = React.memo(
     return (
       <Container>
         <Header setIsActive={setIsActive} />
-        <StarRating height={25} maxValue={5} readOnly={false} width={25} />
+        <StarRatingContainer>
+          <StarRating height={30} maxValue={5} readOnly={false} width={30} />
+          <Text variant="body16">Общая оценка</Text>
+        </StarRatingContainer>
         <FeedBackField
           text={feedBackContent.name}
           name="name"
@@ -83,11 +103,11 @@ export const FeedBackForm = React.memo(
           onDragStateChange={onDragStateChange}
           onFilesDrop={onFilesDrop}
         >
-          {files.length ? (
-            <FilesLength filesLength={files.length} />
-          ) : (
-            <FilesInput onChangeHandler={onFilesDrop} />
-          )}
+          <DropZoneContent
+            files={files}
+            onChangeHandler={onFilesDrop}
+            removeFile={removeFile}
+          />
         </DropZone>
         <PrimaryButton onClick={() => {}}>Добавить</PrimaryButton>
       </Container>

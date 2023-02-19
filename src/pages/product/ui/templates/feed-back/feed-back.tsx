@@ -12,7 +12,7 @@ const Title = styled(Typography)`
 `;
 
 export const FeedBack = () => {
-  const [modalActive, setModalActive] = useState(false);
+  const [modalActive, setModalActive] = useState(true);
 
   return (
     <Container>
