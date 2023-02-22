@@ -1,4 +1,5 @@
-import { createEvent, createStore } from "effector";
+import { createEvent, createStore, restore } from "effector";
+import { persist } from "effector-storage/local";
 import { TFeedBack } from "../types";
 
 const emptyState: TFeedBack = {
@@ -10,8 +11,11 @@ const emptyState: TFeedBack = {
   rating: 5,
 };
 
-export const $feedBack = createStore<TFeedBack>(emptyState);
-
 export const addFeedBack = createEvent<TFeedBack>();
+export const deleteFeedBack = createEvent();
+export const $feedBack = restore(addFeedBack, emptyState).reset(deleteFeedBack);
 
-$feedBack.on(addFeedBack, (_, payload) => payload);
+persist({
+  store: $feedBack,
+  key: "user-feedback",
+});

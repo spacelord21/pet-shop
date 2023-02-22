@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 type TButtonProps = {
   children: string | ReactNode;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const Button = styled.button`

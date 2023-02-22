@@ -7,6 +7,7 @@ import { FeedBackField } from "../../molecules/feed-back-field";
 import { DropZone } from "../../molecules/dropzone";
 import { useDropZone } from "./hooks";
 import { DropZoneContent } from "../dropzone-content/dropzone-content";
+import { addFeedBack, deleteFeedBack } from "@entities/feed-back/model";
 
 const Container = styled.div`
   width: 678px;
@@ -67,6 +68,12 @@ export const FeedBackForm = React.memo(
 
     const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
+      const feedBack: TFeedBack = {
+        ...feedBackContent,
+        rating,
+      };
+      addFeedBack(feedBack);
+      setIsActive(false);
     };
 
     return (
@@ -127,7 +134,7 @@ export const FeedBackForm = React.memo(
             removeFile={removeFile}
           />
         </DropZone>
-        <PrimaryButton onClick={() => {}}>
+        <PrimaryButton onClick={onClickHandler}>
           <ButtonText variant="title">Добавить</ButtonText>
         </PrimaryButton>
       </Container>
