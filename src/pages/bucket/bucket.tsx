@@ -1,7 +1,15 @@
-export const Bucket = () => {
+import { Bucket } from "@entities/bucket/ui/bucket";
+import { Separator } from "@shared/ui";
+import { Footer, Header } from "widgets";
+
+export const BucketPage = () => {
   return (
-    <div>
-      <h1>bucket</h1>
-    </div>
+    <>
+      <Header />
+      <Bucket />
+      <Separator />
+      <Footer />
+      <Separator />
+    </>
   );
 };

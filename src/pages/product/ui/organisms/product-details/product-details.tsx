@@ -1,3 +1,4 @@
+import { addProductToBucket } from "@entities/bucket/model/store";
 import { TProduct } from "@entities/products/types";
 import {
   OutlineButton,
@@ -35,16 +36,16 @@ const Block = styled.div`
   height: ${({ theme }) => theme.spacing(1)}px;
 `;
 
-type TProductDetailsProps = Omit<TProduct, "imageUrl">;
+type TProductDetailsProps = TProduct;
 
-export const ProductDetails = ({
-  description,
-  id,
-  price,
-  shelfLife,
-  title,
-}: TProductDetailsProps) => {
-  const [size, setSize] = useState(0);
+export const ProductDetails = (product: TProductDetailsProps) => {
+  const [size, setSize] = useState(100);
+  const { description, price, shelfLife, title } = product;
+
+  const addToCartHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    addProductToBucket({ ...product, size: size });
+  };
 
   return (
     <Container>
@@ -63,7 +64,9 @@ export const ProductDetails = ({
       <OrderForm setSize={setSize} />
       <TotalPrice size={size} price={price} />
       <Block />
-      <PrimaryButton onClick={() => {}}>Добавить в корзину</PrimaryButton>
+      <PrimaryButton onClick={addToCartHandler}>
+        Добавить в корзину
+      </PrimaryButton>
       <Block />
       <OutlineButton onClick={() => {}}>Заказать</OutlineButton>
       <Block />
