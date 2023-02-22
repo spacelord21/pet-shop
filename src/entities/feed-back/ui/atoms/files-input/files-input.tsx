@@ -1,4 +1,4 @@
-import { styled, Typography } from "@shared/ui";
+import { styled } from "@shared/ui";
 
 const Input = styled.input`
   text-decoration: none;
@@ -13,12 +13,12 @@ const Label = styled.label`
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
   margin-left: ${({ theme }) => theme.spacing(9)}px;
+  width: 100%;
 `;
 
 type TFilesInputProps = {
-  onChangeHandler: (files: File[]) => void;
+  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   withLabel?: boolean;
 };
 
@@ -26,18 +26,6 @@ export const FilesInput = ({
   onChangeHandler,
   withLabel,
 }: TFilesInputProps) => {
-  const onFilesPut = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const files: File[] = [];
-    if (e.target.files && e.target.files.length > 0) {
-      for (let i = 0; i < e.target.files?.length; i++) {
-        files.push(e.target.files?.item(i)!);
-      }
-    }
-    onChangeHandler(files);
-  };
-
   return (
     <Container>
       {withLabel ? (
@@ -48,7 +36,7 @@ export const FilesInput = ({
 
       <Input
         type="file"
-        onChange={onFilesPut}
+        onChange={onChangeHandler}
         accept=".jpg,.png,.gif,.jpeg"
         id="files"
       />

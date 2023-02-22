@@ -1,7 +1,8 @@
 import { TProduct } from "@entities/products/types";
 import { Separator, styled } from "@shared/ui";
 import { Footer, Header } from "widgets";
-import { FeedBack, ProductDetails, ProductTemplate } from "./ui";
+import { ProductDetails, ProductTemplate } from "./ui";
+import { FeedBack } from "@entities/feed-back";
 
 const Container = styled.div`
   display: flex;

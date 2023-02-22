@@ -1,6 +1,8 @@
 export type TFeedBack = {
-  name: string;
+  name?: string;
   dignities: string;
-  disadvantages: string;
-  comment: string;
+  disadvantages?: string;
+  comment?: string;
+  imagesUrl?: string[];
+  rating?: number;
 };

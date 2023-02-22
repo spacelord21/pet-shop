@@ -1,4 +1,4 @@
-import { styled } from "@shared/ui";
+import { styled, Typography } from "@shared/ui";
 import { ReactNode } from "react";
 
 type TButtonProps = {

@@ -1,7 +1,7 @@
 import { styled, Typography } from "@shared/ui";
 import { useState } from "react";
-import { ModalWindow } from "../../molecules";
-import { FeedBackForm } from "../../organisms";
+import { ModalWindow } from "./molecules";
+import { FeedBackForm } from "./organisms";
 
 const Container = styled.div`
   margin-top: ${({ theme }) => theme.spacing(3)}px;
@@ -12,7 +12,7 @@ const Title = styled(Typography)`
 `;
 
 export const FeedBack = () => {
-  const [modalActive, setModalActive] = useState(true);
+  const [modalActive, setModalActive] = useState(false);
 
   return (
     <Container>

@@ -16,7 +16,7 @@ export const useDropZone = () => {
   );
 
   const onFilesDrop = useCallback((newFiles: File[]) => {
-    if (files.length === 3 || files.length + newFiles.length === 3) return;
+    if (files.length === 3 || files.length + newFiles.length > 3) return;
     setFiles((files) => [...files, ...newFiles]);
   }, []);
 

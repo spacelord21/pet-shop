@@ -1,10 +1,8 @@
 import { TFeedBack } from "@entities/feed-back/types";
-import { Icon } from "@iconify/react";
 import { PrimaryButton, StarRating, styled, Typography } from "@shared/ui";
-import React, { useCallback, useRef } from "react";
+import React from "react";
 import { useState } from "react";
-import { useTheme } from "styled-components";
-import { FilesInput, Header, TextArea } from "../../atoms";
+import { Header } from "../../atoms";
 import { FeedBackField } from "../../molecules/feed-back-field";
 import { DropZone } from "../../molecules/dropzone";
 import { useDropZone } from "./hooks";
@@ -18,6 +16,7 @@ const Container = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.palette.background.primary};
   border-radius: 10px;
+  padding: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 const StarRatingContainer = styled.div`
@@ -36,6 +35,10 @@ const Text = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.tertiary};
 `;
 
+const ButtonText = styled(Typography)`
+  color: ${({ theme }) => theme.palette.text.secondary};
+`;
+
 type TFeedBackFormProps = {
   setIsActive: (value: boolean) => void;
 };
@@ -48,6 +51,8 @@ export const FeedBackForm = React.memo(
       dignities: "",
       disadvantages: "",
     });
+    const [rating, setRating] = useState(0);
+    const [hoveringRating, setHover] = useState<number | null>(null);
     const { files, onDragStateChange, onFilesDrop, removeFile } = useDropZone();
 
     const feedBackChangeHandle = (
@@ -60,15 +65,28 @@ export const FeedBackForm = React.memo(
       });
     };
 
+    const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+    };
+
     return (
       <Container>
         <Header setIsActive={setIsActive} />
         <StarRatingContainer>
-          <StarRating height={30} maxValue={5} readOnly={false} width={30} />
+          <StarRating
+            height={30}
+            maxValue={5}
+            readOnly={false}
+            width={30}
+            localeRating={rating}
+            setLocaleRating={setRating}
+            hover={hoveringRating}
+            setHover={setHover}
+          />
           <Text variant="body16">Общая оценка</Text>
         </StarRatingContainer>
         <FeedBackField
-          text={feedBackContent.name}
+          text={feedBackContent.name!}
           name="name"
           setText={feedBackChangeHandle}
           title="Ваше имя"
@@ -84,7 +102,7 @@ export const FeedBackForm = React.memo(
           key={2}
         />
         <FeedBackField
-          text={feedBackContent.disadvantages}
+          text={feedBackContent.disadvantages!}
           name="disadvantages"
           setText={feedBackChangeHandle}
           title={"Недостатки"}
@@ -92,7 +110,7 @@ export const FeedBackForm = React.memo(
           key={3}
         />
         <FeedBackField
-          text={feedBackContent.comment}
+          text={feedBackContent.comment!}
           name="comment"
           setText={feedBackChangeHandle}
           title={"Комментарий"}
@@ -109,7 +127,9 @@ export const FeedBackForm = React.memo(
             removeFile={removeFile}
           />
         </DropZone>
-        <PrimaryButton onClick={() => {}}>Добавить</PrimaryButton>
+        <PrimaryButton onClick={() => {}}>
+          <ButtonText variant="title">Добавить</ButtonText>
+        </PrimaryButton>
       </Container>
     );
   }

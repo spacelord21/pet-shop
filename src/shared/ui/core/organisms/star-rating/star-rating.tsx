@@ -10,6 +10,10 @@ type TStarRatingProps = {
   width: number;
   height: number;
   realRating?: number;
+  localeRating?: number;
+  setLocaleRating?: (value: number) => void;
+  hover?: number | null;
+  setHover?: (value: number | null) => void;
 };
 
 export const StarRating = ({
@@ -18,18 +22,19 @@ export const StarRating = ({
   width,
   height,
   realRating,
+  localeRating,
+  setLocaleRating,
+  setHover,
+  hover,
 }: TStarRatingProps) => {
-  const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState<number | null>(null);
-
   const setHoverFn = (value: number | null) => {
     if (readOnly) return;
-    setHover(value);
+    setHover!(value);
   };
 
   const setRatingFn = (value: number) => {
     if (readOnly) return;
-    setRating(value);
+    setLocaleRating!(value);
   };
 
   return (
@@ -40,7 +45,7 @@ export const StarRating = ({
         height={height}
         hover={hover!}
         setHoverFn={setHoverFn}
-        localeRating={rating}
+        localeRating={localeRating}
         realRating={realRating}
         setRatingFn={setRatingFn}
       />
