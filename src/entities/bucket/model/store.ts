@@ -1,4 +1,10 @@
-import { createEffect, createEvent, restore, sample } from "effector";
+import {
+  createEffect,
+  createEvent,
+  createStore,
+  restore,
+  sample,
+} from "effector";
 import { persist } from "effector-storage/local";
 import { TProductInBucket } from "../types";
 import { contain } from "./utils";
@@ -56,3 +62,8 @@ $bucket.on(reduceSize, (state, payload) =>
     product.id === payload ? { ...product, size: product.size - 100 } : product
   )
 );
+
+export const $bucketWidgetActive = createStore(true);
+export const setWidgetActive = createEvent<boolean>();
+
+$bucketWidgetActive.on(setWidgetActive, (_, payload) => payload);

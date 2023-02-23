@@ -1,4 +1,7 @@
-import { addProductToBucket } from "@entities/bucket/model/store";
+import {
+  addProductToBucket,
+  setWidgetActive,
+} from "@entities/bucket/model/store";
 import { TProduct } from "@entities/products/types";
 import {
   OutlineButton,
@@ -45,6 +48,7 @@ export const ProductDetails = (product: TProductDetailsProps) => {
   const addToCartHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     addProductToBucket({ ...product, size: size });
+    setWidgetActive(true);
   };
 
   return (
