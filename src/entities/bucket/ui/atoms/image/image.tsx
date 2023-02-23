@@ -1,8 +1,8 @@
 import { styled } from "@shared/ui";
 
 const Img = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 200px;
 `;
 
 type TImageProps = {

@@ -19,7 +19,7 @@ const fetchBucketFromStorageFx = createEffect<void, TProductInBucket[], Error>(
 
 export const fetchBucketFromStorage = createEvent();
 export const addProductToBucket = createEvent<TProductInBucket>();
-export const increaseSize = createEvent<number>();
+export const increaseSize = createEvent<{ id: number; size?: number }>();
 export const reduceSize = createEvent<number>();
 export const removeAllProductsFromBucketById = createEvent<number>();
 
@@ -29,7 +29,7 @@ export const $bucket = restore(fetchBucketFromStorageFx.doneData, emptyState);
 
 $bucket.on(addProductToBucket, (state, payload) => {
   if (contain(state, payload)) {
-    increaseSize(payload.id);
+    increaseSize({ id: payload.id, size: payload.size });
     return;
   }
   return [...state, payload];
@@ -45,16 +45,14 @@ persist({
 
 $bucket.on(increaseSize, (state, payload) =>
   state.map((product) =>
-    product.id === payload
-      ? { ...product, price: product.price + 100 }
+    product.id === payload.id
+      ? { ...product, size: product.size + (payload.size ?? 100) }
       : product
   )
 );
 
 $bucket.on(reduceSize, (state, payload) =>
   state.map((product) =>
-    product.id === payload
-      ? { ...product, price: product.price - 100 }
-      : product
+    product.id === payload ? { ...product, size: product.size - 100 } : product
   )
 );

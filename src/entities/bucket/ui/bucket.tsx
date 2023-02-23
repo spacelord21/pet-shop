@@ -1,14 +1,16 @@
 import { styled } from "@shared/ui";
 import { useStore } from "effector-react";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { $bucket, fetchBucketFromStorage } from "../model/store";
-import { BucketList } from "./organisms";
+import { BucketList, OrderSummary } from "./organisms";
 
 const Container = styled.div`
+  display: flex;
   background-color: ${({ theme }) => theme.palette.background.primary};
   width: 100%;
-  height: 1200px;
-  margin-top: 700px;
+  height: 100%;
+  justify-content: center;
+  align-items: flex-start;
 `;
 
 export const Bucket = () => {
@@ -18,9 +20,18 @@ export const Bucket = () => {
     fetchBucketFromStorage();
   }, []);
 
+  const totalPrice = useMemo(() => {
+    let price = 0;
+    products.forEach((product) => {
+      price += (product.size * product.price) / 100;
+    });
+    return price;
+  }, [products]);
+
   return (
     <Container className="bucket">
       <BucketList products={products} />
+      {totalPrice ? <OrderSummary totalPrice={totalPrice} /> : null}
     </Container>
   );
 };

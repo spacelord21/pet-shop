@@ -15,7 +15,7 @@ export const TotalPrice = ({ size, price }: TTotalPriceProps) => {
     <>
       {size ? (
         <>
-          <Text variant="title">
+          <Text variant="body16">
             ₽{(size / 100) * price} за {size} грамм
           </Text>
         </>

@@ -1,10 +1,13 @@
+import { Product } from "@pages/product";
 import { TProductInBucket } from "../types";
 
 export const contain = (array: TProductInBucket[], item: TProductInBucket) => {
-  array.forEach((product) => {
-    if (product.id === item.id) {
-      return true;
+  let flag = false;
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].id === item.id) {
+      flag = true;
+      break;
     }
-  });
-  return false;
+  }
+  return flag;
 };

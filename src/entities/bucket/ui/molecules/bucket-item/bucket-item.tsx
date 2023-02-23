@@ -7,6 +7,8 @@ import { SizeControl } from "../size-control";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  width: 550px;
+  height: 200px;
 `;
 
 type TBucketItemProps = TProductInBucket;

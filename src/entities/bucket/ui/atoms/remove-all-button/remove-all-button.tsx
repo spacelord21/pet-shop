@@ -3,9 +3,10 @@ import { Icon } from "@iconify/react";
 import { styled } from "@shared/ui";
 
 const IconWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-top: ${({ theme }) => theme.spacing(2)}px;
+  margin-left: ${({ theme }) => theme.spacing(1)}px;
+  color: ${({ theme }) => theme.palette.accent.primary};
+  cursor: pointer;
 `;
 
 type TRemoveAllButtonProps = {
