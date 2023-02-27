@@ -1,4 +1,5 @@
 import { productData } from "@entities/index";
+import { TProduct } from "@entities/products/types";
 import { styled, Typography } from "@shared/ui";
 import { ProductCard } from "../../molecules";
 
@@ -23,11 +24,15 @@ const Title = styled(Typography)`
   margin-top: ${({ theme }) => theme.spacing(2)}px;
 `;
 
-export const Products = () => {
+type TProductsProps = {
+  products: TProduct[];
+};
+
+export const Products = ({ products }: TProductsProps) => {
   return (
     <Wrapper>
       <Container>
-        {productData.map((product) => (
+        {products.map((product) => (
           <ProductCard
             imageUrl={product.imageUrl}
             price={product.price}

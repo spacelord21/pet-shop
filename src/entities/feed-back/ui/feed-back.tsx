@@ -1,11 +1,7 @@
 import { PrimaryButton, styled, Typography } from "@shared/ui";
-import { useStore } from "effector-react";
 import { useState } from "react";
-import { $feedBack } from "../model";
-import { TFeedBack } from "../types";
-import { FeedBackItem, ModalWindow } from "./molecules";
+import { ModalWindow } from "./molecules";
 import { FeedBackForm } from "./organisms";
-import { FeedBackList } from "./organisms/feed-back-list";
 
 const Container = styled.div`
   margin-top: ${({ theme }) => theme.spacing(3)}px;
@@ -21,7 +17,6 @@ const ButtonText = styled(Typography)`
 
 export const FeedBack = () => {
   const [modalActive, setModalActive] = useState(false);
-  const feedBack = useStore($feedBack);
 
   return (
     <Container>
@@ -36,7 +31,6 @@ export const FeedBack = () => {
       <ModalWindow isActive={modalActive} setIsActive={setModalActive}>
         <FeedBackForm setIsActive={setModalActive} />
       </ModalWindow>
-      <FeedBackItem feedBack={feedBack} />
     </Container>
   );
 };

@@ -2,7 +2,7 @@ import { TProduct } from "./types";
 const shelfLife =
   "12 месяцев при температуре от +5С до +20С при влажности не более 75%";
 
-export const productData: TProduct[] = [
+/* export const productData: TProduct[] = [
   {
     id: 1,
     title: "Бычий корень в нарезке",
@@ -94,3 +94,5 @@ export const productData: TProduct[] = [
     price: 180,
   },
 ];
+*/
+export {};

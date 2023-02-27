@@ -32,5 +32,4 @@ export const navItems: TItemType[] = [
     iconName: "material-symbols:person-outline",
     link: "/contacts",
   },
-  { id: 5, title: "", iconName: "simple-line-icons:basket", link: "/bucket" },
 ];

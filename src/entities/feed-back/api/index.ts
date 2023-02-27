@@ -1,0 +1,2 @@
+export { getAllFeedBacksById } from "./get-all-feed-backs-by-id";
+export { paths } from "./paths";

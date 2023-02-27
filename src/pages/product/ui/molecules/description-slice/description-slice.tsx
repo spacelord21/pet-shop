@@ -5,44 +5,67 @@ import { keyframes } from "styled-components";
 const Title = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
   cursor: pointer;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  margin-left: ${({ theme }) => theme.spacing(1)}px;
+  margin-top: ${({ theme }) => theme.spacing(0.5)}px;
+`;
+
+const Button = styled(Typography)`
+  color: ${({ theme }) => theme.palette.text.primary};
+  cursor: pointer;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  margin-right: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 type TIsActive = {
   isActive: boolean;
 };
 
-const openAnimation = keyframes`
- from {
-  transform: translateY(-10px);
-  transition: all .5s ease-in-out;
-
- }
- to {
-  transform: translateY(0px);
-  transition: all .5s ease-in-out;
- }
- `;
-
-const closeAnimation = keyframes`
-  from {
-    transform: translateY(0px);
-    transition: all .5s ease-in-out;
-  }
-  to {
-    transform: translateY(-10px);
-    transition: all .5s ease-in-out;
-  }
-`;
-
 const Text = styled(Typography)<TIsActive>`
   color: ${({ theme }) => theme.palette.text.tertiary};
-  margin-top: ${({ theme }) => theme.spacing(0)}px;
-  height: ${({ isActive }) => (isActive ? "auto" : 0)};
+  /* margin-bottom: ${({ theme }) => theme.spacing(1)}px; */
+  /* height: ${({ isActive }) => (isActive ? "auto" : 0)}; */
+  height: 0;
+  transition: all 1s ease;
   overflow: ${({ isActive }) => (isActive ? "visible" : "hidden")};
-  animation-name: ${({ isActive }) =>
-    isActive ? openAnimation : closeAnimation};
-  animation-duration: 0.8s;
+
   width: 300px;
+  margin-left: ${({ theme }) => theme.spacing(1)}px;
+  animation: ${({ isActive }) => (isActive ? "show-text" : "hide-text")} 0.5s
+    forwards;
+  @keyframes show-text {
+    0% {
+      height: 0;
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      height: auto;
+      transform: translateY(0px);
+    }
+  }
+  @keyframes hide-text {
+    0% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+  }
 `;
 
 const Container = styled.div`
@@ -71,11 +94,11 @@ export const DescriptionSlice = ({
     <>
       <Container>
         <Title variant="body16">{title}</Title>
-        <Title variant="body16" onClick={handleClick}>
+        <Button variant="title" onClick={handleClick}>
           {isPressed ? "-" : "+"}
-        </Title>
+        </Button>
       </Container>
-      <Separator />
+      <Separator width={100} />
       <Text variant="body14" isActive={isPressed}>
         {content}
       </Text>
