@@ -1,5 +1,11 @@
 import { TProduct } from "@entities/products/types";
-import { OutlineButton, PrimaryButton, styled, Typography } from "@shared/ui";
+import {
+  OutlineButton,
+  PrimaryButton,
+  StarRating,
+  styled,
+  Typography,
+} from "@shared/ui";
 import { useState } from "react";
 import { DescriptionSlice, OrderForm, TotalPrice } from "../../molecules";
 
@@ -44,6 +50,13 @@ export const ProductDetails = ({
     <Container>
       <ProductName variant="title">{title}</ProductName>
       <ProductPrice variant="title">₽{price}.00</ProductPrice>
+      <StarRating
+        height={35}
+        width={35}
+        realRating={4}
+        maxValue={5}
+        readOnly={true}
+      />
       <ProductPriceDescription variant="body12">
         *указанная цена за 100 грамм
       </ProductPriceDescription>
