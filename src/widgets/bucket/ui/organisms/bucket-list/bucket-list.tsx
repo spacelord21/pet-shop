@@ -21,6 +21,11 @@ const ProductsWrapper = styled.div`
   }
 `;
 
+const ItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 type TBucketListProps = {
   products: TProductInBucket[];
 };
@@ -38,10 +43,10 @@ export const BucketList = ({ products }: TBucketListProps) => {
     <Container>
       <ProductsWrapper>
         {products.map((product, index) => (
-          <>
+          <ItemWrapper key={index}>
             <ProductItem {...product} key={product.id} />
-            {products.length - 1 !== index ? <Separator /> : null}
-          </>
+            <Separator width={100} key={index} />
+          </ItemWrapper>
         ))}
       </ProductsWrapper>
       <TotalPrice totalPrice={totalPrice} />

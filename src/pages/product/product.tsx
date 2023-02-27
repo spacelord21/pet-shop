@@ -26,7 +26,7 @@ export const Product = (product: TProductProps) => {
   const isBucketWidgetActive = useStore($bucketWidgetActive);
   return (
     <>
-      {isBucketWidgetActive ? <BucketWidget /> : null}
+      <BucketWidget />
       <Header />
       <Container>
         <Block />

@@ -2,7 +2,9 @@ import { removeAllProductsFromBucketById } from "@entities/bucket/model/store";
 import { Icon } from "@iconify/react";
 import { styled } from "@shared/ui";
 
-const IconWrapper = styled.div``;
+const IconWrapper = styled.div`
+  margin-left: 70px;
+`;
 
 type TRemoveButtonProps = {
   id: number;

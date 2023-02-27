@@ -5,6 +5,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${({ theme }) => theme.spacing(1)}px;
+  width: 200px;
 `;
 
 const Title = styled(Typography)`
@@ -15,6 +16,10 @@ const Price = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
   font-weight: 400;
   margin-top: ${({ theme }) => theme.spacing(1)}px;
+`;
+
+const Wrapper = styled.div`
+  /* margin-left: ${({ theme }) => theme.spacing(1)}px; */
 `;
 
 type TProductBodyProps = {
@@ -29,7 +34,9 @@ export const ProductBody = ({ title, size, price, id }: TProductBodyProps) => {
     <Container>
       <Title variant="body16">{title}</Title>
       <Price variant="body16">{price}.00₽</Price>
-      <SizeControl id={id} size={size} />
+      <Wrapper>
+        <SizeControl id={id} size={size} />
+      </Wrapper>
     </Container>
   );
 };

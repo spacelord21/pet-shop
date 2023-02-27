@@ -63,7 +63,7 @@ $bucket.on(reduceSize, (state, payload) =>
   )
 );
 
-export const $bucketWidgetActive = createStore(true);
+export const $bucketWidgetActive = createStore(false);
 export const setWidgetActive = createEvent<boolean>();
 
 $bucketWidgetActive.on(setWidgetActive, (_, payload) => payload);

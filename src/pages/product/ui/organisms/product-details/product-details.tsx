@@ -58,7 +58,7 @@ export const ProductDetails = (product: TProductDetailsProps) => {
       <StarRating
         height={35}
         width={35}
-        realRating={4}
+        realRating={product.rating}
         maxValue={5}
         readOnly={true}
       />

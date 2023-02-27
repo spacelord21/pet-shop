@@ -46,7 +46,7 @@ type TFeedBackFormProps = {
 
 export const FeedBackForm = React.memo(
   ({ setIsActive }: TFeedBackFormProps) => {
-    const [feedBackContent, setFeedBackContent] = useState<TFeedBack>({
+    const [feedBackContent, setFeedBackContent] = useState({
       name: "",
       comment: "",
       dignities: "",
@@ -68,11 +68,11 @@ export const FeedBackForm = React.memo(
 
     const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      const feedBack: TFeedBack = {
+      const feedBack = {
         ...feedBackContent,
         rating,
       };
-      addFeedBack(feedBack);
+      // addFeedBack(feedBack);
       setIsActive(false);
     };
 

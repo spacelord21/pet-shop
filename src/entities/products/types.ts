@@ -5,4 +5,5 @@ export type TProduct = {
   shelfLife: string;
   price: number;
   imageUrl: string;
+  rating: number;
 };
