@@ -4,7 +4,7 @@ export const theme = {
   name: "theme",
   palette: {
     background: {
-      primary: "#f5f5f5",
+      primary: "#FFFAF5",
       secondary: "#f7f7f7",
     },
     text: {
@@ -20,12 +20,12 @@ export const theme = {
   },
   typography: {
     title: {
-      size: "19.2px",
+      size: "21px",
       fontFamily: "Roboto",
-      letterSpacing: "1px",
+      letterSpacing: "0px",
     },
     largeTitle: {
-      size: "30px",
+      size: "45px",
       fontFamily: "Roboto",
       letterSpacing: "1px",
     },
@@ -36,6 +36,16 @@ export const theme = {
     },
     body12: {
       size: "10px",
+      fontFamily: "Roboto",
+      letterSpacing: "1px",
+    },
+    body16: {
+      size: "16px",
+      fontFamily: "Roboto",
+      letterSpacing: "1px",
+    },
+    title2: {
+      size: "32px",
       fontFamily: "Roboto",
       letterSpacing: "1px",
     },

@@ -23,7 +23,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif|ico|json)$/,
+        test: /\.(png|svg|jpg|jpeg|gif|ico|json)$/i,
         exclude: /node_modules/,
         use: ['file-loader?name=[name].[ext]'] // ?name=[name].[ext] is only necessary to preserve the original file name
       }
@@ -35,6 +35,6 @@ module.exports = {
   },
   devServer: {
     port: 3000,
-    historyApiFallback: true
+    historyApiFallback: true,
   }
 }
