@@ -4,6 +4,7 @@ import { navItems } from "../nav-items";
 import { Icon, Item } from "./ui/atoms";
 
 const Wrapper = styled.div`
+  display: block;
   position: fixed;
   width: 100%;
   z-index: 100;
