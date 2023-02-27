@@ -32,6 +32,7 @@ export const Products = () => {
             imageUrl={product.imageUrl}
             price={product.price}
             title={product.title}
+            id={product.id}
             key={product.id}
           />
         ))}
