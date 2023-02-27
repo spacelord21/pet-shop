@@ -1,1 +1,1 @@
-export { Bucket } from "./bucket";
+export { BucketPage } from "./bucket";
