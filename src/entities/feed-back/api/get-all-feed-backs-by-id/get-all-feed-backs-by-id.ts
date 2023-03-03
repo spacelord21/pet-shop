@@ -10,6 +10,7 @@ export type TFeedBackModel = {
   comment: string | null;
   imagesUrl: string[] | null;
   rating: number;
+  createTime: string;
 };
 
 export const getAllFeedBacksById = async (

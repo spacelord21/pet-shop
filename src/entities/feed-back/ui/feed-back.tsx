@@ -15,7 +15,11 @@ const ButtonText = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.secondary};
 `;
 
-export const FeedBack = () => {
+type TFeedBackProps = {
+  productId: number;
+};
+
+export const FeedBack = ({ productId }: TFeedBackProps) => {
   const [modalActive, setModalActive] = useState(false);
 
   return (
@@ -29,7 +33,7 @@ export const FeedBack = () => {
         <ButtonText variant="title">Добавить</ButtonText>
       </PrimaryButton>
       <ModalWindow isActive={modalActive} setIsActive={setModalActive}>
-        <FeedBackForm setIsActive={setModalActive} />
+        <FeedBackForm setIsActive={setModalActive} productId={productId} />
       </ModalWindow>
     </Container>
   );

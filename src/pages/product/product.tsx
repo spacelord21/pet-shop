@@ -31,7 +31,7 @@ export const Product = (product: TProductProps) => {
       <Container>
         <Block />
         <ProductTemplate {...product} />
-        <FeedBack />
+        <FeedBack productId={product.id} />
         <Separator />
       </Container>
       <Footer />

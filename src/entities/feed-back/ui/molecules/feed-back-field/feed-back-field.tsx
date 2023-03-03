@@ -7,7 +7,7 @@ const Container = styled.div``;
 type TFeedBackFieldProps = {
   title: string;
   text: string;
-  setText: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  setText: (value: string) => void;
   isName: boolean;
   name: string;
 };

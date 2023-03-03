@@ -1,13 +1,24 @@
 import { TFeedBack } from "@entities/feed-back/types";
 import { PrimaryButton, StarRating, styled, Typography } from "@shared/ui";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Header } from "../../atoms";
 import { FeedBackField } from "../../molecules/feed-back-field";
 import { DropZone } from "../../molecules/dropzone";
 import { useDropZone } from "./hooks";
 import { DropZoneContent } from "../dropzone-content/dropzone-content";
-import { addFeedBack, deleteFeedBack } from "@entities/feed-back/model";
+import {
+  createFeedback,
+  selectors,
+  setComment,
+  setDignities,
+  setDisadvantages,
+  setName,
+  setProductId,
+  setRating,
+  uploadImagesFx,
+  uploadImagesToCloudinary,
+} from "@entities/feed-back/model";
 
 const Container = styled.div`
   width: 678px;
@@ -42,38 +53,19 @@ const ButtonText = styled(Typography)`
 
 type TFeedBackFormProps = {
   setIsActive: (value: boolean) => void;
+  productId: number;
 };
 
 export const FeedBackForm = React.memo(
-  ({ setIsActive }: TFeedBackFormProps) => {
-    const [feedBackContent, setFeedBackContent] = useState({
-      name: "",
-      comment: "",
-      dignities: "",
-      disadvantages: "",
-    });
-    const [rating, setRating] = useState(0);
+  ({ setIsActive, productId }: TFeedBackFormProps) => {
+    const { comment, dignities, disadvantages, name, rating } = selectors();
     const [hoveringRating, setHover] = useState<number | null>(null);
     const { files, onDragStateChange, onFilesDrop, removeFile } = useDropZone();
 
-    const feedBackChangeHandle = (
-      event: React.ChangeEvent<HTMLTextAreaElement>
-    ) => {
-      event.preventDefault();
-      setFeedBackContent({
-        ...feedBackContent,
-        [event.target.name]: event.target.value,
-      });
-    };
-
     const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      const feedBack = {
-        ...feedBackContent,
-        rating,
-      };
-      // addFeedBack(feedBack);
-      setIsActive(false);
+      setProductId(productId);
+      uploadImagesToCloudinary(files);
     };
 
     return (
@@ -93,33 +85,33 @@ export const FeedBackForm = React.memo(
           <Text variant="body16">Общая оценка</Text>
         </StarRatingContainer>
         <FeedBackField
-          text={feedBackContent.name!}
+          text={name}
           name="name"
-          setText={feedBackChangeHandle}
+          setText={setName}
           title="Ваше имя"
           key={1}
           isName={true}
         />
         <FeedBackField
-          text={feedBackContent.dignities}
+          text={dignities}
           name="dignities"
-          setText={feedBackChangeHandle}
+          setText={setDignities}
           title={"Достоинства"}
           isName={false}
           key={2}
         />
         <FeedBackField
-          text={feedBackContent.disadvantages!}
+          text={disadvantages}
           name="disadvantages"
-          setText={feedBackChangeHandle}
+          setText={setDisadvantages}
           title={"Недостатки"}
           isName={false}
           key={3}
         />
         <FeedBackField
-          text={feedBackContent.comment!}
+          text={comment}
           name="comment"
-          setText={feedBackChangeHandle}
+          setText={setComment}
           title={"Комментарий"}
           isName={false}
           key={4}

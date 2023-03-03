@@ -5,6 +5,6 @@ export const paths = {
   },
   createFeedBack: {
     method: "POST",
-    url: "/add-feed-back",
+    url: "/feedbacks/add-feedback",
   },
 };
