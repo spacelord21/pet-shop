@@ -6,5 +6,5 @@ export type TFeedBack = {
   comment?: string;
   imagesUrl?: string[];
   rating: number;
-  createDate: string;
+  createTime: string;
 };

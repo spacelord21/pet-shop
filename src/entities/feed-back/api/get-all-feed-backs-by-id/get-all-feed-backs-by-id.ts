@@ -16,12 +16,15 @@ export type TFeedBackModel = {
 export const getAllFeedBacksById = async (
   productId: number
 ): Promise<TFeedBackModel[]> => {
-  const response = await fetch(`${mainUrl}${paths.getAllById}-${productId}`, {
-    method: paths.getAllById.method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `${mainUrl}${paths.getAllById.url}${productId}`,
+    {
+      method: paths.getAllById.method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   if (!response.ok) {
     throw new Error("Не удалось загрузить отзывы");
   }

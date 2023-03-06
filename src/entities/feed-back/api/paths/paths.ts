@@ -1,7 +1,7 @@
 export const paths = {
   getAllById: {
     method: "GET",
-    url: "/feed-backs",
+    url: "/feedbacks/get-feedback=",
   },
   createFeedBack: {
     method: "POST",

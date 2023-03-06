@@ -1,8 +1,9 @@
 import { styled } from "@shared/ui";
+import { Event } from "effector";
 
 type TTextAreaProps = {
   text: string;
-  setText: (value: string) => void;
+  setText: Event<string>;
   title: string;
   isActive: boolean;
   isName: boolean;

@@ -1,7 +1,14 @@
-import { createEffect, createEvent, createStore, sample } from "effector";
+import {
+  createEffect,
+  createEvent,
+  createStore,
+  sample,
+  restore,
+} from "effector";
 import { useStore } from "effector-react";
 import { persist } from "effector-storage/local";
 import { getAllFeedBacksById, storeFeedbackInDB, uploadImages } from "../api";
+import { TFeedBackModel } from "../api/get-all-feed-backs-by-id/get-all-feed-backs-by-id";
 import { TFeedBack } from "../types";
 import { mappedFeedBacks } from "./mappers";
 
@@ -13,7 +20,7 @@ const emptyState: TFeedBack = {
   name: "",
   imagesUrl: [],
   rating: 5,
-  createDate: "",
+  createTime: "",
 };
 
 // при вызове ивента createFeedBack запускается эффект createFeedbackFx
@@ -25,12 +32,12 @@ export const setDisadvantages = createEvent<string>();
 export const setComment = createEvent<string>();
 export const setRating = createEvent<number>();
 export const setProductId = createEvent<number>();
-export const $name = createStore("").reset(setName);
-export const $dignities = createStore("").reset(setDignities);
-export const $disadvantages = createStore("").reset(setDisadvantages);
-export const $comment = createStore("").reset(setComment);
-export const $productId = createStore(0).reset(setProductId);
-export const $rating = createStore(0).reset(setRating);
+export const $name = createStore("");
+export const $dignities = createStore("");
+export const $disadvantages = createStore("");
+export const $comment = createStore("");
+export const $productId = createStore(0);
+export const $rating = createStore(0);
 
 export const createFeedback = createEvent<TFeedBack>();
 export const deleteFeedBack = createEvent();
@@ -51,11 +58,18 @@ const createFeedbackFx = createEffect<TFeedBack, void, Error>(
   }
 );
 
-uploadImagesFx.doneData.watch((payload) =>
+$dignities.on(setDignities, (state, payload) => payload);
+$disadvantages.on(setDisadvantages, (state, payload) => payload);
+$name.on(setName, (state, payload) => payload);
+$comment.on(setComment, (state, payload) => payload);
+$rating.on(setRating, (state, payload) => payload);
+$productId.on(setProductId, (state, payload) => payload);
+
+uploadImagesFx.doneData.watch((payload) => {
   createFeedback({
     name: $name.getState(),
     productId: $productId.getState(),
-    createDate: new Date().toLocaleString("ru", {
+    createTime: new Date().toLocaleString("ru", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -65,8 +79,8 @@ uploadImagesFx.doneData.watch((payload) =>
     dignities: $dignities.getState(),
     disadvantages: $disadvantages.getState(),
     imagesUrl: payload,
-  })
-);
+  });
+});
 
 createFeedback.watch((feedback) => createFeedbackFx(feedback));
 
@@ -79,9 +93,9 @@ persist({
 });
 
 export const $feedBacks = createStore<TFeedBack[]>([]);
-export const fetchFeedBacksFx = createEffect<number, TFeedBack[], Error>(
+export const fetchFeedBacksFx = createEffect<number, TFeedBackModel[], Error>(
   async (productId: number) => {
-    return mappedFeedBacks(await getAllFeedBacksById(productId));
+    return await getAllFeedBacksById(productId);
   }
 );
 
@@ -89,16 +103,23 @@ export const fetchFeedBacks = createEvent<number>();
 
 fetchFeedBacks.watch((productId) => fetchFeedBacksFx(productId));
 
-// $feedBacks.on(fetchFeedBacksFx.doneData, (state, payload) => [
-//   ...state,
-//   payload,
-// ]);
-
 sample({
-  clock: fetchFeedBacksFx,
   source: fetchFeedBacksFx.doneData,
+  fn: (source) => {
+    return mappedFeedBacks(source);
+  },
   target: $feedBacks,
 });
+
+type TPopStore = {
+  index: number;
+  images: string[];
+};
+
+export const $popUpImages = createStore<TPopStore>({ index: 0, images: [] });
+export const setPopUpImages = createEvent<TPopStore>();
+
+$popUpImages.on(setPopUpImages, (_, payload) => payload);
 
 export const selectors = () => {
   return {

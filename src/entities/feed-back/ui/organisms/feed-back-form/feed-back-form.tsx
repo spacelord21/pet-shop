@@ -19,6 +19,7 @@ import {
   uploadImagesFx,
   uploadImagesToCloudinary,
 } from "@entities/feed-back/model";
+import { TStarRatingProps } from "@shared/ui/core/organisms/star-rating/star-rating";
 
 const Container = styled.div`
   width: 678px;
@@ -56,6 +57,35 @@ type TFeedBackFormProps = {
   productId: number;
 };
 
+export const StarRatingWithConteiner = ({
+  height,
+  maxValue,
+  readOnly,
+  width,
+  hover,
+  localeRating,
+  realRating,
+  setHover,
+  setLocaleRating,
+}: TStarRatingProps) => {
+  return (
+    <StarRatingContainer>
+      <StarRating
+        height={height}
+        maxValue={maxValue}
+        readOnly={readOnly}
+        width={width}
+        localeRating={localeRating}
+        setLocaleRating={setLocaleRating}
+        hover={hover}
+        setHover={setHover}
+        realRating={realRating}
+      />
+      <Text variant="body16">Общая оценка</Text>
+    </StarRatingContainer>
+  );
+};
+
 export const FeedBackForm = React.memo(
   ({ setIsActive, productId }: TFeedBackFormProps) => {
     const { comment, dignities, disadvantages, name, rating } = selectors();
@@ -71,19 +101,16 @@ export const FeedBackForm = React.memo(
     return (
       <Container>
         <Header setIsActive={setIsActive} />
-        <StarRatingContainer>
-          <StarRating
-            height={30}
-            maxValue={5}
-            readOnly={false}
-            width={30}
-            localeRating={rating}
-            setLocaleRating={setRating}
-            hover={hoveringRating}
-            setHover={setHover}
-          />
-          <Text variant="body16">Общая оценка</Text>
-        </StarRatingContainer>
+        <StarRatingWithConteiner
+          height={30}
+          width={25}
+          maxValue={5}
+          readOnly={false}
+          hover={hoveringRating}
+          localeRating={rating}
+          setHover={setHover}
+          setLocaleRating={setRating}
+        />
         <FeedBackField
           text={name}
           name="name"

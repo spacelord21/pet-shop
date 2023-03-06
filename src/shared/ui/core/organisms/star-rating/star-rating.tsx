@@ -4,7 +4,7 @@ import { StarList } from "../../molecules";
 
 const Container = styled.div``;
 
-type TStarRatingProps = {
+export type TStarRatingProps = {
   maxValue: number;
   readOnly: boolean;
   width: number;

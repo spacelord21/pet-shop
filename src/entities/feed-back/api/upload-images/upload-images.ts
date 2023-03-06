@@ -3,18 +3,21 @@ const cloudName = "ddbqvzsqy";
 const uploadPreset = "feedbacks";
 
 export const uploadImages = async (files: File[]): Promise<string[]> => {
-  let images: string[] = [];
-  files.forEach(async (file) => {
+  const actions = files.map(upload);
+  return Promise.all(actions);
+};
+
+const upload = (file: File) => {
+  return new Promise<string>((resolve, reject) => {
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", uploadPreset);
     data.append("cloud_name", cloudName);
-    const response = await fetch(url, {
+    fetch(url, {
       method: "POST",
       body: data,
-    });
-    const result = await response.json();
-    images.push(result.url);
+    })
+      .then((res) => res.json())
+      .then((data) => resolve(data.url));
   });
-  return images;
 };

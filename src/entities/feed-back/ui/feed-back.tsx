@@ -1,10 +1,14 @@
 import { PrimaryButton, styled, Typography } from "@shared/ui";
-import { useState } from "react";
+import { useStore } from "effector-react";
+import { useEffect, useState } from "react";
+import { $feedBacks, fetchFeedBacks } from "../model";
 import { ModalWindow } from "./molecules";
 import { FeedBackForm } from "./organisms";
+import { FeedBackList } from "./organisms/feed-back-list";
 
 const Container = styled.div`
   margin-top: ${({ theme }) => theme.spacing(3)}px;
+  width: 724px;
 `;
 
 const Title = styled(Typography)`
@@ -21,7 +25,11 @@ type TFeedBackProps = {
 
 export const FeedBack = ({ productId }: TFeedBackProps) => {
   const [modalActive, setModalActive] = useState(false);
+  const feedbacks = useStore($feedBacks);
 
+  useEffect(() => {
+    fetchFeedBacks(productId);
+  }, []);
   return (
     <Container>
       <Title variant="title">ВАШИ ОТЗЫВЫ</Title>
@@ -35,6 +43,7 @@ export const FeedBack = ({ productId }: TFeedBackProps) => {
       <ModalWindow isActive={modalActive} setIsActive={setModalActive}>
         <FeedBackForm setIsActive={setModalActive} productId={productId} />
       </ModalWindow>
+      <FeedBackList feedBacks={feedbacks} />
     </Container>
   );
 };
