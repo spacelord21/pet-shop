@@ -2,13 +2,11 @@ import { TFeedBack } from "@entities/feed-back/types";
 import { PrimaryButton, StarRating, styled, Typography } from "@shared/ui";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Header } from "../../atoms";
 import { FeedBackField } from "../../molecules/feed-back-field";
 import { DropZone } from "../../molecules/dropzone";
 import { useDropZone } from "./hooks";
 import { DropZoneContent } from "../dropzone-content/dropzone-content";
 import {
-  createFeedback,
   selectors,
   setComment,
   setDignities,
@@ -20,6 +18,7 @@ import {
   uploadImagesToCloudinary,
 } from "@entities/feed-back/model";
 import { TStarRatingProps } from "@shared/ui/core/organisms/star-rating/star-rating";
+import { Header } from "@shared/ui/core/molecules";
 
 const Container = styled.div`
   width: 678px;
@@ -100,7 +99,7 @@ export const FeedBackForm = React.memo(
 
     return (
       <Container>
-        <Header setIsActive={setIsActive} />
+        <Header setIsActive={setIsActive} title={"Ваш отзыв очень важен!"} />
         <StarRatingWithConteiner
           height={30}
           width={25}

@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
-import { styled, Typography } from "@shared/ui";
+import { styled } from "@shared/ui";
+import { Typography } from "../../atoms";
 import { useTheme } from "styled-components";
 
 const Container = styled.div`
@@ -23,14 +24,15 @@ const Title = styled(Typography)`
 
 type THeaderProps = {
   setIsActive: (value: boolean) => void;
+  title: string;
 };
 
-export const Header = ({ setIsActive }: THeaderProps) => {
+export const Header = ({ setIsActive, title }: THeaderProps) => {
   const theme = useTheme();
 
   return (
     <Container>
-      <Title variant="body24">Ваш отзыв очень важен!</Title>
+      <Title variant="body24">{title}</Title>
       <IconWrapper onClick={() => setIsActive(false)}>
         <Icon
           icon={"carbon:close-outline"}

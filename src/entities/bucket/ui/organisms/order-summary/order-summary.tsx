@@ -1,3 +1,4 @@
+import { setOrderWidget } from "@entities/order/model";
 import { PrimaryButton, Separator, styled, Typography } from "@shared/ui";
 import { TotalPrice } from "../../atoms";
 
@@ -22,7 +23,7 @@ export const OrderSummary = ({ totalPrice }: TOrderSummaryProps) => {
     <Container>
       <TotalPrice totalPrice={totalPrice} />
       <Separator />
-      <PrimaryButton onClick={() => {}}>
+      <PrimaryButton onClick={() => setOrderWidget(true)}>
         <ButtonText variant="body16">Заказать</ButtonText>
       </PrimaryButton>
     </Container>
