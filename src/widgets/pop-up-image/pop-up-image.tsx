@@ -60,16 +60,15 @@ export const PopUpImage = () => {
       : setIndex((prevIndex) => prevIndex + 1);
   };
 
+  const leftArrowColor = theme.palette.accent.primary;
+  const rightArrowColor = theme.palette.accent.primary;
+
   return (
     <Wrapper isEmpty={!!popUpImages.images.length}>
       <LeftArrow>
         <Icon
           icon={"material-symbols:keyboard-double-arrow-left-sharp"}
-          color={
-            index === 0
-              ? theme.palette.text.tertiary
-              : theme.palette.accent.primary
-          }
+          color={leftArrowColor}
           onClick={leftArrowHandlerClick}
           {...iconSize}
         />
@@ -78,11 +77,7 @@ export const PopUpImage = () => {
       <RightArrow>
         <Icon
           icon={"material-symbols:keyboard-double-arrow-right"}
-          color={
-            index === popUpImages.images.length - 1
-              ? theme.palette.text.tertiary
-              : theme.palette.accent.primary
-          }
+          color={rightArrowColor}
           {...iconSize}
           onClick={rightArrowHandlerClick}
         />

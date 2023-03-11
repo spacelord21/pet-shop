@@ -1,7 +1,7 @@
 import { PrimaryButton, styled, Typography } from "@shared/ui";
 import { useStore } from "effector-react";
 import { useEffect, useState } from "react";
-import { $feedBacks, fetchFeedBacks } from "../model";
+import { $feedBacks, $userId, createUserId, fetchFeedBacks } from "../model";
 import { ModalWindow } from "./molecules";
 import { FeedBackForm } from "./organisms";
 import { FeedBackList } from "./organisms/feed-back-list";
@@ -26,6 +26,17 @@ type TFeedBackProps = {
 export const FeedBack = ({ productId }: TFeedBackProps) => {
   const [modalActive, setModalActive] = useState(false);
   const feedbacks = useStore($feedBacks);
+  const userId = useStore($userId);
+
+  const createFeedbackHandler = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+    if (!userId) {
+      createUserId();
+    }
+    setModalActive(true);
+  };
 
   useEffect(() => {
     fetchFeedBacks(productId);
@@ -33,17 +44,18 @@ export const FeedBack = ({ productId }: TFeedBackProps) => {
   return (
     <Container>
       <Title variant="title">ВАШИ ОТЗЫВЫ</Title>
-      <PrimaryButton
-        onClick={() => {
-          setModalActive(true);
-        }}
-      >
-        <ButtonText variant="title">Добавить</ButtonText>
-      </PrimaryButton>
+      {userId && feedbacks.find((feedback) => feedback.userId === userId) ? (
+        <Title variant="body16">У вас уже есть отзыв по этому продукту!</Title>
+      ) : (
+        <PrimaryButton onClick={createFeedbackHandler}>
+          <ButtonText variant="title">Добавить</ButtonText>
+        </PrimaryButton>
+      )}
+
       <ModalWindow isActive={modalActive} setIsActive={setModalActive}>
         <FeedBackForm setIsActive={setModalActive} productId={productId} />
       </ModalWindow>
-      <FeedBackList feedBacks={feedbacks} />
+      <FeedBackList feedBacks={feedbacks} productId={productId} />
     </Container>
   );
 };

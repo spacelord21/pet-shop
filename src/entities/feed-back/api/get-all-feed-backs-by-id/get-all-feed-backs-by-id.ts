@@ -3,6 +3,7 @@ import { mainUrl } from "@shared/index";
 import { paths } from "../paths";
 
 export type TFeedBackModel = {
+  feedbackId: number;
   productId: number;
   name: string | null;
   dignities: string | null;
@@ -11,6 +12,7 @@ export type TFeedBackModel = {
   imagesUrl: string[] | null;
   rating: number;
   createTime: string;
+  userId: string;
 };
 
 export const getAllFeedBacksById = async (

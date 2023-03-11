@@ -1,8 +1,10 @@
+import { $userId, deleteFeedback } from "@entities/feed-back/model";
 import { TFeedBack } from "@entities/feed-back/types";
 import { StarRating, styled, Typography } from "@shared/ui";
 import { CreateTime, FeedBackItemField, FeedbackOwner } from "../../atoms";
 import { StarRatingWithConteiner } from "../../organisms/feed-back-form/feed-back-form";
 import { ImagesList } from "../images-list";
+import { useStore } from "effector-react";
 
 const Container = styled.div`
   padding: ${({ theme }) => theme.spacing(1)}px;
@@ -22,11 +24,22 @@ const Title = styled(Typography)`
   margin-bottom: ${({ theme }) => theme.spacing(1)}px;
 `;
 
+const DeleteText = styled(Typography)`
+  width: 55px;
+  margin-top: ${({ theme }) => theme.spacing(1)}px;
+  color: ${({ theme }) => theme.palette.text.tertiary};
+  border-bottom: 0.5px solid ${({ theme }) => theme.palette.text.tertiary};
+  cursor: pointer;
+  display: flex;
+  justify-self: right;
+`;
+
 type TFeedBackItemProps = {
   feedBack: TFeedBack;
+  hasOwner?: boolean;
 };
 
-export const FeedBackItem = ({ feedBack }: TFeedBackItemProps) => {
+export const FeedBackItem = ({ feedBack, hasOwner }: TFeedBackItemProps) => {
   const {
     dignities,
     comment,
@@ -35,7 +48,16 @@ export const FeedBackItem = ({ feedBack }: TFeedBackItemProps) => {
     createTime,
     rating,
     imagesUrl,
+    productId,
   } = feedBack;
+
+  const userId = useStore($userId);
+
+  const deleteHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    deleteFeedback({ userId: userId, productId: productId });
+  };
+
   return (
     <Container>
       <HeaderWrapper>
@@ -63,6 +85,11 @@ export const FeedBackItem = ({ feedBack }: TFeedBackItemProps) => {
       />
       <Title variant="body16">Фотографии</Title>
       <ImagesList images={imagesUrl ?? []} />
+      {hasOwner ? (
+        <DeleteText variant="body14" onClick={deleteHandler}>
+          Удалить
+        </DeleteText>
+      ) : null}
     </Container>
   );
 };

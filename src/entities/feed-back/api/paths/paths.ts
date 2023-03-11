@@ -7,4 +7,8 @@ export const paths = {
     method: "POST",
     url: "/feedbacks/add-feedback",
   },
+  deleteFeedback: {
+    method: "POST",
+    url: "/feedbacks/delete-feedback?",
+  },
 };
