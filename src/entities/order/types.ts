@@ -1,18 +1,23 @@
-export type OrderDetails = {
+import { TProductInBucket } from "@entities/bucket/types";
+
+export type TOrderDetails = {
   fullPrice: number;
 };
 
-export type Order = {
+export type TContactDetails = {
   name: string;
-  products: string[];
-  fullPrice: number;
   phone: string;
-  communitationPlace: CommunicationPlace;
+  communicationPlace: string[];
 };
 
-export type CommunicationPlace = {
-  whatsapp: "WhatsApp";
-  telegram: "Telegram";
-  viber: "Viber";
-  phoneCall: "Напрямую по телефону";
+export type TOrder = {
+  products: Pick<TProductInBucket, "size" | "price" | "title">[];
+  fullPrice: number;
+  contacts: TContactDetails;
 };
+
+export type TCommunicationPlace =
+  | "WhatsApp"
+  | "Telegram"
+  | "Viber"
+  | "Напрямую по телефону";
