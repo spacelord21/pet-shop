@@ -1,4 +1,6 @@
-import { styled, Typography } from "@shared/ui";
+import { useWindowDimensions } from "@shared/hooks";
+import { size, styled, Typography } from "@shared/ui";
+import { TypographyVariants } from "@shared/ui/types";
 import MOPS from "../../../../../../public/assets/mops-bg.jpg";
 
 type TContainerAttrs = {
@@ -11,30 +13,40 @@ const Container = styled.div<TContainerAttrs>`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  width: 100vw;
   height: 750px;
+  display: flex;
+  align-items: center;
 `;
 
 const Text = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.secondary};
   font-weight: 400;
+  margin-left: ${({ theme }) => theme.spacing(1)}px;
+  text-shadow: 0 2px 0 0px ${({ theme }) => theme.palette.accent.primary},
+    0 3px 2px 0px ${({ theme }) => theme.palette.accent.primary};
 `;
 
 const TextBlock = styled.div`
-  width: 351px;
-  height: 313px;
   z-index: 1;
-  position: absolute;
-  top: 350px;
-  left: 59px;
 `;
 
 export const BackgroundPicture = () => {
+  const { width } = useWindowDimensions();
+
+  const handleFontSize = (): TypographyVariants => {
+    if (width >= size.mobileS && width <= size.mobileL) {
+      return "title40";
+    }
+    return "largeTitle";
+  };
+
   return (
     <Container url={MOPS}>
       <TextBlock>
-        <Text variant="largeTitle">
-          ТВОЙ ЛУЧШИЙ ДРУГ ЗАСЛУЖИВАЕТ ЛУЧШУЮ ЕДУ
-        </Text>
+        <Text variant={handleFontSize()}>ТВОЙ ЛУЧШИЙ ДРУГ</Text>
+        <Text variant={handleFontSize()}>ЗАСЛУЖИВАЕТ</Text>
+        <Text variant={handleFontSize()}>ЛУЧШУЮ ЕДУ</Text>
       </TextBlock>
     </Container>
   );

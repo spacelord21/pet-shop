@@ -10,3 +10,4 @@ export { RobotoFontStyle } from "./font-styles";
 import { styled } from "./styled";
 export { styled };
 export * from "./core";
+export { size } from "./theme";

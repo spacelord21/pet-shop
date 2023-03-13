@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 const Container = styled.div`
   flex: 0 0 32%;
   margin-bottom: ${({ theme }) => theme.spacing(2)}px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled(Typography)`
@@ -28,6 +32,10 @@ const ContentBody = styled.div`
 `;
 
 const ClickableWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
   cursor: pointer;
 `;
 
@@ -41,8 +49,11 @@ export const ProductCard = ({
 }: TProductCardProps) => {
   const navigate = useNavigate();
   return (
-    <Container>
-      <ClickableWrapper onClick={() => navigate(`/product-${id}`)}>
+    <Container className="product-card">
+      <ClickableWrapper
+        onClick={() => navigate(`/product-${id}`)}
+        className="product-card-content"
+      >
         <img src={imageUrl} alt={title} width={230} height={306} />
         <ContentBody>
           <Title variant="body16">{title}</Title>

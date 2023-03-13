@@ -5,14 +5,18 @@ import { NetworkItem } from "../../atoms";
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: ${({ theme }) => theme.spacing(3)}px;
+  margin-top: ${({ theme }) => theme.spacing(1.5)}px;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 33%;
+  width: 32%;
+  @media ${({ theme }) => theme.device.mobileS} {
+    width: 100%;
+    margin-top: ${({ theme }) => theme.spacing(1)}px;
+  }
 `;
 
 const Title = styled(Typography)`

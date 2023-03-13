@@ -6,6 +6,7 @@ import { FeedBackItem } from "../../molecules";
 
 const Container = styled.div`
   margin-top: ${({ theme }) => theme.spacing(2)}px;
+  width: 100%;
 `;
 
 type TFeedBackListProps = {

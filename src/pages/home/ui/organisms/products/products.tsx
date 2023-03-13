@@ -4,9 +4,9 @@ import { ProductCard } from "../../molecules";
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  margin-left: 13%;
 `;
 
 const Wrapper = styled.div`
@@ -14,6 +14,8 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
+  background-color: ${({ theme }) => theme.palette.background.primary};
 `;
 
 type TProductsProps = {

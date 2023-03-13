@@ -9,6 +9,10 @@ import { FeedBackList } from "./organisms/feed-back-list";
 const Container = styled.div`
   margin-top: ${({ theme }) => theme.spacing(3)}px;
   width: 724px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const Title = styled(Typography)`
