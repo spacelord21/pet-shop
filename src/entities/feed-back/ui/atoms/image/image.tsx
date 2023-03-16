@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import { useWindowDimensions } from "@shared/hooks";
 import { styled } from "@shared/ui";
 import { useState } from "react";
 import { useTheme } from "styled-components";
@@ -7,10 +8,10 @@ type TIsImageHover = {
   isImageHover: boolean;
 };
 
-const Img = styled.img`
+const Img = styled.img<{ isNotDesktop: boolean }>`
   border-radius: 10px;
-  width: 100px;
-  height: 100px;
+  width: ${({ isNotDesktop }) => (isNotDesktop ? 70 : 100)}px;
+  height: ${({ isNotDesktop }) => (isNotDesktop ? 70 : 100)}px;
 `;
 
 const IconWrapper = styled.div<TIsImageHover>`
@@ -40,13 +41,14 @@ type TImageProps = {
 
 export const Image = ({ imageUrl, removeFile, id }: TImageProps) => {
   const [isImageHover, setIsImageHover] = useState(false);
+  const { isNotDesktop } = useWindowDimensions();
   const theme = useTheme();
   return (
     <Container
       onMouseEnter={() => setIsImageHover(true)}
       onMouseLeave={() => setIsImageHover(false)}
     >
-      <Img src={imageUrl} />
+      <Img src={imageUrl} isNotDesktop={isNotDesktop} />
       <IconWrapper isImageHover={isImageHover} onClick={() => removeFile(id)}>
         <Icon
           icon={"mdi:garbage-can-outline"}

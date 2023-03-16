@@ -51,6 +51,7 @@ const IconWrapper = styled.div<{ isEmpty: boolean }>`
 const BarsWrapper = styled.div`
   position: fixed;
   right: 60px;
+  z-index: 5000;
   top: 35px;
   cursor: pointer;
 `;
@@ -74,11 +75,13 @@ export const Header = () => {
               setActive={setWidgetActive}
             />
           ) : (
-            <BarsWrapper>
+            <BarsWrapper
+              onClick={() => setWidgetActive(true)}
+              onTouchEnd={() => setWidgetActive(true)}
+            >
               <Iconify
                 icon={"uil:bars"}
                 color={theme.palette.accent.primary}
-                onClick={() => setWidgetActive(true)}
                 width={40}
               />
             </BarsWrapper>

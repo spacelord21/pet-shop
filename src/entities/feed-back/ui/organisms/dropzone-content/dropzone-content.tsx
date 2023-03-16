@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import { useWindowDimensions } from "@shared/hooks";
 import { styled, Typography } from "@shared/ui";
 import { useState } from "react";
 import { useTheme } from "styled-components";
@@ -7,6 +8,7 @@ import { FilesInput, Image } from "../../atoms";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -24,22 +26,24 @@ const Wrapper = styled.div`
   height: 100px;
 `;
 
-const AddingBox = styled.div`
-  width: 100px;
-  height: 100px;
+const AddingBox = styled.div<{ isNotDesktop: boolean }>`
+  width: ${({ isNotDesktop }) => (isNotDesktop ? 70 : 100)}px;
+  height: ${({ isNotDesktop }) => (isNotDesktop ? 70 : 100)}px;
   border-radius: 10px;
   border: 0.5px solid ${({ theme }) => theme.palette.accent.primary};
   display: flex;
   justify-content: center;
   align-items: center;
   margin-left: ${({ theme }) => theme.spacing(1)}px;
+  position: relative;
 `;
 
 const Plus = styled.label`
   color: ${({ theme }) => theme.palette.accent.grey};
   opacity: 0.8;
   font-size: 35px;
-  margin-left: 39px;
+  position: absolute;
+  left: auto;
 `;
 
 const Text = styled(Typography)`
@@ -64,6 +68,7 @@ export const DropZoneContent = ({
   const makeImageUrl = (file: File) => {
     return URL.createObjectURL(file);
   };
+  const { isNotDesktop } = useWindowDimensions();
 
   const onFilesPut = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -93,7 +98,7 @@ export const DropZoneContent = ({
               </Wrapper>
             ))}
             {files.length !== 3 ? (
-              <AddingBox>
+              <AddingBox isNotDesktop={isNotDesktop}>
                 <Plus htmlFor="files">+</Plus>
                 <Input
                   id="files"

@@ -8,12 +8,13 @@ import { Footer, Header } from "widgets";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: ${({ theme }) => theme.palette.background.primary};
 `;
 
 const Title = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
-  margin-left: 37%;
   margin-bottom: ${({ theme }) => theme.spacing(3)}px;
 `;
 
@@ -30,7 +31,7 @@ export const ProductsPage = () => {
     <Container>
       <Header />
       <Block />
-      <Title variant="largeTitle">НАШИ ПРОДУКТЫ</Title>
+      <Title variant="title2">НАШИ ПРОДУКТЫ</Title>
       <Products products={products} />
       <Separator />
       <Footer />

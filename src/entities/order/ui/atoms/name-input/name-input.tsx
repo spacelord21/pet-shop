@@ -2,7 +2,7 @@ import { selectors, setName } from "@entities/order/model/order-form";
 import { styled } from "@shared/ui";
 
 const Input = styled.input<{ hasError: boolean }>`
-  width: 558px;
+  width: 100%;
   height: ${({ theme }) => theme.spacing(2.2)}px;
   resize: none;
   border: 2px solid

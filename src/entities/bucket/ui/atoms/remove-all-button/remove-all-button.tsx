@@ -4,7 +4,7 @@ import { styled } from "@shared/ui";
 
 const IconWrapper = styled.div`
   margin-top: ${({ theme }) => theme.spacing(2)}px;
-  margin-left: ${({ theme }) => theme.spacing(1)}px;
+  margin-left: ${({ theme }) => theme.spacing(0.7)}px;
   color: ${({ theme }) => theme.palette.accent.primary};
   cursor: pointer;
 `;

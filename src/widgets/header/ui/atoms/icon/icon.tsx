@@ -1,3 +1,4 @@
+import { useWindowDimensions } from "@shared/hooks";
 import { styled } from "@shared/ui";
 import icon from "./icon.png";
 
@@ -8,9 +9,14 @@ const Container = styled.div`
 `;
 
 export const Icon = () => {
+  const { isNotDesktop } = useWindowDimensions();
   return (
     <Container>
-      <img src={icon} height={186} width={186} />
+      <img
+        src={icon}
+        height={isNotDesktop ? 120 : 186}
+        width={isNotDesktop ? 120 : 186}
+      />
     </Container>
   );
 };

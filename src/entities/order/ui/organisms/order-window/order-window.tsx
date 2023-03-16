@@ -5,13 +5,15 @@ import {
 } from "@entities/order/model";
 import { createOrder, selectors } from "@entities/order/model/order-form";
 import { TContactDetails } from "@entities/order/types";
+import { useWindowDimensions } from "@shared/hooks";
 import { OutlineButton, PrimaryButton, styled, Typography } from "@shared/ui";
 import { Header } from "@shared/ui/core/molecules";
 import { useStore } from "effector-react";
+import { useMemo } from "react";
 import { useTheme } from "styled-components";
 import { OrderForm } from "../../molecules";
 
-const Container = styled.div<{ isActive: boolean }>`
+const Container = styled.div<{ isActive: boolean; isNotDesktop: boolean }>`
   z-index: ${({ isActive }) => (isActive ? 1000 : -1000)};
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};
   width: 100%;
@@ -24,11 +26,11 @@ const Container = styled.div<{ isActive: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: ${({ isNotDesktop }) => (isNotDesktop ? "column" : "row")};
 `;
 
-const Window = styled.div`
-  width: 678px;
+const Window = styled.div<{ isNotDesktop: boolean; width: number }>`
+  width: ${({ isNotDesktop, width }) => (isNotDesktop ? width - 40 : 678)}px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,6 +38,10 @@ const Window = styled.div`
   background-color: ${({ theme }) => theme.palette.background.primary};
   border-radius: 10px;
   padding: ${({ theme }) => theme.spacing(1)}px;
+  margin-bottom: ${({ theme }) => theme.spacing(1)}px;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 `;
 
 const DescriptionWindow = styled.div`
@@ -47,6 +53,9 @@ const DescriptionWindow = styled.div`
   border-radius: 10px;
   padding: ${({ theme }) => theme.spacing(1)}px;
   margin-left: ${({ theme }) => theme.spacing(1)}px;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 `;
 
 const Text = styled(Typography)`
@@ -60,6 +69,7 @@ const ButtonText = styled(Typography)`
 export const OrderWindow = () => {
   const orderActive = useStore($orderWidget);
   const { communicationPlace, name, phoneNumber } = selectors();
+  const { isMobile, isTablet, width } = useWindowDimensions();
 
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -68,13 +78,16 @@ export const OrderWindow = () => {
       name: name,
       phone: phoneNumber,
     };
-    console.log("easd");
     createOrderFx(result);
   };
 
+  const isNotDesktop = useMemo(() => {
+    return isMobile || isTablet;
+  }, [isMobile, isTablet]);
+
   return (
-    <Container isActive={orderActive}>
-      <Window>
+    <Container isActive={orderActive} isNotDesktop={isNotDesktop}>
+      <Window isNotDesktop={isNotDesktop} width={width}>
         <Header setIsActive={setOrderWidget} title={"Оформление заказа!"} />
         <OrderForm />
         <PrimaryButton onClick={onClickHandler}>

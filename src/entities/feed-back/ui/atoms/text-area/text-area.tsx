@@ -11,7 +11,7 @@ type TTextAreaProps = {
 };
 
 const Area = styled.textarea<Pick<TTextAreaProps, "isActive" | "isName">>`
-  width: 558px;
+  width: 100%;
   height: ${({ theme }) => theme.spacing(2.2)}px;
   resize: none;
   border: 2px solid ${({ theme }) => theme.palette.accent.secondary};

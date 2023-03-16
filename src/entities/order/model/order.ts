@@ -5,7 +5,7 @@ import { fetchOrder } from "../api";
 import { TContactDetails, TOrder } from "../types";
 import { createOrder } from "./order-form";
 
-export const $orderWidget = createStore<boolean>(true);
+export const $orderWidget = createStore<boolean>(false);
 export const setOrderWidget = createEvent<boolean>();
 
 $orderWidget.on(setOrderWidget, (_, payload) => payload);

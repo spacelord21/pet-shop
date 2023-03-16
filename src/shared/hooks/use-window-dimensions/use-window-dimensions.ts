@@ -36,10 +36,15 @@ export const useWindowDimensions = () => {
     );
   }, [windowDimensions.width]);
 
+  const isNotDesktop = useMemo(() => {
+    return isMobile || isTablet;
+  }, [isMobile, isTablet]);
+
   return {
     isMobile,
     isTablet,
     width: windowDimensions.width,
     height: windowDimensions.height,
+    isNotDesktop,
   };
 };

@@ -2,8 +2,14 @@ import { styled } from "@shared/ui";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { isTupleTypeNode } from "typescript";
 
-const Container = styled.div<{ isDragActive: boolean }>`
-  width: 558px;
+type TContainerProps = {
+  isDragActive: boolean;
+  isNotDesktop: boolean;
+  width: number;
+};
+
+const Container = styled.div<TContainerProps>`
+  width: 98%;
   height: ${({ theme }) => theme.spacing(8)}px;
   border-radius: 5px;
   border: 2px dotted ${({ theme }) => theme.palette.accent.primary};
@@ -25,6 +31,8 @@ export type TDropZoneProps = {
   onDrag?: () => void;
   onDragOut?: () => void;
   onFilesDrop?: (files: File[]) => void;
+  isNotDesktop: boolean;
+  width: number;
 };
 
 export const DropZone = React.memo(
@@ -37,6 +45,8 @@ export const DropZone = React.memo(
       onDrop,
       onFilesDrop,
       children,
+      isNotDesktop,
+      width,
     } = props;
     const [isDragActive, setIsDragActive] = useState(false);
     const dropZoneRef = useRef<null | HTMLDivElement>(null);
@@ -118,7 +128,12 @@ export const DropZone = React.memo(
     }, []);
 
     return (
-      <Container ref={dropZoneRef} isDragActive={isDragActive}>
+      <Container
+        ref={dropZoneRef}
+        isDragActive={isDragActive}
+        isNotDesktop={isNotDesktop}
+        width={width}
+      >
         {children}
       </Container>
     );

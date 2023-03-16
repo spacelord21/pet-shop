@@ -12,7 +12,6 @@ const ModalPanel = styled.div<{ isActive: boolean }>`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 1px solid red;
   position: fixed;
   width: 100%;
   height: 100vh;
