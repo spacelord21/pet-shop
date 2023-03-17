@@ -9,7 +9,7 @@ export const getAllProducts = async (): Promise<TProduct[]> => {
     },
   });
   if (!response.ok) {
-    throw new Error("Не получается получить продукты!");
+    throw new Error("Не получается получить продукты! Попробуйте еще раз.");
   }
   return response.json();
 };

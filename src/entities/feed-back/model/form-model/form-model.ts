@@ -30,7 +30,9 @@ $formModal.on(setActiveForm, (_, payload) => payload);
 export const createFeedback = createEvent<TFeedBack>();
 export const uploadImagesToCloudinary = createEvent<File[]>();
 
-uploadImagesToCloudinary.watch((payload) => uploadImagesFx(payload));
+uploadImagesToCloudinary.watch((payload) => {
+  uploadImagesFx(payload);
+});
 
 export const uploadImagesFx = createEffect<File[], string[], Error>(
   async (files) => {

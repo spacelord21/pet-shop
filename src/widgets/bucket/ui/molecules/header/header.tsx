@@ -11,6 +11,7 @@ const Container = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.palette.accent.primary};
   flex-direction: row;
+  position: relative;
 `;
 
 const Title = styled(Typography)`
@@ -20,15 +21,21 @@ const Title = styled(Typography)`
 const IconWrapper = styled.div`
   position: absolute;
   margin-top: 4px;
-  left: 8px;
+  right: 8px;
 `;
 
 export const Header = () => {
   const theme = useTheme();
   const iconSize = { width: 50, height: 30 };
+
+  const clickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setWidgetActive(false);
+  };
+
   return (
     <Container>
-      <IconWrapper onClick={() => setWidgetActive(false)}>
+      <IconWrapper onClick={clickHandler}>
         <Icon
           icon={"material-symbols:arrow-right-alt"}
           color={theme.palette.text.secondary}

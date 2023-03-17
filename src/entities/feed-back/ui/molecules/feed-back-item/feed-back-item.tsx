@@ -72,14 +72,17 @@ export const FeedBackItem = ({ feedBack, hasOwner }: TFeedBackItemProps) => {
         realRating={rating}
       />
       <FeedBackItemField
+        key={1}
         title={"Достоинства"}
         content={dignities?.length ? dignities : "Пусто"}
       />
       <FeedBackItemField
+        key={2}
         title={"Недостатки"}
         content={disadvantages?.length ? disadvantages : "Пусто"}
       />
       <FeedBackItemField
+        key={3}
         title={"Комментарий"}
         content={comment?.length ? comment : "Пусто"}
       />

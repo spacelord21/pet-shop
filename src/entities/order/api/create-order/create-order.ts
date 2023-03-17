@@ -10,7 +10,7 @@ export const fetchOrder = async (order: TOrder) => {
     body: JSON.stringify(order),
   });
   if (!response.ok) {
-    throw new Error("Не получилось оформить заказ!");
+    throw new Error("Не получилось оформить заказ! Попробуйте еще раз.");
   }
   console.log(response);
 };

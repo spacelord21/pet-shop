@@ -5,7 +5,7 @@ import {
   styled,
   Typography,
 } from "@shared/ui";
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { FeedBackField } from "../../molecules/feed-back-field";
 import { DropZone } from "../../molecules/dropzone";
@@ -13,7 +13,6 @@ import { useDropZone } from "./hooks";
 import { DropZoneContent } from "../dropzone-content/dropzone-content";
 import {
   createFeedbackFx,
-  fetchFeedBacksFx,
   selectors,
   setActiveForm,
   setComment,
@@ -28,7 +27,6 @@ import { TStarRatingProps } from "@shared/ui/core/organisms/star-rating/star-rat
 import { Header } from "@shared/ui/core/molecules";
 import { useWindowDimensions } from "@shared/hooks";
 import { useStore } from "effector-react";
-import { useTheme } from "styled-components";
 
 const Container = styled.div<{ isNotDesktop: boolean; width: number }>`
   width: ${({ isNotDesktop, width }) => (isNotDesktop ? width - 16 : 678)}px;
@@ -167,7 +165,10 @@ export const FeedBackForm = React.memo(({ productId }: TFeedBackFormProps) => {
           removeFile={removeFile}
         />
       </DropZone>
-      <PrimaryButton onClick={onClickHandler} disabled={loading}>
+      <PrimaryButton
+        onClick={onClickHandler}
+        disabled={loading || rating === 0}
+      >
         {loading ? (
           <Loader />
         ) : (

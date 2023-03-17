@@ -1,3 +1,4 @@
+import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
 import { deleteFeedbackFromDB } from "@entities/feed-back/api";
 import {
   getAllFeedBacksById,
@@ -33,6 +34,38 @@ deleteFeedback.watch((payload) => deleteFeedbackFx(payload));
 deleteFeedbackFx.done.watch((payload) =>
   fetchFeedBacksFx(payload.params.productId)
 );
+
+fetchFeedBacksFx.failData.watch((payload) => {
+  createAlert({
+    message: payload.message,
+    timeout: DEFAULT_ALERT_TIMEOUT,
+    type: "ERROR",
+  });
+});
+
+deleteFeedbackFx.failData.watch((payload) => {
+  createAlert({
+    message: payload.message,
+    timeout: DEFAULT_ALERT_TIMEOUT,
+    type: "ERROR",
+  });
+});
+
+deleteFeedbackFx.done.watch(() => {
+  createAlert({
+    message: "Отзыв успешно удален!",
+    timeout: DEFAULT_ALERT_TIMEOUT,
+    type: "SUCCESS",
+  });
+});
+
+createFeedbackFx.done.watch(() => {
+  createAlert({
+    message: "Отзыв успешно добавлен!",
+    timeout: DEFAULT_ALERT_TIMEOUT,
+    type: "SUCCESS",
+  });
+});
 
 sample({
   source: fetchFeedBacksFx.doneData,
