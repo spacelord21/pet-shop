@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 type TButtonProps = {
   children: string | ReactNode;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
 };
 
 const Button = styled.button`
@@ -20,8 +21,22 @@ const Button = styled.button`
     opacity: 1;
     transition: 0.7s ease;
   }
+  &:disabled {
+    background: ${({ theme }) => theme.palette.text.tertiary};
+    color: ${({ theme }) => theme.palette.text.secondary};
+    cursor: not-allowed;
+    opacity: 1;
+  }
 `;
 
-export const PrimaryButton = ({ children, onClick }: TButtonProps) => {
-  return <Button onClick={onClick}>{children}</Button>;
+export const PrimaryButton = ({
+  children,
+  onClick,
+  disabled,
+}: TButtonProps) => {
+  return (
+    <Button onClick={onClick} disabled={disabled}>
+      {children}
+    </Button>
+  );
 };
