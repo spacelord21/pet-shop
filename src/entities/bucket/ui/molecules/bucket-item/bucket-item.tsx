@@ -34,6 +34,7 @@ export const BucketItem = ({
         price={price}
         title={title}
         isNotDesktop={isMobile || isTablet}
+        productId={id}
       />
       <FlexWrapper isNotDesktop={isMobile || isTablet}>
         <SizeControl id={id} size={size} />

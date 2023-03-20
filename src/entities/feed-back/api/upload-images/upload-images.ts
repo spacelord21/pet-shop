@@ -18,6 +18,11 @@ const upload = (file: File) => {
       body: data,
     })
       .then((res) => res.json())
-      .then((data) => resolve(data.url));
+      .then((data) => resolve(data.url))
+      .catch(() => {
+        throw new Error(
+          "Не получилось загрузить картинки! Попробуйте еще раз."
+        );
+      });
   });
 };

@@ -33,6 +33,7 @@ const Container = styled.div<Pick<TAlert, "type"> & TContainerProps>`
     isNotDesktop ? -((width - 16) / 2) : -150}px;
   z-index: 1200;
   border-radius: 10px;
+  padding: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 const IconWrapper = styled.div`

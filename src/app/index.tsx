@@ -11,7 +11,6 @@ const Container = styled.div`
 
 export const App = () => {
   const alert = useStore($alert);
-  console.log(alert);
   return (
     <Container>
       <RobotoFontStyle>

@@ -2,6 +2,8 @@ import {
   addProductToBucket,
   setWidgetActive,
 } from "@entities/bucket/model/store";
+import { setOrderWidget } from "@entities/order/model";
+import { OrderWindow } from "@entities/order/ui/organisms";
 import { TProduct } from "@entities/products/types";
 import { useWindowDimensions } from "@shared/hooks";
 import {
@@ -55,8 +57,15 @@ export const ProductDetails = (product: TProductDetailsProps) => {
     setWidgetActive(true);
   };
 
+  const addToCardAndOpenOrder = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    addProductToBucket({ ...product, size: size });
+    setOrderWidget(true);
+  };
+
   return (
     <Container isNotDesktop={isMobile || isTablet}>
+      <OrderWindow />
       <ProductName variant="title">{title}</ProductName>
       <StarRating
         height={35}
@@ -76,7 +85,7 @@ export const ProductDetails = (product: TProductDetailsProps) => {
         Добавить в корзину
       </PrimaryButton>
       <Block />
-      <OutlineButton onClick={() => {}}>Заказать</OutlineButton>
+      <OutlineButton onClick={addToCardAndOpenOrder}>Заказать</OutlineButton>
       <Block />
       <DescriptionSlice content={description} title={"Описание продукта"} />
       <DescriptionSlice content={shelfLife} title={"Срок годности"} />

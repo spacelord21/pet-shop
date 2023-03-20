@@ -3,14 +3,13 @@ import { mainUrl } from "@shared/index";
 import { paths } from "../paths";
 
 export const storeFeedbackInDB = async (feedBack: TFeedBack) => {
-  const response = await fetch(`${mainUrl}${paths.createFeedBack.url}`, {
+  await fetch(`${mainUrl}${paths.createFeedBack.url}`, {
     method: paths.createFeedBack.method,
     body: JSON.stringify(feedBack),
     headers: {
       "Content-Type": "application/json",
     },
-  });
-  if (!response.ok) {
+  }).catch((error: Error) => {
     throw new Error("Ошибка при создании отзыва!");
-  }
+  });
 };
