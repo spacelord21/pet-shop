@@ -1,6 +1,6 @@
 import { $userId } from "@entities/feed-back/model";
 import { TFeedBack } from "@entities/feed-back/types";
-import { Separator, styled } from "@shared/ui";
+import { styled } from "@shared/ui";
 import { useStore } from "effector-react";
 import { FeedBackItem } from "../../molecules";
 
@@ -19,6 +19,7 @@ type TFeedBackListProps = {
 
 export const FeedBackList = ({ feedBacks }: TFeedBackListProps) => {
   const userId = useStore($userId);
+
   return (
     <Container>
       {feedBacks.map((feedback, index) => (

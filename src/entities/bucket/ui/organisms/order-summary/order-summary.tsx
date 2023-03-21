@@ -1,6 +1,7 @@
 import { setOrderWidget } from "@entities/order/model";
 import { useWindowDimensions } from "@shared/hooks";
 import { PrimaryButton, Separator, styled, Typography } from "@shared/ui";
+import React from "react";
 import { TotalPrice } from "../../atoms";
 
 const Container = styled.div<{ isNotDesktop: boolean }>`
@@ -22,9 +23,10 @@ type TOrderSummaryProps = {
 };
 
 export const OrderSummary = ({ totalPrice }: TOrderSummaryProps) => {
-  const { isMobile, isTablet } = useWindowDimensions();
+  const { isNotDesktop } = useWindowDimensions();
+
   return (
-    <Container isNotDesktop={isMobile || isTablet}>
+    <Container isNotDesktop={isNotDesktop}>
       <TotalPrice totalPrice={totalPrice} />
       <Separator />
       <PrimaryButton onClick={() => setOrderWidget(true)}>

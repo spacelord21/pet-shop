@@ -6,6 +6,11 @@ const Container = styled.div`
   flex-direction: row;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Image = styled.img`
   width: 100px;
   height: 100px;
@@ -36,9 +41,9 @@ type TImagesListProps = {
 
 export const ImagesList = ({ images }: TImagesListProps) => {
   return (
-    <>
+    <Wrapper>
+      <Title variant="body16">Фотографии</Title>
       <Container>
-        <Title variant="body16">Фотографии</Title>
         {images.map((image, index) => (
           <Image
             src={image}
@@ -47,6 +52,6 @@ export const ImagesList = ({ images }: TImagesListProps) => {
           />
         ))}
       </Container>
-    </>
+    </Wrapper>
   );
 };

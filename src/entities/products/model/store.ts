@@ -22,3 +22,13 @@ fetchProductsFx.failData.watch((payload) => {
     type: "ERROR",
   });
 });
+
+let timeout: ReturnType<typeof setTimeout>;
+
+fetchProductsFx.fail.watch(() => {
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    fetchProductsFx();
+    console.log("каждые 10 сек");
+  }, 10000);
+});

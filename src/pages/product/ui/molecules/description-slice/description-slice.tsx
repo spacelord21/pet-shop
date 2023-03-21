@@ -31,9 +31,9 @@ type TIsActive = {
 const Text = styled(Typography)<TIsActive>`
   color: ${({ theme }) => theme.palette.text.tertiary};
   width: 300px;
-  opacity: ${({ isActive }) => (isActive ? 1 : 0)};
   height: ${({ isActive }) => (isActive ? "auto" : 0)};
   margin-left: ${({ theme }) => theme.spacing(1)}px;
+  text-align: justify;
 `;
 
 const Container = styled.div`
@@ -75,9 +75,11 @@ export const DescriptionSlice = ({
         </Button>
       </Container>
       <Separator width={isNotDesktop ? 100 : 65} />
-      <Text variant="body14" isActive={isPressed} ref={itemRef}>
-        {content}
-      </Text>
+      {isPressed ? (
+        <Text variant="body14" isActive={isPressed} ref={itemRef}>
+          {content}
+        </Text>
+      ) : null}
     </>
   );
 };
