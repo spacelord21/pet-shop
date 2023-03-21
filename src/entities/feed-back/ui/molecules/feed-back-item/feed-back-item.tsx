@@ -1,6 +1,6 @@
 import { $userId, deleteFeedback } from "@entities/feed-back/model";
 import { TFeedBack } from "@entities/feed-back/types";
-import { StarRating, styled, Typography } from "@shared/ui";
+import { Separator, StarRating, styled, Typography } from "@shared/ui";
 import { CreateTime, FeedBackItemField, FeedbackOwner } from "../../atoms";
 import { StarRatingWithConteiner } from "../../organisms/feed-back-form/feed-back-form";
 import { ImagesList } from "../images-list";
@@ -16,12 +16,6 @@ const HeaderWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`;
-
-const Title = styled(Typography)`
-  color: ${({ theme }) => theme.palette.text.primary};
-  margin-top: ${({ theme }) => theme.spacing(1)}px;
-  margin-bottom: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 const DeleteText = styled(Typography)`
@@ -74,25 +68,25 @@ export const FeedBackItem = ({ feedBack, hasOwner }: TFeedBackItemProps) => {
       <FeedBackItemField
         key={1}
         title={"Достоинства"}
-        content={dignities?.length ? dignities : "Пусто"}
+        content={dignities?.length ? dignities : ""}
       />
       <FeedBackItemField
         key={2}
         title={"Недостатки"}
-        content={disadvantages?.length ? disadvantages : "Пусто"}
+        content={disadvantages?.length ? disadvantages : ""}
       />
       <FeedBackItemField
         key={3}
         title={"Комментарий"}
-        content={comment?.length ? comment : "Пусто"}
+        content={comment?.length ? comment : ""}
       />
-      <Title variant="body16">Фотографии</Title>
-      <ImagesList images={imagesUrl ?? []} />
+      {imagesUrl?.length! > 0 ? <ImagesList images={imagesUrl!} /> : null}
       {hasOwner ? (
         <DeleteText variant="body14" onClick={deleteHandler}>
           Удалить
         </DeleteText>
       ) : null}
+      <Separator />
     </Container>
   );
 };

@@ -22,14 +22,11 @@ export const FeedBackList = ({ feedBacks }: TFeedBackListProps) => {
   return (
     <Container>
       {feedBacks.map((feedback, index) => (
-        <>
-          <FeedBackItem
-            feedBack={feedback}
-            key={feedback.userId}
-            hasOwner={feedback.userId === userId}
-          />
-          <Separator key={index} />
-        </>
+        <FeedBackItem
+          feedBack={feedback}
+          key={index}
+          hasOwner={feedback.userId === userId}
+        />
       ))}
     </Container>
   );

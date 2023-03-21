@@ -46,7 +46,7 @@ export const BucketList = ({ products }: TBucketListProps) => {
         {products.map((product, index) => (
           <ItemWrapper key={index}>
             <ProductItem {...product} key={product.id} />
-            <Separator width={100} key={index} />
+            <Separator width={100} key={index + 1000} />
           </ItemWrapper>
         ))}
       </ProductsWrapper>

@@ -1,5 +1,5 @@
 import { setPopUpImages } from "@entities/feed-back/model";
-import { styled } from "@shared/ui";
+import { styled, Typography } from "@shared/ui";
 
 const Container = styled.div`
   display: flex;
@@ -24,6 +24,12 @@ const Image = styled.img`
   }
 `;
 
+const Title = styled(Typography)`
+  color: ${({ theme }) => theme.palette.text.primary};
+  margin-top: ${({ theme }) => theme.spacing(1)}px;
+  margin-bottom: ${({ theme }) => theme.spacing(1)}px;
+`;
+
 type TImagesListProps = {
   images: string[];
 };
@@ -32,6 +38,7 @@ export const ImagesList = ({ images }: TImagesListProps) => {
   return (
     <>
       <Container>
+        <Title variant="body16">Фотографии</Title>
         {images.map((image, index) => (
           <Image
             src={image}

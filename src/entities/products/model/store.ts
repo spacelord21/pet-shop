@@ -5,9 +5,11 @@ import { TProduct } from "../types";
 
 export const $products = createStore<TProduct[]>([]);
 export const fetchProducts = createEvent();
-const fetchProductsFx = createEffect<void, TProduct[], Error>(async () => {
-  return await getAllProducts();
-});
+export const fetchProductsFx = createEffect<void, TProduct[], Error>(
+  async () => {
+    return await getAllProducts();
+  }
+);
 
 fetchProducts.watch(() => fetchProductsFx());
 

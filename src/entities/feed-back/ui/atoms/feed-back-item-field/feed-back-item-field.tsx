@@ -22,7 +22,7 @@ type TProps = {
 };
 
 export const FeedBackItemField = ({ content, title }: TProps) => {
-  return (
+  return content ? (
     <Container>
       <Title className="feed-back-title" variant="body16">
         {title}
@@ -31,5 +31,5 @@ export const FeedBackItemField = ({ content, title }: TProps) => {
         {content}
       </Content>
     </Container>
-  );
+  ) : null;
 };

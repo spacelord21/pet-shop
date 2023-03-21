@@ -10,7 +10,7 @@ const Title = styled(Typography)`
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  margin-left: ${({ theme }) => theme.spacing(1)}px;
+  margin-left: ${({ theme }) => theme.spacing(0)}px;
   margin-top: ${({ theme }) => theme.spacing(0.5)}px;
 `;
 
