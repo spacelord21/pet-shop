@@ -11,6 +11,7 @@ type TProductPreviewProps = {
   price: number;
   title: string;
   isNotDesktop: boolean;
+  productId: number;
 };
 
 export const ProductPreview = ({
@@ -18,10 +19,15 @@ export const ProductPreview = ({
   price,
   title,
   isNotDesktop,
+  productId,
 }: TProductPreviewProps) => {
   return (
     <Container>
-      <Image imageUrl={imageUrl} isNotDesktop={isNotDesktop} />
+      <Image
+        imageUrl={imageUrl}
+        isNotDesktop={isNotDesktop}
+        productId={productId}
+      />
       <ProductDescription price={price} title={title} />
     </Container>
   );

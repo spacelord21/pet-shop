@@ -1,3 +1,4 @@
+import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
 import { createEffect, createEvent, createStore } from "effector";
 import { getAllProducts } from "../api";
 import { TProduct } from "../types";
@@ -11,3 +12,11 @@ const fetchProductsFx = createEffect<void, TProduct[], Error>(async () => {
 fetchProducts.watch(() => fetchProductsFx());
 
 $products.on(fetchProductsFx.doneData, (_, payload) => payload);
+
+fetchProductsFx.failData.watch((payload) => {
+  createAlert({
+    message: payload.message,
+    timeout: DEFAULT_ALERT_TIMEOUT,
+    type: "ERROR",
+  });
+});

@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 
 type TModalWindowProps = {
   isActive: boolean;
-  setIsActive: (value: boolean) => void;
   children: ReactNode;
 };
 
@@ -22,11 +21,7 @@ const Container = styled.div<Pick<TModalWindowProps, "isActive">>`
   /* transition: 0.5s; */
 `;
 
-export const ModalWindow = ({
-  isActive,
-  setIsActive,
-  children,
-}: TModalWindowProps) => {
+export const ModalWindow = ({ isActive, children }: TModalWindowProps) => {
   return (
     <Container isActive={isActive} className={isActive ? "active" : "inactive"}>
       {children}

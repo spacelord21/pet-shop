@@ -6,7 +6,13 @@ import {
 import { createOrder, selectors } from "@entities/order/model/order-form";
 import { TContactDetails } from "@entities/order/types";
 import { useWindowDimensions } from "@shared/hooks";
-import { OutlineButton, PrimaryButton, styled, Typography } from "@shared/ui";
+import {
+  Loader,
+  OutlineButton,
+  PrimaryButton,
+  styled,
+  Typography,
+} from "@shared/ui";
 import { Header } from "@shared/ui/core/molecules";
 import { useStore } from "effector-react";
 import { useMemo } from "react";
@@ -70,6 +76,7 @@ export const OrderWindow = () => {
   const orderActive = useStore($orderWidget);
   const { communicationPlace, name, phoneNumber } = selectors();
   const { isMobile, isTablet, width } = useWindowDimensions();
+  const loading = useStore(createOrderFx.pending);
 
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -90,8 +97,20 @@ export const OrderWindow = () => {
       <Window isNotDesktop={isNotDesktop} width={width}>
         <Header setIsActive={setOrderWidget} title={"Оформление заказа!"} />
         <OrderForm />
-        <PrimaryButton onClick={onClickHandler}>
-          <ButtonText variant="body14">Оформить</ButtonText>
+        <PrimaryButton
+          onClick={onClickHandler}
+          disabled={
+            communicationPlace.length === 0 ||
+            name.length <= 1 ||
+            phoneNumber.length <= 3 ||
+            loading
+          }
+        >
+          {loading ? (
+            <Loader />
+          ) : (
+            <ButtonText variant="body14">Оформить</ButtonText>
+          )}
         </PrimaryButton>
       </Window>
       <DescriptionWindow>

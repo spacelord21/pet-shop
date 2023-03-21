@@ -1,4 +1,5 @@
 import { styled } from "@shared/ui";
+import { useNavigate } from "react-router-dom";
 
 const Img = styled.img<{ isNotDesktop: boolean }>`
   width: ${({ isNotDesktop }) => (isNotDesktop ? 100 : 150)}px;
@@ -8,8 +9,16 @@ const Img = styled.img<{ isNotDesktop: boolean }>`
 type TImageProps = {
   imageUrl: string;
   isNotDesktop: boolean;
+  productId: number;
 };
 
-export const Image = ({ imageUrl, isNotDesktop }: TImageProps) => {
-  return <Img src={imageUrl} isNotDesktop={isNotDesktop} />;
+export const Image = ({ imageUrl, isNotDesktop, productId }: TImageProps) => {
+  const navigate = useNavigate();
+  return (
+    <Img
+      src={imageUrl}
+      isNotDesktop={isNotDesktop}
+      onClick={() => navigate(`/product-${productId}`)}
+    />
+  );
 };

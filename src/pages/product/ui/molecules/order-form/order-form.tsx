@@ -1,11 +1,12 @@
+import { useWindowDimensions } from "@shared/hooks";
 import { OutlineButton, styled, Typography } from "@shared/ui";
 import { Sizes } from "../sizes";
 
-const Container = styled.div`
+const Container = styled.div<{ isNotDesktop: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: ${({ isNotDesktop }) => (isNotDesktop ? "center" : "left")};
 `;
 
 const Text = styled(Typography)`
@@ -18,8 +19,9 @@ type Props = {
 };
 
 export const OrderForm = ({ setSize }: Props) => {
+  const { isNotDesktop } = useWindowDimensions();
   return (
-    <Container>
+    <Container isNotDesktop={isNotDesktop}>
       <Text variant="body14">Количество</Text>
       <Sizes setSize={setSize} />
     </Container>

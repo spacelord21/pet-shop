@@ -1,29 +1,33 @@
 import { $bucket, $bucketWidgetActive } from "@entities/bucket/model/store";
+import { useWindowDimensions } from "@shared/hooks";
 import { Separator, styled } from "@shared/ui";
 import { useStore } from "effector-react";
 import { Footer, Header } from "./ui/molecules";
 import { BucketList } from "./ui/organisms";
 
-const Wrapper = styled.div<{ isActive: boolean }>`
+type TWrapperProps = {
+  isActive: boolean;
+  isNotDesktop: boolean;
+};
+
+const Wrapper = styled.div<TWrapperProps>`
   z-index: 1999;
   position: fixed;
   height: 100%;
-  width: 400px;
+  width: ${({ isNotDesktop }) => (isNotDesktop ? 100 : 25)}%;
   right: 0;
   background-color: ${({ theme }) => theme.palette.background.primary};
   animation: ${({ isActive }) => (isActive ? "show-bucket" : "hide-bucket")} 1s
-    forwards;
+    normal;
   @keyframes show-bucket {
     0% {
-      opacity: 0;
-      transform: translateX(500px);
+      opacity: 1;
     }
     50% {
-      opacity: 0.7;
+      opacity: 1;
     }
     100% {
       opacity: 1;
-      transform: translateX(0px);
     }
   }
   @keyframes hide-bucket {
@@ -56,10 +60,11 @@ const Container = styled.div<{ isActive: boolean }>`
 export const BucketWidget = () => {
   const products = useStore($bucket);
   const isActive = useStore($bucketWidgetActive);
+  const { isNotDesktop } = useWindowDimensions();
 
   return (
     <Container isActive={isActive}>
-      <Wrapper isActive={isActive}>
+      <Wrapper isActive={isActive} isNotDesktop={isNotDesktop}>
         <Header />
         <BucketList products={products} />
         <Separator />

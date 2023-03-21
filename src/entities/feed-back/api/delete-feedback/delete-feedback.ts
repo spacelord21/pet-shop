@@ -11,14 +11,12 @@ export const deleteFeedbackFromDB = async (
       userId: userId,
       productId: String(productId),
     }).toString();
-  const response = await fetch(url, {
+  await fetch(url, {
     method: paths.deleteFeedback.method,
     headers: {
       "Content-Type": "application/json",
     },
-  });
-  if (!response.ok) {
+  }).catch((err: Error) => {
     throw new Error("Не получилось удалить отзыв!");
-  }
-  return;
+  });
 };

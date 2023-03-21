@@ -18,7 +18,7 @@ type TFeedBackListProps = {
   productId: number;
 };
 
-export const FeedBackList = ({ feedBacks, productId }: TFeedBackListProps) => {
+export const FeedBackList = ({ feedBacks }: TFeedBackListProps) => {
   const userId = useStore($userId);
   return (
     <Container>
@@ -26,7 +26,7 @@ export const FeedBackList = ({ feedBacks, productId }: TFeedBackListProps) => {
         <>
           <FeedBackItem
             feedBack={feedback}
-            key={index}
+            key={feedback.userId}
             hasOwner={feedback.userId === userId}
           />
           <Separator key={index} />

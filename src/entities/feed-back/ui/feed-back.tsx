@@ -2,7 +2,15 @@ import { useWindowDimensions } from "@shared/hooks";
 import { PrimaryButton, styled, Typography } from "@shared/ui";
 import { useStore } from "effector-react";
 import { useEffect, useState } from "react";
-import { $feedBacks, $userId, createUserId, fetchFeedBacks } from "../model";
+import {
+  $feedBacks,
+  $formModal,
+  $userId,
+  createFeedbackFx,
+  createUserId,
+  fetchFeedBacks,
+  setActiveForm,
+} from "../model";
 import { ModalWindow } from "./molecules";
 import { FeedBackForm } from "./organisms";
 import { FeedBackList } from "./organisms/feed-back-list";
@@ -18,6 +26,7 @@ const Container = styled.div<{ isNotDesktop: boolean; width: number }>`
 
 const Title = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
+  margin-bottom: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 const ButtonText = styled(Typography)`
@@ -29,7 +38,7 @@ type TFeedBackProps = {
 };
 
 export const FeedBack = ({ productId }: TFeedBackProps) => {
-  const [modalActive, setModalActive] = useState(false);
+  const modalActive = useStore($formModal);
   const feedbacks = useStore($feedBacks);
   const userId = useStore($userId);
   const { isMobile, isTablet, width } = useWindowDimensions();
@@ -41,7 +50,7 @@ export const FeedBack = ({ productId }: TFeedBackProps) => {
     if (!userId) {
       createUserId();
     }
-    setModalActive(true);
+    setActiveForm(true);
   };
 
   useEffect(() => {
@@ -58,8 +67,8 @@ export const FeedBack = ({ productId }: TFeedBackProps) => {
         </PrimaryButton>
       )}
 
-      <ModalWindow isActive={modalActive} setIsActive={setModalActive}>
-        <FeedBackForm setIsActive={setModalActive} productId={productId} />
+      <ModalWindow isActive={modalActive}>
+        <FeedBackForm productId={productId} />
       </ModalWindow>
       <FeedBackList feedBacks={feedbacks} productId={productId} />
     </Container>

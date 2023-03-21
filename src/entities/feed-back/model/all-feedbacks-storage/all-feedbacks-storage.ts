@@ -1,3 +1,4 @@
+import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
 import { deleteFeedbackFromDB } from "@entities/feed-back/api";
 import {
   getAllFeedBacksById,
@@ -5,6 +6,7 @@ import {
 } from "@entities/feed-back/api/get-all-feed-backs-by-id/get-all-feed-backs-by-id";
 import { TFeedBack } from "@entities/feed-back/types";
 import { createEffect, createEvent, createStore, sample } from "effector";
+import { createFeedbackFx } from "../form-model";
 import { $userId } from "../local-storage-model";
 import { mappedFeedBacks } from "../mappers";
 
@@ -29,7 +31,41 @@ export const fetchFeedBacks = createEvent<number>();
 
 fetchFeedBacks.watch((productId) => fetchFeedBacksFx(productId));
 deleteFeedback.watch((payload) => deleteFeedbackFx(payload));
-deleteFeedbackFx.watch((payload) => fetchFeedBacksFx(payload.productId));
+deleteFeedbackFx.done.watch((payload) =>
+  fetchFeedBacksFx(payload.params.productId)
+);
+
+fetchFeedBacksFx.failData.watch((payload) => {
+  createAlert({
+    message: payload.message,
+    timeout: DEFAULT_ALERT_TIMEOUT,
+    type: "ERROR",
+  });
+});
+
+deleteFeedbackFx.failData.watch((payload) => {
+  createAlert({
+    message: payload.message,
+    timeout: DEFAULT_ALERT_TIMEOUT,
+    type: "ERROR",
+  });
+});
+
+deleteFeedbackFx.done.watch(() => {
+  createAlert({
+    message: "Отзыв успешно удален!",
+    timeout: DEFAULT_ALERT_TIMEOUT,
+    type: "SUCCESS",
+  });
+});
+
+createFeedbackFx.done.watch(() => {
+  createAlert({
+    message: "Отзыв успешно добавлен!",
+    timeout: DEFAULT_ALERT_TIMEOUT,
+    type: "SUCCESS",
+  });
+});
 
 sample({
   source: fetchFeedBacksFx.doneData,
@@ -40,6 +76,10 @@ sample({
   },
   target: $feedBacks,
 });
+
+createFeedbackFx.done.watch((payload) =>
+  fetchFeedBacksFx(payload.params.productId)
+);
 
 const compareFunction = (item1: TFeedBack, item2: TFeedBack) => {
   if (item1.userId === $userId.getState()) {

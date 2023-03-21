@@ -1,3 +1,4 @@
+import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
 import { $bucket } from "@entities/bucket/model/store";
 import { createEffect, createEvent, createStore } from "effector";
 import { useStore } from "effector-react";
@@ -28,3 +29,20 @@ export const createOrderFx = createEffect<TContactDetails, void, Error>(
 );
 
 createOrder.watch((payload) => createOrderFx(payload));
+
+createOrderFx.failData.watch((payload) => {
+  createAlert({
+    message: payload.message,
+    timeout: DEFAULT_ALERT_TIMEOUT,
+    type: "ERROR",
+  });
+});
+
+createOrderFx.done.watch(() => {
+  createAlert({
+    message: "Ваш заказ успешно оформлен, пожалуйста, ожидайте!",
+    timeout: DEFAULT_ALERT_TIMEOUT,
+    type: "SUCCESS",
+  });
+  setOrderWidget(false);
+});

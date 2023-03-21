@@ -1,25 +1,32 @@
-import { TFeedBack } from "@entities/feed-back/types";
-import { PrimaryButton, StarRating, styled, Typography } from "@shared/ui";
-import React, { useEffect } from "react";
+import {
+  Loader,
+  PrimaryButton,
+  StarRating,
+  styled,
+  Typography,
+} from "@shared/ui";
+import React from "react";
 import { useState } from "react";
 import { FeedBackField } from "../../molecules/feed-back-field";
 import { DropZone } from "../../molecules/dropzone";
 import { useDropZone } from "./hooks";
 import { DropZoneContent } from "../dropzone-content/dropzone-content";
 import {
+  createFeedbackFx,
   selectors,
+  setActiveForm,
   setComment,
   setDignities,
   setDisadvantages,
   setName,
   setProductId,
   setRating,
-  uploadImagesFx,
   uploadImagesToCloudinary,
 } from "@entities/feed-back/model";
 import { TStarRatingProps } from "@shared/ui/core/organisms/star-rating/star-rating";
 import { Header } from "@shared/ui/core/molecules";
 import { useWindowDimensions } from "@shared/hooks";
+import { useStore } from "effector-react";
 
 const Container = styled.div<{ isNotDesktop: boolean; width: number }>`
   width: ${({ isNotDesktop, width }) => (isNotDesktop ? width - 16 : 678)}px;
@@ -56,7 +63,6 @@ const ButtonText = styled(Typography)`
 `;
 
 type TFeedBackFormProps = {
-  setIsActive: (value: boolean) => void;
   productId: number;
 };
 
@@ -89,80 +95,86 @@ export const StarRatingWithConteiner = ({
   );
 };
 
-export const FeedBackForm = React.memo(
-  ({ setIsActive, productId }: TFeedBackFormProps) => {
-    const { comment, dignities, disadvantages, name, rating } = selectors();
-    const [hoveringRating, setHover] = useState<number | null>(null);
-    const { files, onDragStateChange, onFilesDrop, removeFile } = useDropZone();
-    const { isNotDesktop, width } = useWindowDimensions();
+export const FeedBackForm = React.memo(({ productId }: TFeedBackFormProps) => {
+  const { comment, dignities, disadvantages, name, rating } = selectors();
+  const [hoveringRating, setHover] = useState<number | null>(null);
+  const { files, onDragStateChange, onFilesDrop, removeFile } = useDropZone();
+  const { isNotDesktop, width } = useWindowDimensions();
+  const loading = useStore(createFeedbackFx.pending);
 
-    const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      setProductId(productId);
-      uploadImagesToCloudinary(files);
-    };
+  const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setProductId(productId);
+    uploadImagesToCloudinary(files);
+  };
 
-    return (
-      <Container isNotDesktop={isNotDesktop} width={width}>
-        <Header setIsActive={setIsActive} title={"Ваш отзыв очень важен!"} />
-        <StarRatingWithConteiner
-          height={30}
-          width={25}
-          maxValue={5}
-          readOnly={false}
-          hover={hoveringRating}
-          localeRating={rating}
-          setHover={setHover}
-          setLocaleRating={setRating}
+  return (
+    <Container isNotDesktop={isNotDesktop} width={width}>
+      <Header setIsActive={setActiveForm} title={"Ваш отзыв очень важен!"} />
+      <StarRatingWithConteiner
+        height={30}
+        width={25}
+        maxValue={5}
+        readOnly={false}
+        hover={hoveringRating}
+        localeRating={rating}
+        setHover={setHover}
+        setLocaleRating={setRating}
+      />
+      <FeedBackField
+        text={name}
+        name="name"
+        setText={setName}
+        title="Ваше имя"
+        key={1}
+        isName={true}
+      />
+      <FeedBackField
+        text={dignities}
+        name="dignities"
+        setText={setDignities}
+        title={"Достоинства"}
+        isName={false}
+        key={2}
+      />
+      <FeedBackField
+        text={disadvantages}
+        name="disadvantages"
+        setText={setDisadvantages}
+        title={"Недостатки"}
+        isName={false}
+        key={3}
+      />
+      <FeedBackField
+        text={comment}
+        name="comment"
+        setText={setComment}
+        title={"Комментарий"}
+        isName={false}
+        key={4}
+      />
+      <DropZone
+        onDragStateChange={onDragStateChange}
+        onFilesDrop={onFilesDrop}
+        isNotDesktop={isNotDesktop}
+        width={width}
+      >
+        <DropZoneContent
+          files={files}
+          onChangeHandler={onFilesDrop}
+          removeFile={removeFile}
         />
-        <FeedBackField
-          text={name}
-          name="name"
-          setText={setName}
-          title="Ваше имя"
-          key={1}
-          isName={true}
-        />
-        <FeedBackField
-          text={dignities}
-          name="dignities"
-          setText={setDignities}
-          title={"Достоинства"}
-          isName={false}
-          key={2}
-        />
-        <FeedBackField
-          text={disadvantages}
-          name="disadvantages"
-          setText={setDisadvantages}
-          title={"Недостатки"}
-          isName={false}
-          key={3}
-        />
-        <FeedBackField
-          text={comment}
-          name="comment"
-          setText={setComment}
-          title={"Комментарий"}
-          isName={false}
-          key={4}
-        />
-        <DropZone
-          onDragStateChange={onDragStateChange}
-          onFilesDrop={onFilesDrop}
-          isNotDesktop={isNotDesktop}
-          width={width}
-        >
-          <DropZoneContent
-            files={files}
-            onChangeHandler={onFilesDrop}
-            removeFile={removeFile}
-          />
-        </DropZone>
-        <PrimaryButton onClick={onClickHandler}>
+      </DropZone>
+      <PrimaryButton
+        onClick={onClickHandler}
+        disabled={loading || rating === 0}
+      >
+        {loading ? (
+          <Loader />
+        ) : (
           <ButtonText variant="title">Добавить</ButtonText>
-        </PrimaryButton>
-      </Container>
-    );
-  }
-);
+        )}
+      </PrimaryButton>
+    </Container>
+  );
+});

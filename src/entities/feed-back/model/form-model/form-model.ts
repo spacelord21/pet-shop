@@ -10,12 +10,14 @@ export const setDisadvantages = createEvent<string>();
 export const setComment = createEvent<string>();
 export const setRating = createEvent<number>();
 export const setProductId = createEvent<number>();
+export const setActiveForm = createEvent<boolean>();
 export const $name = createStore("");
 export const $dignities = createStore("");
 export const $disadvantages = createStore("");
 export const $comment = createStore("");
 export const $productId = createStore(0);
 export const $rating = createStore(0);
+export const $formModal = createStore(false);
 
 $dignities.on(setDignities, (state, payload) => payload);
 $disadvantages.on(setDisadvantages, (state, payload) => payload);
@@ -23,11 +25,14 @@ $name.on(setName, (state, payload) => payload);
 $comment.on(setComment, (state, payload) => payload);
 $rating.on(setRating, (state, payload) => payload);
 $productId.on(setProductId, (state, payload) => payload);
+$formModal.on(setActiveForm, (_, payload) => payload);
 
 export const createFeedback = createEvent<TFeedBack>();
 export const uploadImagesToCloudinary = createEvent<File[]>();
 
-uploadImagesToCloudinary.watch((payload) => uploadImagesFx(payload));
+uploadImagesToCloudinary.watch((payload) => {
+  uploadImagesFx(payload);
+});
 
 export const uploadImagesFx = createEffect<File[], string[], Error>(
   async (files) => {
@@ -60,6 +65,8 @@ uploadImagesFx.doneData.watch((payload) => {
     userId: $userId.getState(),
   });
 });
+
+createFeedbackFx.done.watch((payload) => setActiveForm(false));
 
 export const selectors = () => {
   return {
