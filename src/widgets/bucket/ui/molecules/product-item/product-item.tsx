@@ -6,7 +6,8 @@ import { ProductBody } from "../product-body";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
+  width: 100%;
 `;
 
 type TProductItemProps = TProductInBucket;

@@ -63,14 +63,14 @@ export const FeedBack = ({ productId }: TFeedBackProps) => {
         <Title variant="body16">У вас уже есть отзыв по этому продукту!</Title>
       ) : (
         <PrimaryButton onClick={createFeedbackHandler}>
-          <ButtonText variant="title">Добавить</ButtonText>
+          <ButtonText variant="body16">Добавить</ButtonText>
         </PrimaryButton>
       )}
 
       <ModalWindow isActive={modalActive}>
         <FeedBackForm productId={productId} />
       </ModalWindow>
-      <FeedBackList feedBacks={feedbacks} productId={productId} />
+      <FeedBackList feedBacks={feedbacks} />
     </Container>
   );
 };

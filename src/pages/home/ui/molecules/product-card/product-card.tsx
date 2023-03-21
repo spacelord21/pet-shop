@@ -1,3 +1,7 @@
+import {
+  addProductToBucket,
+  setWidgetActive,
+} from "@entities/bucket/model/store";
 import { TProduct } from "@entities/products/types";
 import { OutlineButton, PrimaryButton, styled, Typography } from "@shared/ui";
 import { useNavigate } from "react-router-dom";
@@ -39,13 +43,17 @@ const ClickableWrapper = styled.div`
   cursor: pointer;
 `;
 
-type TProductCardProps = Pick<TProduct, "imageUrl" | "title" | "price" | "id">;
+type TProductCardProps = Pick<
+  TProduct,
+  "imageUrl" | "title" | "price" | "id" | "rating"
+>;
 
 export const ProductCard = ({
   imageUrl,
   price,
   title,
   id,
+  rating,
 }: TProductCardProps) => {
   const navigate = useNavigate();
   return (
@@ -62,8 +70,18 @@ export const ProductCard = ({
       </ClickableWrapper>
 
       <PrimaryButton
-        onClick={() => {}}
-        children={<ButtonContent variant="body16">ДОБАВИТЬ</ButtonContent>}
+        onClick={() => {
+          setWidgetActive(true);
+          addProductToBucket({
+            id: id,
+            imageUrl: imageUrl,
+            price: price,
+            size: 100,
+            title: title,
+            rating: rating,
+          });
+        }}
+        children={<ButtonContent variant="body16">Добавить</ButtonContent>}
       />
     </Container>
   );

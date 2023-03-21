@@ -19,6 +19,7 @@ const Wrapper = styled.div<TWrapperProps>`
   background-color: ${({ theme }) => theme.palette.background.primary};
   animation: ${({ isActive }) => (isActive ? "show-bucket" : "hide-bucket")} 1s
     normal;
+  overflow-y: scroll;
   @keyframes show-bucket {
     0% {
       opacity: 1;
@@ -51,7 +52,7 @@ const Container = styled.div<{ isActive: boolean }>`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.palette.background.tertiary};
-  transition: all 3s ease;
+  transition: all 0.5s ease-in;
   position: fixed;
   top: 0;
   left: 0;

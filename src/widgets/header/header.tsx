@@ -36,21 +36,24 @@ const NavPanel = styled.div`
 const Amount = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.secondary};
   position: relative;
-  top: 30px;
-  left: 13px;
+  left: 4.4px;
+  top: 3px;
 `;
 
-const IconWrapper = styled.div<{ isEmpty: boolean }>`
-  margin-top: ${({ theme, isEmpty }) => (isEmpty ? theme.spacing(-0.7) : 5)}px;
+const IconWrapper = styled.div`
   position: fixed;
-  right: 16px;
-  top: 30px;
+  right: 45px;
+  top: 40px;
   cursor: pointer;
+  background-color: ${({ theme }) => theme.palette.accent.error};
+  border-radius: 50%;
+  width: 15px;
+  height: 18px;
 `;
 
 const BarsWrapper = styled.div`
   position: fixed;
-  right: 60px;
+  right: ${({ theme }) => theme.spacing(1)}px;
   z-index: 5000;
   top: 35px;
   cursor: pointer;
@@ -58,17 +61,16 @@ const BarsWrapper = styled.div`
 
 export const Header = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const theme = useTheme();
   const products = useStore($bucket);
-  const { width, isMobile, isTablet } = useWindowDimensions();
+  const { width, isNotDesktop } = useWindowDimensions();
   const [widgetActive, setWidgetActive] = useState(false);
 
   return (
     <Wrapper width={width} className="header">
       <Container>
         <Icon />
-        {isMobile || isTablet ? (
+        {isNotDesktop ? (
           widgetActive ? (
             <PopUpNavigation
               isActive={widgetActive}
@@ -100,22 +102,11 @@ export const Header = () => {
             ))}
           </NavPanel>
         )}
-
-        <IconWrapper
-          onClick={() => navigate("/bucket")}
-          isEmpty={!!products.length}
-        >
-          {products.length ? (
-            <Amount variant="body14">{products.length}</Amount>
-          ) : null}
-
-          <Iconify
-            icon={"ic:baseline-shopping-bag"}
-            color={theme.palette.accent.primary}
-            width={35}
-            height={35}
-          />
-        </IconWrapper>
+        {products.length && !isNotDesktop ? (
+          <IconWrapper>
+            <Amount variant="body12">{products.length}</Amount>
+          </IconWrapper>
+        ) : null}
       </Container>
     </Wrapper>
   );

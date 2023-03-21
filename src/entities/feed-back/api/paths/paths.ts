@@ -11,4 +11,8 @@ export const paths = {
     method: "POST",
     url: "/feedbacks/delete-feedback?",
   },
+  getAll: {
+    method: "GET",
+    url: "/feedbacks/get-all",
+  },
 };

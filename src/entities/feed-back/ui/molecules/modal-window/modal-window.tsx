@@ -7,18 +7,18 @@ type TModalWindowProps = {
 };
 
 const Container = styled.div<Pick<TModalWindowProps, "isActive">>`
-  width: ${({ isActive }) => (isActive ? 100 : 0)}%;
-  height: ${({ isActive }) => (isActive ? 100 : 0)}vh;
+  width: 100%;
+  height: 100%;
   background-color: ${({ theme }) => theme.palette.background.tertiary};
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
+  display: ${({ isActive }) => (isActive ? "flex" : "none")};
   justify-content: center;
   align-items: center;
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};
   z-index: 1000;
-  /* transition: 0.5s; */
+  border: 1px solid red;
 `;
 
 export const ModalWindow = ({ isActive, children }: TModalWindowProps) => {

@@ -28,6 +28,7 @@ export const Products = ({ products }: TProductsProps) => {
       <Container>
         {products.map((product) => (
           <ProductCard
+            rating={product.rating}
             imageUrl={product.imageUrl}
             price={product.price}
             title={product.title}

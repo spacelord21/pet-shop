@@ -4,6 +4,7 @@ import { Separator, styled, Typography } from "@shared/ui";
 import { useStore } from "effector-react";
 import { useEffect } from "react";
 import { Footer, Header } from "widgets";
+import { BucketWidget } from "widgets/bucket";
 
 const Container = styled.div`
   display: flex;
@@ -30,6 +31,7 @@ export const ProductsPage = () => {
   return (
     <Container>
       <Header />
+      <BucketWidget />
       <Block />
       <Title variant="title2">НАШИ ПРОДУКТЫ</Title>
       <Products products={products} />

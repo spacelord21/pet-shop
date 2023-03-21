@@ -1,4 +1,5 @@
 import { styled } from "@shared/ui";
+import { useEffect, useRef } from "react";
 import { ContactsSlice, NavSlice, SocialNetworkSlice } from "./ui";
 
 const Container = styled.div`
@@ -21,7 +22,7 @@ const Container = styled.div`
 
 export const Footer = () => {
   return (
-    <Container>
+    <Container className="footer-comp">
       <NavSlice />
       <ContactsSlice />
       <SocialNetworkSlice />

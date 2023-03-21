@@ -15,7 +15,6 @@ const Container = styled.div`
 
 type TFeedBackListProps = {
   feedBacks: TFeedBack[];
-  productId: number;
 };
 
 export const FeedBackList = ({ feedBacks }: TFeedBackListProps) => {

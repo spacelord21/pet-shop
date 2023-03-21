@@ -39,9 +39,13 @@ const Text = styled(Typography)`
   cursor: pointer;
 `;
 
-const EmptyCartContainer = styled.div`
+const EmptyCartContainer = styled.div<{
+  isNotDesktop: boolean;
+  deviceWidth: number;
+}>`
   height: 300px;
-  width: 765px;
+  width: ${({ isNotDesktop, deviceWidth }) =>
+    isNotDesktop ? deviceWidth - 16 : 765}px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -54,11 +58,11 @@ type TBucketListProps = {
 
 export const BucketList = ({ products }: TBucketListProps) => {
   const navigate = useNavigate();
-  const { width, isMobile, isTablet } = useWindowDimensions();
+  const { width, isNotDesktop } = useWindowDimensions();
   return (
     <Container
       isCartEmpty={!!products.length}
-      isNotDesktop={isMobile || isTablet}
+      isNotDesktop={isNotDesktop}
       width={width}
     >
       <Title variant="title">Моя корзина</Title>
@@ -72,7 +76,7 @@ export const BucketList = ({ products }: TBucketListProps) => {
         ))
       ) : (
         <>
-          <EmptyCartContainer>
+          <EmptyCartContainer isNotDesktop={isNotDesktop} deviceWidth={width}>
             <Title variant="title">Корзина пуста</Title>
             <Text variant="body14" onClick={() => navigate("/products")}>
               Перейти к продуктам

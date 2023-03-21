@@ -7,6 +7,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${({ theme }) => theme.spacing(1)}px;
+  width: 100%;
 `;
 
 const ProductsWrapper = styled.div`

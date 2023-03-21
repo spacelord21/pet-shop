@@ -22,14 +22,14 @@ export const navItems: TItemType[] = [
   },
   {
     id: 3,
-    title: "отзывы",
-    iconName: "mdi:comment-quote-outline",
-    link: "/feed-back",
-  },
-  {
-    id: 4,
     title: "контакты",
     iconName: "material-symbols:person-outline",
     link: "/contacts",
+  },
+  {
+    id: 4,
+    title: "корзина",
+    iconName: "teenyicons:bag-outline",
+    link: "/bucket",
   },
 ];
