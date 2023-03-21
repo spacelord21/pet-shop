@@ -1,8 +1,9 @@
 import { styled } from "@shared/ui";
+import { Event } from "effector";
 
 type TTextAreaProps = {
   text: string;
-  setText: (value: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  setText: Event<string>;
   title: string;
   isActive: boolean;
   isName: boolean;
@@ -45,7 +46,7 @@ export const TextArea = ({
   name,
 }: TTextAreaProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event);
+    setText(event.target.value);
   };
 
   return (

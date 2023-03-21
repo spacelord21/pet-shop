@@ -1,6 +1,6 @@
 import { TProduct } from "@entities/products/types";
 import { Separator, styled } from "@shared/ui";
-import { Footer, Header } from "widgets";
+import { Footer, Header, PopUpImage } from "widgets";
 import { ProductDetails, ProductTemplate } from "./ui";
 import { FeedBack } from "@entities/feed-back";
 import { useStore } from "effector-react";
@@ -12,6 +12,7 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.palette.background.primary};
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 const Block = styled.div`
@@ -23,15 +24,15 @@ const Block = styled.div`
 type TProductProps = TProduct;
 
 export const Product = (product: TProductProps) => {
-  const isBucketWidgetActive = useStore($bucketWidgetActive);
   return (
     <>
       <BucketWidget />
+      <PopUpImage />
       <Header />
       <Container>
         <Block />
         <ProductTemplate {...product} />
-        <FeedBack />
+        <FeedBack productId={product.id} />
         <Separator />
       </Container>
       <Footer />

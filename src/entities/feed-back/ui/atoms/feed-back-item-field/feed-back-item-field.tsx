@@ -3,6 +3,7 @@ import { styled, Typography } from "@shared/ui";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 const Title = styled(Typography)`
@@ -11,6 +12,8 @@ const Title = styled(Typography)`
 
 const Content = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.tertiary};
+  margin-left: ${({ theme }) => theme.spacing(0.5)}px;
+  margin-top: ${({ theme }) => theme.spacing(0.2)}px;
 `;
 
 type TProps = {
@@ -21,10 +24,10 @@ type TProps = {
 export const FeedBackItemField = ({ content, title }: TProps) => {
   return (
     <Container>
-      <Title className="feed-back-title" variant="title">
+      <Title className="feed-back-title" variant="body16">
         {title}
       </Title>
-      <Content className="feed-back-content" variant="body16">
+      <Content className="feed-back-content" variant="body14">
         {content}
       </Content>
     </Container>

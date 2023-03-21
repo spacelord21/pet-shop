@@ -3,6 +3,7 @@ import { mainUrl } from "@shared/index";
 import { paths } from "../paths";
 
 export type TFeedBackModel = {
+  feedbackId: number;
   productId: number;
   name: string | null;
   dignities: string | null;
@@ -10,17 +11,22 @@ export type TFeedBackModel = {
   comment: string | null;
   imagesUrl: string[] | null;
   rating: number;
+  createTime: string;
+  userId: string;
 };
 
 export const getAllFeedBacksById = async (
   productId: number
 ): Promise<TFeedBackModel[]> => {
-  const response = await fetch(`${mainUrl}${paths.getAllById}-${productId}`, {
-    method: paths.getAllById.method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `${mainUrl}${paths.getAllById.url}${productId}`,
+    {
+      method: paths.getAllById.method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   if (!response.ok) {
     throw new Error("Не удалось загрузить отзывы");
   }

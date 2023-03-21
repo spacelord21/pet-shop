@@ -1,4 +1,3 @@
-import { productData } from "@entities/index";
 import { TProduct } from "@entities/products/types";
 import { styled, Typography } from "@shared/ui";
 import { ProductCard } from "../../molecules";
@@ -15,13 +14,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`;
-
-const Title = styled(Typography)`
-  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
-  color: ${({ theme }) => theme.palette.text.primary};
-  font-weight: 600;
-  margin-top: ${({ theme }) => theme.spacing(2)}px;
 `;
 
 type TProductsProps = {

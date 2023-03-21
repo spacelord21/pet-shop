@@ -1,4 +1,5 @@
 import { styled } from "@shared/ui";
+import { Event } from "effector";
 import { useState } from "react";
 import { TextArea } from "../../atoms";
 
@@ -7,7 +8,7 @@ const Container = styled.div``;
 type TFeedBackFieldProps = {
   title: string;
   text: string;
-  setText: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  setText: Event<string>;
   isName: boolean;
   name: string;
 };

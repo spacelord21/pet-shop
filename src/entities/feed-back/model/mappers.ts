@@ -10,5 +10,8 @@ export const mappedFeedBacks = (feedBacks: TFeedBackModel[]): TFeedBack[] => {
     disadvantages: feedBack.disadvantages ?? "",
     imagesUrl: feedBack.imagesUrl ?? [],
     name: feedBack.name ?? "",
+    createTime: feedBack.createTime,
+    feedbackId: Number(feedBack.feedbackId),
+    userId: feedBack.userId,
   }));
 };

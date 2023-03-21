@@ -1,10 +1,14 @@
 export const paths = {
   getAllById: {
     method: "GET",
-    url: "/feed-backs",
+    url: "/feedbacks/get-feedback=",
   },
   createFeedBack: {
     method: "POST",
-    url: "/add-feed-back",
+    url: "/feedbacks/add-feedback",
+  },
+  deleteFeedback: {
+    method: "POST",
+    url: "/feedbacks/delete-feedback?",
   },
 };

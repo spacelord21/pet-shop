@@ -1,3 +1,4 @@
+import { OrderWindow } from "@entities/order/ui/organisms";
 import { styled } from "@shared/ui";
 import { useStore } from "effector-react";
 import { useEffect, useMemo } from "react";
@@ -32,6 +33,7 @@ export const Bucket = () => {
     <Container className="bucket">
       <BucketList products={products} />
       {totalPrice ? <OrderSummary totalPrice={totalPrice} /> : null}
+      <OrderWindow />
     </Container>
   );
 };

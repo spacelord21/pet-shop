@@ -1,4 +1,5 @@
 export type TFeedBack = {
+  feedbackId?: number;
   productId: number;
   name?: string;
   dignities?: string;
@@ -6,4 +7,6 @@ export type TFeedBack = {
   comment?: string;
   imagesUrl?: string[];
   rating: number;
+  createTime: string;
+  userId: string;
 };

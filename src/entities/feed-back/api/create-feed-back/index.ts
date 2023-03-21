@@ -1,1 +1,1 @@
-export { createFeedBack } from "./create-feed-back";
+export { storeFeedbackInDB } from "./create-feed-back";
