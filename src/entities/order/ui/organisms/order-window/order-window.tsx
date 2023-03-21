@@ -1,7 +1,15 @@
-import { $orderWidget, setOrderWidget } from "@entities/order/model";
-import { styled } from "@shared/ui";
+import {
+  $orderWidget,
+  createOrderFx,
+  setOrderWidget,
+} from "@entities/order/model";
+import { createOrder, selectors } from "@entities/order/model/order-form";
+import { TContactDetails } from "@entities/order/types";
+import { OutlineButton, PrimaryButton, styled, Typography } from "@shared/ui";
 import { Header } from "@shared/ui/core/molecules";
 import { useStore } from "effector-react";
+import { useTheme } from "styled-components";
+import { OrderForm } from "../../molecules";
 
 const Container = styled.div<{ isActive: boolean }>`
   z-index: ${({ isActive }) => (isActive ? 1000 : -1000)};
@@ -16,6 +24,7 @@ const Container = styled.div<{ isActive: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 `;
 
 const Window = styled.div`
@@ -29,14 +38,55 @@ const Window = styled.div`
   padding: ${({ theme }) => theme.spacing(1)}px;
 `;
 
+const DescriptionWindow = styled.div`
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.palette.background.primary};
+  border-radius: 10px;
+  padding: ${({ theme }) => theme.spacing(1)}px;
+  margin-left: ${({ theme }) => theme.spacing(1)}px;
+`;
+
+const Text = styled(Typography)`
+  color: ${({ theme }) => theme.palette.text.primary};
+`;
+
+const ButtonText = styled(Typography)`
+  color: ${({ theme }) => theme.palette.text.secondary};
+`;
+
 export const OrderWindow = () => {
   const orderActive = useStore($orderWidget);
+  const { communicationPlace, name, phoneNumber } = selectors();
+
+  const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const result: TContactDetails = {
+      communicationPlace: communicationPlace,
+      name: name,
+      phone: phoneNumber,
+    };
+    console.log("easd");
+    createOrderFx(result);
+  };
 
   return (
     <Container isActive={orderActive}>
       <Window>
         <Header setIsActive={setOrderWidget} title={"Оформление заказа!"} />
+        <OrderForm />
+        <PrimaryButton onClick={onClickHandler}>
+          <ButtonText variant="body14">Оформить</ButtonText>
+        </PrimaryButton>
       </Window>
+      <DescriptionWindow>
+        <Text variant="body14">
+          Пожалуйста, укажите данные, предложенные в форме. С Вами свяжутся в
+          ближайщее время для уточнения деталей доставки!
+        </Text>
+      </DescriptionWindow>
     </Container>
   );
 };

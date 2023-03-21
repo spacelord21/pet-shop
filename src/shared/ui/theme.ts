@@ -23,6 +23,7 @@ export const theme = {
       grey: "#808080",
       lightGreen: "#83f28f",
       dark: "#232831",
+      error: "#dc3545",
     },
   },
   typography: {
