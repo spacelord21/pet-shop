@@ -19,7 +19,7 @@ const Container = styled.div<{ isNotDesktop: boolean }>`
 
 export const Bucket = () => {
   const products = useStore($bucket);
-  const { isMobile, isTablet } = useWindowDimensions();
+  const { isNotDesktop } = useWindowDimensions();
 
   useEffect(() => {
     fetchBucketFromStorage();
@@ -34,7 +34,7 @@ export const Bucket = () => {
   }, [products]);
 
   return (
-    <Container className="bucket" isNotDesktop={isMobile || isTablet}>
+    <Container className="bucket" isNotDesktop={isNotDesktop}>
       <BucketList products={products} />
       {totalPrice ? <OrderSummary totalPrice={totalPrice} /> : null}
       <OrderWindow />

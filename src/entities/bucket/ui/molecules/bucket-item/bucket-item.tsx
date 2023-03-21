@@ -5,9 +5,10 @@ import { PriceForProduct, RemoveAllButton } from "../../atoms";
 import { ProductPreview } from "../product-preview";
 import { SizeControl } from "../size-control";
 
-const Container = styled.div`
+const Container = styled.div<{ isNotDesktop: boolean; width: number }>`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   width: 100%;
   height: 200px;
 `;
@@ -26,17 +27,21 @@ export const BucketItem = ({
   size,
   title,
 }: TBucketItemProps) => {
-  const { isMobile, isTablet } = useWindowDimensions();
+  const { isNotDesktop, width } = useWindowDimensions();
   return (
-    <Container>
+    <Container
+      className="bucket-item"
+      width={width}
+      isNotDesktop={isNotDesktop}
+    >
       <ProductPreview
         imageUrl={imageUrl}
         price={price}
         title={title}
-        isNotDesktop={isMobile || isTablet}
+        isNotDesktop={isNotDesktop}
         productId={id}
       />
-      <FlexWrapper isNotDesktop={isMobile || isTablet}>
+      <FlexWrapper isNotDesktop={isNotDesktop}>
         <SizeControl id={id} size={size} />
         <PriceForProduct price={price} size={size} />
       </FlexWrapper>

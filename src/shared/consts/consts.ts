@@ -1,6 +1,1 @@
-export type TNavLinks =
-  | "/"
-  | "/products"
-  | "/feed-back"
-  | "/contacts"
-  | "/bucket";
+export type TNavLinks = "/" | "/products" | "/contacts" | "/bucket";

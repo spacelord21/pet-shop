@@ -1,6 +1,6 @@
 export type TFeedBack = {
   feedbackId?: number;
-  productId: number;
+  productId?: number;
   name?: string;
   dignities?: string;
   disadvantages?: string;
@@ -10,3 +10,5 @@ export type TFeedBack = {
   createTime: string;
   userId: string;
 };
+
+export type TSortType = "DATE" | "RATING";

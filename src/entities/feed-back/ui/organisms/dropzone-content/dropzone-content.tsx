@@ -52,6 +52,7 @@ const Text = styled(Typography)`
 
 const Input = styled.input`
   visibility: hidden;
+  border: 1px solid red;
 `;
 
 type TDropZoneContentProps = {

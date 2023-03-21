@@ -76,6 +76,8 @@ export const PopUpNavigation = ({
         />
         {navItems.map((item, index) => (
           <Item
+            widgetActive={isActive}
+            setActive={setActive}
             key={index}
             iconName={item.iconName}
             id={item.id}
