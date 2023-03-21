@@ -3,7 +3,9 @@ import { Event } from "effector";
 import { useState } from "react";
 import { TextArea } from "../../atoms";
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 98%;
+`;
 
 type TFeedBackFieldProps = {
   title: string;

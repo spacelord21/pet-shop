@@ -8,6 +8,7 @@ const Container = styled.div`
 
 const Title = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
+  padding-left: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 type TTotalPriceProps = {

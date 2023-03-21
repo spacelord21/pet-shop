@@ -1,3 +1,4 @@
+import { useWindowDimensions } from "@shared/hooks";
 import { PrimaryButton, styled, Typography } from "@shared/ui";
 import { useStore } from "effector-react";
 import { useEffect, useState } from "react";
@@ -6,9 +7,13 @@ import { ModalWindow } from "./molecules";
 import { FeedBackForm } from "./organisms";
 import { FeedBackList } from "./organisms/feed-back-list";
 
-const Container = styled.div`
+const Container = styled.div<{ isNotDesktop: boolean; width: number }>`
   margin-top: ${({ theme }) => theme.spacing(3)}px;
-  width: 724px;
+  width: ${({ isNotDesktop, width }) => (isNotDesktop ? width - 16 : 724)}px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const Title = styled(Typography)`
@@ -27,6 +32,7 @@ export const FeedBack = ({ productId }: TFeedBackProps) => {
   const [modalActive, setModalActive] = useState(false);
   const feedbacks = useStore($feedBacks);
   const userId = useStore($userId);
+  const { isMobile, isTablet, width } = useWindowDimensions();
 
   const createFeedbackHandler = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -42,7 +48,7 @@ export const FeedBack = ({ productId }: TFeedBackProps) => {
     fetchFeedBacks(productId);
   }, []);
   return (
-    <Container>
+    <Container isNotDesktop={isMobile || isTablet} width={width}>
       <Title variant="title">ВАШИ ОТЗЫВЫ</Title>
       {userId && feedbacks.find((feedback) => feedback.userId === userId) ? (
         <Title variant="body16">У вас уже есть отзыв по этому продукту!</Title>

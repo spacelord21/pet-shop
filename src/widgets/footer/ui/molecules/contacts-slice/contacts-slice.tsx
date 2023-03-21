@@ -5,7 +5,11 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 33%;
+  width: 32%;
+  @media ${({ theme }) => theme.device.mobileS} {
+    width: 100%;
+    margin-top: ${({ theme }) => theme.spacing(1)}px;
+  }
 `;
 
 const Title = styled(Typography)`

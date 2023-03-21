@@ -1,13 +1,12 @@
 import { TProduct } from "@entities/products/types";
+import { useWindowDimensions } from "@shared/hooks";
 import { styled } from "@shared/ui";
 
 type TProductImageProps = Pick<TProduct, "imageUrl">;
 
-const Container = styled.div`
+const Container = styled.div<{ isNotDesktop: boolean }>`
   border: 0.5px solid ${({ theme }) => theme.palette.accent.primary};
-  /* background-size: contain; */
-  /* background-position: center; */
-  width: 500px;
+  width: ${({ isNotDesktop }) => (isNotDesktop ? 360 : 500)}px;
   height: 500px;
   display: flex;
   align-items: center;
@@ -15,9 +14,14 @@ const Container = styled.div`
 `;
 
 export const ProductImage = ({ imageUrl }: TProductImageProps) => {
+  const { width, isMobile, isTablet } = useWindowDimensions();
   return (
-    <Container>
-      <img src={imageUrl} width={350} height={500} />
+    <Container isNotDesktop={isMobile || isTablet}>
+      <img
+        src={imageUrl}
+        width={isMobile || isTablet ? width - 5 : 350}
+        height={500}
+      />
     </Container>
   );
 };

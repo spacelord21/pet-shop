@@ -21,6 +21,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: ${({ theme }) => theme.spacing(0.7)}px;
+  width: 80%;
 `;
 
 const Text = styled(Typography)`

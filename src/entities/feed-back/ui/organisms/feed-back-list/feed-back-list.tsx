@@ -6,6 +6,11 @@ import { FeedBackItem } from "../../molecules";
 
 const Container = styled.div`
   margin-top: ${({ theme }) => theme.spacing(2)}px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 type TFeedBackListProps = {

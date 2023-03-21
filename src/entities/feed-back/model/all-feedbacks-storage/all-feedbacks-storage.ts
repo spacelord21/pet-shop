@@ -29,6 +29,7 @@ export const fetchFeedBacks = createEvent<number>();
 
 fetchFeedBacks.watch((productId) => fetchFeedBacksFx(productId));
 deleteFeedback.watch((payload) => deleteFeedbackFx(payload));
+deleteFeedbackFx.watch((payload) => fetchFeedBacksFx(payload.productId));
 
 sample({
   source: fetchFeedBacksFx.doneData,

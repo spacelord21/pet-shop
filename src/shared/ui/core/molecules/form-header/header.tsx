@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { styled } from "@shared/ui";
 import { Typography } from "../../atoms";
 import { useTheme } from "styled-components";
+import { useWindowDimensions } from "@shared/hooks";
 
 const Container = styled.div`
   display: flex;
@@ -10,16 +11,17 @@ const Container = styled.div`
   flex-direction: row;
   width: 100%;
   margin-top: ${({ theme }) => theme.spacing(0.5)}px;
+  position: relative;
 `;
 
 const IconWrapper = styled.div`
-  margin-left: ${({ theme }) => theme.spacing(40)}px;
   margin-top: 5px;
+  position: absolute;
+  right: 0;
 `;
 
 const Title = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
-  position: fixed;
 `;
 
 type THeaderProps = {
@@ -29,10 +31,10 @@ type THeaderProps = {
 
 export const Header = ({ setIsActive, title }: THeaderProps) => {
   const theme = useTheme();
-
+  const { isNotDesktop } = useWindowDimensions();
   return (
     <Container>
-      <Title variant="body24">{title}</Title>
+      <Title variant={isNotDesktop ? "title" : "body24"}>{title}</Title>
       <IconWrapper onClick={() => setIsActive(false)}>
         <Icon
           icon={"carbon:close-outline"}

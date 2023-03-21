@@ -1,5 +1,6 @@
 export type TypographyVariants =
   | "title"
+  | "title40"
   | "largeTitle"
   | "body10"
   | "body12"

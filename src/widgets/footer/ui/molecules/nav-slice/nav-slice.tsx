@@ -7,7 +7,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: ${({ theme }) => theme.spacing(1)}px;
-  width: 33%;
+  @media ${({ theme }) => theme.device.mobileS} {
+    width: 100%;
+    margin-top: ${({ theme }) => theme.spacing(1)}px;
+  }
+  width: 32%;
   justify-content: center;
   align-items: center;
 `;

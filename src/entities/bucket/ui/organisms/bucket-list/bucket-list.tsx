@@ -1,16 +1,31 @@
 import { TProductInBucket } from "@entities/bucket/types";
+import { useWindowDimensions } from "@shared/hooks";
 import { Separator, styled, Typography } from "@shared/ui";
 import { useNavigate } from "react-router-dom";
 import { BucketItem } from "../../molecules";
 
-const Container = styled.div<{ isCartEmpty: boolean }>`
+type TContainerProps = {
+  isCartEmpty: boolean;
+  isNotDesktop: boolean;
+  width: number;
+};
+
+const Container = styled.div<TContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: ${({ isCartEmpty }) => (isCartEmpty ? 550 : 765)}px;
+  width: ${({ isCartEmpty, isNotDesktop, width }) =>
+    isCartEmpty
+      ? isNotDesktop
+        ? width - 16
+        : 550
+      : isNotDesktop
+      ? width - 16
+      : 765}px;
   margin-top: 200px;
   height: auto;
-  margin-bottom: ${({ theme }) => theme.spacing(5)}px;
+  margin-bottom: ${({ theme, isNotDesktop }) =>
+    isNotDesktop ? 16 : theme.spacing(5)}px;
 `;
 
 const Title = styled(Typography)`
@@ -39,8 +54,13 @@ type TBucketListProps = {
 
 export const BucketList = ({ products }: TBucketListProps) => {
   const navigate = useNavigate();
+  const { width, isMobile, isTablet } = useWindowDimensions();
   return (
-    <Container isCartEmpty={!!products.length}>
+    <Container
+      isCartEmpty={!!products.length}
+      isNotDesktop={isMobile || isTablet}
+      width={width}
+    >
       <Title variant="title">Моя корзина</Title>
       <Separator />
       {products.length ? (

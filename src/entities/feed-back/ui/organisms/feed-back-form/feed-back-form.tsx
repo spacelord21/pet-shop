@@ -19,9 +19,10 @@ import {
 } from "@entities/feed-back/model";
 import { TStarRatingProps } from "@shared/ui/core/organisms/star-rating/star-rating";
 import { Header } from "@shared/ui/core/molecules";
+import { useWindowDimensions } from "@shared/hooks";
 
-const Container = styled.div`
-  width: 678px;
+const Container = styled.div<{ isNotDesktop: boolean; width: number }>`
+  width: ${({ isNotDesktop, width }) => (isNotDesktop ? width - 16 : 678)}px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,6 +30,9 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.palette.background.primary};
   border-radius: 10px;
   padding: ${({ theme }) => theme.spacing(1)}px;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 `;
 
 const StarRatingContainer = styled.div`
@@ -90,6 +94,7 @@ export const FeedBackForm = React.memo(
     const { comment, dignities, disadvantages, name, rating } = selectors();
     const [hoveringRating, setHover] = useState<number | null>(null);
     const { files, onDragStateChange, onFilesDrop, removeFile } = useDropZone();
+    const { isNotDesktop, width } = useWindowDimensions();
 
     const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
@@ -98,7 +103,7 @@ export const FeedBackForm = React.memo(
     };
 
     return (
-      <Container>
+      <Container isNotDesktop={isNotDesktop} width={width}>
         <Header setIsActive={setIsActive} title={"Ваш отзыв очень важен!"} />
         <StarRatingWithConteiner
           height={30}
@@ -145,6 +150,8 @@ export const FeedBackForm = React.memo(
         <DropZone
           onDragStateChange={onDragStateChange}
           onFilesDrop={onFilesDrop}
+          isNotDesktop={isNotDesktop}
+          width={width}
         >
           <DropZoneContent
             files={files}
