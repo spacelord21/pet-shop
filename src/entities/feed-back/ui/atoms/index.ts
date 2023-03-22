@@ -4,3 +4,4 @@ export { Image } from "./image";
 export { FeedBackItemField } from "./feed-back-item-field";
 export { FeedbackOwner } from "./feedback-owner";
 export { CreateTime } from "./create-time";
+export { ShowMoreButton } from "./show-more-button";
