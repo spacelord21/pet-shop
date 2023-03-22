@@ -28,7 +28,7 @@
       "@entities/*" :["entities/*"],
       "@pages/*" : ["pages/*"],
       "@processes/*" :["processes/*"],
-      "@shared/*" : ["shared/*"]
+      "@shared/*" : ["shared/*"],
     },
   },
   "include": [

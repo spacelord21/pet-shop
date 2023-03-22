@@ -23,6 +23,9 @@ const ProductsPage = lazy(() =>
 const NotFound = lazy(() =>
   import("./not-found").then(({ NotFound }) => ({ default: NotFound }))
 );
+const AdminPanel = lazy(() =>
+  import("./admin-panel").then(({ AdminPanel }) => ({ default: AdminPanel }))
+);
 
 export const Routing = () => {
   const products = useStore($products);
@@ -46,6 +49,7 @@ export const Routing = () => {
               element={<Product key={product.id} {...product} />}
             />
           ))}
+          <Route path="/admin-login" element={<AdminPanel />} />
         </Routes>
       </Suspense>
     </ErrorBoundary>
