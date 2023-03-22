@@ -2,8 +2,8 @@ import { mainUrl } from "@shared/index";
 import { TFeedBackModel } from "../get-all-feed-backs-by-id/get-all-feed-backs-by-id";
 import { paths } from "../paths";
 
-export const getALlFeedbacks = (): Promise<TFeedBackModel[]> => {
-  return fetch(`${mainUrl}${paths.getAll.url}`, {
+export const getAllFeedbacks = async (): Promise<TFeedBackModel[]> => {
+  return await fetch(`${mainUrl}${paths.getAll.url}`, {
     method: paths.getAll.method,
     headers: {
       "Content-Type": "application/json",

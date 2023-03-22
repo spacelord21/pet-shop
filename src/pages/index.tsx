@@ -49,7 +49,7 @@ export const Routing = () => {
               element={<Product key={product.id} {...product} />}
             />
           ))}
-          <Route path="/admin-login" element={<AdminPanel />} />
+          <Route path="/admin" element={<AdminPanel />} />
         </Routes>
       </Suspense>
     </ErrorBoundary>

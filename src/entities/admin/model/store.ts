@@ -1,5 +1,5 @@
 import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
-import { getALlFeedbacks } from "@entities/feed-back/api";
+import { getAllFeedbacks } from "@entities/feed-back/api";
 import { TFeedBackModel } from "@entities/feed-back/api/get-all-feed-backs-by-id/get-all-feed-backs-by-id";
 import { mappedFeedBacks } from "@entities/feed-back/model/mappers";
 import { TFeedBack } from "@entities/feed-back/types";
@@ -25,18 +25,19 @@ export const getPermissionFx = createEffect<TAdmin, boolean, Error>(
 
 const fetchAllFeedbacksFx = createEffect<void, TFeedBackModel[], Error>(
   async () => {
-    return await getALlFeedbacks();
+    return await getAllFeedbacks();
   }
 );
 
 export const $allFeedbacks = createStore<TFeedBack[]>([]);
 
-sample({
-  clock: fetchAllFeedbacksFx.doneData,
-  fn: (payload) => {
-    return mappedFeedBacks(payload);
-  },
-  target: $allFeedbacks,
+$allFeedbacks.on(fetchAllFeedbacksFx.doneData, (_, payload) =>
+  mappedFeedBacks(payload)
+);
+
+forward({
+  from: getPermissionFx.done,
+  to: fetchAllFeedbacksFx,
 });
 
 fetchAllFeedbacksFx.failData.watch((payload) => {
@@ -54,7 +55,15 @@ forward({
 
 $hasPermission.on(getPermissionFx.doneData, (_, payload) => payload);
 
+getPermissionFx.doneData.watch((payload) => console.log(payload));
+
 persist({
   store: $hasPermission,
   key: ADMIN_KEY,
+});
+
+$hasPermission.watch((state) => {
+  if (state) {
+    fetchAllFeedbacksFx();
+  }
 });

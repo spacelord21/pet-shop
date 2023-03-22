@@ -1,1 +1,1 @@
-export { getALlFeedbacks } from "./get-all-feedbacks";
+export { getAllFeedbacks } from "./get-all-feedbacks";
