@@ -1,4 +1,4 @@
-import { fetchProductsFx } from "@entities/products/model";
+import { fetchProducts, fetchProductsFx } from "@entities/products/model";
 import { TProduct } from "@entities/products/types";
 import { Loader, styled, Typography } from "@shared/ui";
 import { useStore } from "effector-react";
@@ -21,6 +21,22 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.background.primary};
 `;
 
+const RefetchText = styled(Typography)`
+  color: ${({ theme }) => theme.palette.text.primary};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.text.primary};
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+const EmptyContainer = styled.div`
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 type TProductsProps = {
   products: TProduct[];
 };
@@ -32,8 +48,21 @@ export const Products = ({ products }: TProductsProps) => {
   return (
     <Wrapper>
       <Container>
+        {!loading && products.length === 0 ? (
+          <EmptyContainer>
+            <RefetchText variant="body16" onClick={() => fetchProducts()}>
+              Не удалось загрузить продукты... Попробовать снова.
+            </RefetchText>
+          </EmptyContainer>
+        ) : null}
         {loading ? (
-          <Loader color={theme.palette.accent.primary} height={40} width={40} />
+          <EmptyContainer>
+            <Loader
+              color={theme.palette.accent.primary}
+              height={40}
+              width={40}
+            />
+          </EmptyContainer>
         ) : (
           products.map((product) => (
             <ProductCard
