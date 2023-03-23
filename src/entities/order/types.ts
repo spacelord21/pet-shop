@@ -21,3 +21,7 @@ export type TCommunicationPlace =
   | "Telegram"
   | "Viber"
   | "Напрямую по телефону";
+
+export type TOrderInStorage = {
+  count: number;
+};

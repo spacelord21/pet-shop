@@ -85,7 +85,7 @@ export const OrderWindow = () => {
       name: name,
       phone: phoneNumber,
     };
-    createOrderFx(result);
+    createOrder(result);
   };
 
   const isNotDesktop = useMemo(() => {
