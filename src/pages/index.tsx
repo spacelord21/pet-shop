@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { ErrorBoundary } from "./error-boundary";
 import { Fallback } from "./fallback";
+import { TProduct } from "@entities/products/types";
 
 const Home = lazy(() =>
   import("./home").then(({ Home }) => ({ default: Home }))
@@ -23,14 +24,15 @@ const ProductsPage = lazy(() =>
 const NotFound = lazy(() =>
   import("./not-found").then(({ NotFound }) => ({ default: NotFound }))
 );
+const AdminPanel = lazy(() =>
+  import("./admin-panel").then(({ AdminPanel }) => ({ default: AdminPanel }))
+);
 
-export const Routing = () => {
-  const products = useStore($products);
+type TRoutingProps = {
+  products: TProduct[];
+};
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
+export const Routing = ({ products }: TRoutingProps) => {
   return (
     <ErrorBoundary>
       <Suspense fallback={<Fallback />}>
@@ -46,6 +48,7 @@ export const Routing = () => {
               element={<Product key={product.id} {...product} />}
             />
           ))}
+          <Route path="/admin" element={<AdminPanel />} />
         </Routes>
       </Suspense>
     </ErrorBoundary>

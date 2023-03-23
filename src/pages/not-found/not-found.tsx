@@ -1,6 +1,6 @@
 import { OutlineButton, styled, Typography } from "@shared/ui";
 import { useNavigate } from "react-router-dom";
-import picture from "../../../public/assets/dog-in-space.jpg";
+import picture from "../../../public/assets/dog-in-space.png";
 
 const Container = styled.div<{ url: string }>`
   display: flex;
