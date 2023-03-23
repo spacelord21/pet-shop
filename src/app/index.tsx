@@ -6,6 +6,7 @@ import { useStore } from "effector-react";
 import { $alert, Alert } from "@entities/alert";
 import { $products, fetchProducts } from "@entities/products/model";
 import { useEffect } from "react";
+import { createUserId } from "@entities/feed-back/model";
 
 const Container = styled.div`
   background-color: #fffaf5;
@@ -16,6 +17,7 @@ export const App = () => {
   const products = useStore($products);
   useEffect(() => {
     fetchProducts();
+    createUserId();
   }, []);
 
   return (

@@ -13,5 +13,6 @@ export const mappedFeedBacks = (feedBacks: TFeedBackModel[]): TFeedBack[] => {
     createTime: feedBack.createTime,
     feedbackId: Number(feedBack.feedbackId),
     userId: feedBack.userId,
+    comments: feedBack.comments,
   }));
 };

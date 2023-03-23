@@ -5,6 +5,7 @@ import { CreateTime, FeedBackItemField, FeedbackOwner } from "../../atoms";
 import { StarRatingWithConteiner } from "../../organisms/feed-back-form/feed-back-form";
 import { ImagesList } from "../images-list";
 import { useStore } from "effector-react";
+import { Comments } from "@entities/comment";
 
 const Container = styled.div`
   padding: ${({ theme }) => theme.spacing(1)}px;
@@ -51,6 +52,7 @@ export const FeedBackItem = ({ feedBack, hasOwner }: TFeedBackItemProps) => {
     e.preventDefault();
     deleteFeedback({ userId: userId, productId: productId });
   };
+  console.log(feedBack.feedbackId);
 
   return (
     <Container>
@@ -86,6 +88,10 @@ export const FeedBackItem = ({ feedBack, hasOwner }: TFeedBackItemProps) => {
           Удалить
         </DeleteText>
       ) : null}
+      <Comments
+        comments={feedBack.comments}
+        feedbackId={feedBack.feedbackId!}
+      />
       <Separator />
     </Container>
   );

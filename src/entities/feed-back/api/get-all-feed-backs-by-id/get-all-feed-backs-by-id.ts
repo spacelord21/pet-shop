@@ -1,4 +1,4 @@
-import { TFeedBack } from "@entities/feed-back/types";
+import { TComment, TFeedBack } from "@entities/feed-back/types";
 import { mainUrl } from "@shared/index";
 import { paths } from "../paths";
 
@@ -13,6 +13,7 @@ export type TFeedBackModel = {
   rating: number;
   createTime: string;
   userId: string;
+  comments: TComment[];
 };
 
 export const getAllFeedBacksById = async (
@@ -24,9 +25,7 @@ export const getAllFeedBacksById = async (
       "Content-Type": "application/json",
     },
   })
-    .then((response) => {
-      return response.json();
-    })
+    .then((response) => response.json())
     .catch(() => {
       throw new Error("Не удалось загрузить отзывы");
     });
