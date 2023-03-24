@@ -20,4 +20,6 @@ export type TComment = {
   comment: string;
   isAdmin: boolean;
   userId: string;
+  createTime: string;
+  avatarId: number;
 };

@@ -2,8 +2,8 @@ import { styled } from "@shared/ui";
 
 const Image = styled.img`
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
 `;
 
 type TAvatarProps = {

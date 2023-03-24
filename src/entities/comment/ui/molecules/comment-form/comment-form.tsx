@@ -1,7 +1,7 @@
 import { $hasPermission } from "@entities/admin";
 import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
 import { saveCommentEv } from "@entities/comment/model/store";
-import { $userId } from "@entities/feed-back/model";
+import { $userId, fetchFeedBacks } from "@entities/feed-back/model";
 import { TextArea } from "@entities/feed-back/ui/atoms";
 import { PrimaryButton, styled, Typography } from "@shared/ui";
 import { useStore } from "effector-react";
@@ -11,7 +11,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  width: 95%;
+  margin-left: 16px;
+  margin-top: ${({ theme }) => theme.spacing(1)}px;
+`;
+
+const Margin = styled.div`
+  margin-top: ${({ theme }) => theme.spacing(0.5)}px;
 `;
 
 const ButtonText = styled(Typography)`
@@ -20,9 +27,10 @@ const ButtonText = styled(Typography)`
 
 type TCommentFormProps = {
   feedbackId: number;
+  productId: number;
 };
 
-export const CommentForm = ({ feedbackId }: TCommentFormProps) => {
+export const CommentForm = ({ feedbackId, productId }: TCommentFormProps) => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const isAdmin = useStore($hasPermission);
@@ -44,7 +52,16 @@ export const CommentForm = ({ feedbackId }: TCommentFormProps) => {
       isAdmin: isAdmin,
       name: name,
       userId: userId,
+      createTime: new Date().toLocaleString("ru", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
+      avatarId: Math.floor(Math.random() * (15 - 0) + 0),
     });
+    fetchFeedBacks(productId);
+    setComment("");
+    setName("");
   };
 
   return (
@@ -58,6 +75,8 @@ export const CommentForm = ({ feedbackId }: TCommentFormProps) => {
         title={"Введите ваше имя"}
         key={1}
       />
+      <Margin />
+
       <TextArea
         isName={false}
         isActive={true}
@@ -67,9 +86,11 @@ export const CommentForm = ({ feedbackId }: TCommentFormProps) => {
         title={"Напишите комментарий"}
         key={2}
       />
+      <Margin />
       <PrimaryButton onClick={handleClick}>
         <ButtonText variant="body14">Добавить</ButtonText>
       </PrimaryButton>
+      <Margin />
     </Container>
   );
 };

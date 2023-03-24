@@ -1,11 +1,12 @@
 import { $userId, deleteFeedback } from "@entities/feed-back/model";
 import { TFeedBack } from "@entities/feed-back/types";
-import { Separator, StarRating, styled, Typography } from "@shared/ui";
+import { Separator, styled, Typography } from "@shared/ui";
 import { CreateTime, FeedBackItemField, FeedbackOwner } from "../../atoms";
 import { StarRatingWithConteiner } from "../../organisms/feed-back-form/feed-back-form";
 import { ImagesList } from "../images-list";
 import { useStore } from "effector-react";
 import { Comments } from "@entities/comment";
+import { useState } from "react";
 
 const Container = styled.div`
   padding: ${({ theme }) => theme.spacing(1)}px;
@@ -19,14 +20,19 @@ const HeaderWrapper = styled.div`
   align-items: center;
 `;
 
-const DeleteText = styled(Typography)`
-  width: 55px;
+const ButtonText = styled(Typography)`
   margin-top: ${({ theme }) => theme.spacing(1)}px;
   color: ${({ theme }) => theme.palette.text.tertiary};
-  border-bottom: 0.5px solid ${({ theme }) => theme.palette.text.tertiary};
   cursor: pointer;
   display: flex;
   justify-self: right;
+  padding: 16px;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* justify-content: ; */
 `;
 
 type TFeedBackItemProps = {
@@ -46,13 +52,13 @@ export const FeedBackItem = ({ feedBack, hasOwner }: TFeedBackItemProps) => {
     productId,
   } = feedBack;
 
+  const [isFullView, setIsFullView] = useState(false);
   const userId = useStore($userId);
 
   const deleteHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     deleteFeedback({ userId: userId, productId: productId });
   };
-  console.log(feedBack.feedbackId);
 
   return (
     <Container>
@@ -83,14 +89,28 @@ export const FeedBackItem = ({ feedBack, hasOwner }: TFeedBackItemProps) => {
         content={comment?.length ? comment : ""}
       />
       {imagesUrl?.length! > 0 ? <ImagesList images={imagesUrl!} /> : null}
-      {hasOwner ? (
-        <DeleteText variant="body14" onClick={deleteHandler}>
-          Удалить
-        </DeleteText>
-      ) : null}
+      <ButtonsContainer>
+        {hasOwner ? (
+          <ButtonText variant="body14" onClick={deleteHandler}>
+            Удалить
+          </ButtonText>
+        ) : null}
+        <ButtonText
+          variant="body14"
+          onClick={() => setIsFullView((prev) => !prev)}
+        >
+          {isFullView
+            ? "Скрыть комментарии"
+            : feedBack.comments.length > 1
+            ? `Комментарии (${feedBack.comments.length - 1})`
+            : "Добавить комментарий"}
+        </ButtonText>
+      </ButtonsContainer>
       <Comments
         comments={feedBack.comments}
         feedbackId={feedBack.feedbackId!}
+        isFullView={isFullView}
+        productId={productId!}
       />
       <Separator />
     </Container>

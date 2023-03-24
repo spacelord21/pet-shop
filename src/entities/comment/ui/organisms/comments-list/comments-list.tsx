@@ -1,14 +1,15 @@
 import { TComment } from "@entities/feed-back/types";
 import { useWindowDimensions } from "@shared/hooks";
 import { styled } from "@shared/ui";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { CommentItem } from "../../molecules";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
+  width: 100%;
 `;
 
 type TCommentsListProps = {
