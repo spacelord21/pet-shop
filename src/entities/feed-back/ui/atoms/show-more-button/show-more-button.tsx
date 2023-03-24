@@ -22,9 +22,9 @@ export const ShowMoreButton = ({
   handleClick,
 }: TShowMoreButtonProps) => {
   return quantity === 0 || quantity < 0 ? (
-    feedbacksLength === 0 || quantity < 0 ? (
+    feedbacksLength === 0 ? (
       <Text variant="body14">Отзывов еще нет</Text>
-    ) : (
+    ) : feedbacksLength === 1 ? null : (
       <Text variant="body14" onClick={handleClick}>
         Скрыть отзывы
       </Text>

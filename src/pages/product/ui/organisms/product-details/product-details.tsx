@@ -67,13 +67,7 @@ export const ProductDetails = (product: TProductDetailsProps) => {
     <Container isNotDesktop={isMobile || isTablet}>
       <OrderWindow />
       <ProductName variant="title">{title}</ProductName>
-      <StarRating
-        height={35}
-        width={35}
-        realRating={product.rating}
-        maxValue={5}
-        readOnly={true}
-      />
+      {/* убрал звезды по заказу */}
       <ProductPrice variant="title">₽{price}.00</ProductPrice>
       <ProductPriceDescription variant="body12">
         *указанная цена за 100 грамм
