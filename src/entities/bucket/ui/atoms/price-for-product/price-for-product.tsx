@@ -12,5 +12,9 @@ type TPriceForProductProps = {
 };
 
 export const PriceForProduct = ({ size, price }: TPriceForProductProps) => {
-  return <Text variant="title">{(size * price) / 100}.00₽</Text>;
+  return (
+    <Text variant="title" className="price-product">
+      {(size * price) / 100}.00₽
+    </Text>
+  );
 };

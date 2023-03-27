@@ -16,6 +16,7 @@ export const Image = ({ imageUrl, isNotDesktop, productId }: TImageProps) => {
   const navigate = useNavigate();
   return (
     <Img
+      className="product-image"
       src={imageUrl}
       isNotDesktop={isNotDesktop}
       onClick={() => navigate(`/product-${productId}`)}

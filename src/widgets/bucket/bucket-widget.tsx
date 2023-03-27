@@ -64,8 +64,12 @@ export const BucketWidget = () => {
   const { isNotDesktop } = useWindowDimensions();
 
   return (
-    <Container isActive={isActive}>
-      <Wrapper isActive={isActive} isNotDesktop={isNotDesktop}>
+    <Container isActive={isActive} className="bucket-widget-container">
+      <Wrapper
+        isActive={isActive}
+        isNotDesktop={isNotDesktop}
+        className="bucket-widget-body"
+      >
         <Header />
         <BucketList products={products} />
         <Separator />

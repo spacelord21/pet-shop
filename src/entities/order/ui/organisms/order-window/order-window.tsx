@@ -1,3 +1,4 @@
+import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
 import {
   $orderWidget,
   createOrderFx,
@@ -80,6 +81,15 @@ export const OrderWindow = () => {
 
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (phoneNumber.length !== 12) {
+      createAlert({
+        message:
+          "Неверно указан номер, форма - 89111111111. Пожалуйста, повторите.",
+        timeout: DEFAULT_ALERT_TIMEOUT,
+        type: "WARNING",
+      });
+      return;
+    }
     const result: TContactDetails = {
       communicationPlace: communicationPlace,
       name: name,
@@ -93,7 +103,11 @@ export const OrderWindow = () => {
   }, [isMobile, isTablet]);
 
   return (
-    <Container isActive={orderActive} isNotDesktop={isNotDesktop}>
+    <Container
+      isActive={orderActive}
+      isNotDesktop={isNotDesktop}
+      className="order-form"
+    >
       <Window isNotDesktop={isNotDesktop} width={width}>
         <Header setIsActive={setOrderWidget} title={"Оформление заказа!"} />
         <OrderForm />

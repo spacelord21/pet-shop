@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
+  width: 85%;
   background-color: ${({ theme }) => theme.palette.background.primary};
 `;
 
@@ -49,14 +49,14 @@ export const Products = ({ products }: TProductsProps) => {
     <Wrapper>
       <Container>
         {!loading && products.length === 0 ? (
-          <EmptyContainer>
+          <EmptyContainer className="empty-container">
             <RefetchText variant="body16" onClick={() => fetchProducts()}>
               Не удалось загрузить продукты... Попробовать снова.
             </RefetchText>
           </EmptyContainer>
         ) : null}
         {loading ? (
-          <EmptyContainer>
+          <EmptyContainer className="empty-container">
             <Loader
               color={theme.palette.accent.primary}
               height={40}

@@ -47,6 +47,7 @@ export const Image = ({ imageUrl, removeFile, id }: TImageProps) => {
     <Container
       onMouseEnter={() => setIsImageHover(true)}
       onMouseLeave={() => setIsImageHover(false)}
+      className="feedback-image"
     >
       <Img src={imageUrl} isNotDesktop={isNotDesktop} />
       <IconWrapper isImageHover={isImageHover} onClick={() => removeFile(id)}>

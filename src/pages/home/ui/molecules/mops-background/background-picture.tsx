@@ -27,12 +27,14 @@ const Text = styled(Typography)`
     0 3px 2px 0px ${({ theme }) => theme.palette.accent.primary};
 `;
 
-const TextBlock = styled.div`
+const TextBlock = styled.div<{ isNotDesktop: boolean }>`
   z-index: 1;
+  margin-left: ${({ theme, isNotDesktop }) =>
+    isNotDesktop ? 0 : theme.spacing(2)}px;
 `;
 
 export const BackgroundPicture = () => {
-  const { width } = useWindowDimensions();
+  const { width, isNotDesktop } = useWindowDimensions();
 
   const handleFontSize = (): TypographyVariants => {
     if (width >= size.mobileS && width <= size.mobileL) {
@@ -42,11 +44,20 @@ export const BackgroundPicture = () => {
   };
 
   return (
-    <Container url={MOPS}>
-      <TextBlock>
-        <Text variant={handleFontSize()}>ТВОЙ ЛУЧШИЙ ДРУГ</Text>
-        <Text variant={handleFontSize()}>ЗАСЛУЖИВАЕТ</Text>
-        <Text variant={handleFontSize()}>ЛУЧШУЮ ЕДУ</Text>
+    <Container url={MOPS} className="pugs background">
+      <TextBlock isNotDesktop={isNotDesktop} className="text-block">
+        <Text variant={handleFontSize()} className="welcome-title">
+          ТВОЙ ЛУЧШИЙ
+        </Text>
+        <Text variant={handleFontSize()} className="welcome-title">
+          ДРУГ
+        </Text>
+        <Text variant={handleFontSize()} className="welcome-title">
+          ЗАСЛУЖИВАЕТ
+        </Text>
+        <Text variant={handleFontSize()} className="welcome-title">
+          ЛУЧШУЮ ЕДУ
+        </Text>
       </TextBlock>
     </Container>
   );

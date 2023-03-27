@@ -27,7 +27,7 @@ export const CommentsList = ({ comments, isFullView }: TCommentsListProps) => {
   const {} = useWindowDimensions();
 
   return (
-    <Container>
+    <Container className="comments-list">
       {comments.length > 0 ? (
         isFullView ? (
           commentsSort(comments).map((comment) => (

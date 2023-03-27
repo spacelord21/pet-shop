@@ -42,7 +42,7 @@ const Amount = styled(Typography)`
 
 const IconWrapper = styled.div`
   position: fixed;
-  right: 45px;
+  right: 52px;
   top: 40px;
   cursor: pointer;
   background-color: ${({ theme }) => theme.palette.accent.error};
@@ -68,7 +68,7 @@ export const Header = () => {
 
   return (
     <Wrapper width={width} className="header">
-      <Container>
+      <Container className="header-body">
         <Icon />
         {isNotDesktop ? (
           widgetActive ? (

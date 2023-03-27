@@ -17,14 +17,14 @@ export const Footer = () => {
   const navigate = useNavigate();
 
   return (
-    <Container>
+    <Container className="bucket-widget-footer">
       <PrimaryButton
         onClick={() => {
           navigate("/bucket");
           setWidgetActive(false);
         }}
       >
-        <ButtonText variant="body16">Перейти в корзину</ButtonText>
+        Перейти в корзину
       </PrimaryButton>
     </Container>
   );

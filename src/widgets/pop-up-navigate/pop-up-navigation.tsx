@@ -66,13 +66,13 @@ export const PopUpNavigation = ({
   const location = useLocation();
   const theme = useTheme();
   return (
-    <ModalPanel isActive={isActive}>
-      <NavList>
+    <ModalPanel isActive={isActive} className="modal-panel">
+      <NavList className="nav list">
         <Icon
           icon={"material-symbols:close-rounded"}
           color={theme.palette.accent.primary}
           onClick={() => setActive(false)}
-          width={40}
+          width={23}
         />
         {navItems.map((item, index) => (
           <Item

@@ -53,6 +53,8 @@ const EmptyCartContainer = styled.div<{
   justify-content: center;
 `;
 
+const Wrapper = styled.div``;
+
 type TBucketListProps = {
   products: TProductInBucket[];
 };
@@ -61,29 +63,32 @@ export const BucketList = ({ products }: TBucketListProps) => {
   const navigate = useNavigate();
   const { width, isNotDesktop } = useWindowDimensions();
 
-  useEffect(() => {
-    console.log("rerender");
-  }, []);
-
   return (
     <Container
       isCartEmpty={!!products.length}
       isNotDesktop={isNotDesktop}
       width={width}
+      className="bucket-list"
     >
-      <Title variant="title">Моя корзина</Title>
+      <Title variant="title" key={"my cart"} className="title">
+        Моя корзина
+      </Title>
       <Separator />
       {products.length ? (
         products.map((product, index) => (
-          <>
+          <Wrapper key={product.id}>
             <BucketItem {...product} key={product.id} />
-            {index !== products.length - 1 ? <Separator /> : null}
-          </>
+            {index !== products.length - 1 ? (
+              <Separator key={product.id + 100} />
+            ) : null}
+          </Wrapper>
         ))
       ) : (
         <>
           <EmptyCartContainer isNotDesktop={isNotDesktop} deviceWidth={width}>
-            <Title variant="title">Корзина пуста</Title>
+            <Title variant="title" key={"empty cart"}>
+              Корзина пуста
+            </Title>
             <Text variant="body14" onClick={() => navigate("/products")}>
               Перейти к продуктам
             </Text>

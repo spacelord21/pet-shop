@@ -12,6 +12,7 @@ type TIsActiveItem = {
 
 const Text = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
+  font-weight: 300;
 `;
 
 const Container = styled.div<TIsActiveItem>`
@@ -59,13 +60,14 @@ export const Item = ({
   };
 
   return (
-    <Container onClick={handleClick} isActive={isActive}>
-      <Text variant="title">{title.toLocaleUpperCase()}</Text>
+    <Container onClick={handleClick} isActive={isActive} className="nav-item">
+      <Text variant="title">{title}</Text>
       <Icon
+        className="nav-item-icon"
         icon={iconName}
         color={theme.palette.accent.primary}
-        width={title ? 20 : 25}
-        height={title ? 20 : 25}
+        width={title ? 18 : 23}
+        height={title ? 18 : 23}
       />
     </Container>
   );

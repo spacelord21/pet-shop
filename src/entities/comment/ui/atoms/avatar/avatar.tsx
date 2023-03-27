@@ -11,5 +11,5 @@ type TAvatarProps = {
 };
 
 export const Avatar = ({ url }: TAvatarProps) => {
-  return <Image src={url} />;
+  return <Image src={url} className="guest-avatar" />;
 };

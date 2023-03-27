@@ -30,7 +30,7 @@ export const ProductsPage = () => {
   const products = useStore($products);
 
   return (
-    <Container>
+    <Container className="products-page">
       <Header />
       <BucketWidget />
       <Block />

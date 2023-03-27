@@ -16,6 +16,15 @@ const Container = styled.div`
   width: 100%;
 `;
 
+const Wrapper = styled.div`
+  background-color: ${({ theme }) => theme.palette.background.primary};
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Block = styled.div`
   width: 100%;
   height: ${({ theme }) => theme.spacing(12)}px;
@@ -26,11 +35,11 @@ type TProductProps = TProduct;
 
 export const Product = (product: TProductProps) => {
   return (
-    <>
+    <Wrapper className="product-page">
       <BucketWidget />
       <PopUpImage />
       <Header />
-      <Container>
+      <Container className="product">
         <Block />
         <ProductTemplate {...product} />
         <FeedBack productId={product.id} />
@@ -38,6 +47,6 @@ export const Product = (product: TProductProps) => {
       </Container>
       <Footer />
       <Separator />
-    </>
+    </Wrapper>
   );
 };

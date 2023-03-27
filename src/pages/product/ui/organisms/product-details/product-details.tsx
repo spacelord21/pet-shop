@@ -64,7 +64,7 @@ export const ProductDetails = (product: TProductDetailsProps) => {
   };
 
   return (
-    <Container isNotDesktop={isMobile || isTablet}>
+    <Container isNotDesktop={isMobile || isTablet} className="product-template">
       <OrderWindow />
       <ProductName variant="title">{title}</ProductName>
       {/* убрал звезды по заказу */}

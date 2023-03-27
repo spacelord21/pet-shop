@@ -17,7 +17,7 @@ const Description = styled(Typography)`
 
 export const OrderForm = () => {
   return (
-    <Container>
+    <Container className="order-form">
       <NameInput />
       <PhoneNumber />
       <Description variant="body16">

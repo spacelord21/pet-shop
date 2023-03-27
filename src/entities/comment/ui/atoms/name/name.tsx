@@ -10,5 +10,9 @@ type TNameProps = {
 };
 
 export const Name = ({ name }: TNameProps) => {
-  return <Text variant="body16">{name}</Text>;
+  return (
+    <Text variant="body16" className="comment-name">
+      {name}
+    </Text>
+  );
 };

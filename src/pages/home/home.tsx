@@ -7,7 +7,7 @@ import { BackgroundPicture, Products } from "./ui";
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.palette.background.primary};
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +29,7 @@ export const Home = () => {
       <Header />
       <BucketWidget />
       <BackgroundPicture />
-      <Title variant="largeTitle">ПРОДУКТЫ</Title>
+      <Title variant="title2">ПРОДУКТЫ</Title>
       <Products products={products} />
       <Separator />
       <Footer />

@@ -22,7 +22,7 @@ export const ProductPreview = ({
   productId,
 }: TProductPreviewProps) => {
   return (
-    <Container>
+    <Container className="product-preview">
       <Image
         imageUrl={imageUrl}
         isNotDesktop={isNotDesktop}

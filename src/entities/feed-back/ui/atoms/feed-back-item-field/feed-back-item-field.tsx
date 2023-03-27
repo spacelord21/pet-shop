@@ -14,6 +14,8 @@ const Content = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.tertiary};
   margin-left: ${({ theme }) => theme.spacing(0.5)}px;
   margin-top: ${({ theme }) => theme.spacing(0.2)}px;
+  text-align: justify;
+  word-wrap: break-word;
 `;
 
 type TProps = {
@@ -23,7 +25,7 @@ type TProps = {
 
 export const FeedBackItemField = ({ content, title }: TProps) => {
   return content ? (
-    <Container>
+    <Container className="feedback-field">
       <Title className="feed-back-title" variant="body16">
         {title}
       </Title>

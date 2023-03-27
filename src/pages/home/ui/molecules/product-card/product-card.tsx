@@ -81,8 +81,9 @@ export const ProductCard = ({
             rating: rating,
           });
         }}
-        children={<ButtonContent variant="body16">Добавить</ButtonContent>}
-      />
+      >
+        Добавить
+      </PrimaryButton>
     </Container>
   );
 };

@@ -32,6 +32,8 @@ const Text = styled(Typography)<TIsActive>`
   color: ${({ theme }) => theme.palette.text.tertiary};
   width: 300px;
   height: ${({ isActive }) => (isActive ? "auto" : 0)};
+  opacity: ${({ isActive }) => (isActive ? 1 : 0)};
+  z-index: ${({ isActive }) => (isActive ? 1 : -1)};
   margin-left: ${({ theme }) => theme.spacing(1)}px;
   text-align: justify;
 `;
@@ -68,18 +70,24 @@ export const DescriptionSlice = ({
 
   return (
     <>
-      <Container>
-        <Title variant="body16">{title}</Title>
-        <Button variant="title" onClick={handleClick}>
+      <Container className="desc-slice">
+        <Title variant="body16" className="title">
+          {title}
+        </Title>
+        <Button variant="title" onClick={handleClick} className="title">
           {isPressed ? "-" : "+"}
         </Button>
       </Container>
       <Separator width={isNotDesktop ? 100 : 65} />
-      {isPressed ? (
-        <Text variant="body14" isActive={isPressed} ref={itemRef}>
-          {content}
-        </Text>
-      ) : null}
+
+      <Text
+        variant="body14"
+        isActive={isPressed}
+        ref={itemRef}
+        className="desc-content"
+      >
+        {content}
+      </Text>
     </>
   );
 };

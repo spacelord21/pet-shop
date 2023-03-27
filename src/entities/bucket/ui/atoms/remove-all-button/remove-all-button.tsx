@@ -15,7 +15,10 @@ type TRemoveAllButtonProps = {
 
 export const RemoveAllButton = ({ id }: TRemoveAllButtonProps) => {
   return (
-    <IconWrapper onClick={() => removeAllProductsFromBucketById(id)}>
+    <IconWrapper
+      onClick={() => removeAllProductsFromBucketById(id)}
+      className="remove-all-button"
+    >
       <Icon icon="material-symbols:close-sharp" width={25} height={25} />
     </IconWrapper>
   );

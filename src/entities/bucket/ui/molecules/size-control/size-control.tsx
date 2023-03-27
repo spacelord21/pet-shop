@@ -45,7 +45,7 @@ export const SizeControl = ({ size, id }: TSizeControlProps) => {
   const sizeIcon = { width: 20, height: 20 };
   const theme = useTheme();
   return (
-    <Container>
+    <Container className="size-control">
       <Button
         onClick={() => {
           reduceSize(id);
@@ -58,7 +58,9 @@ export const SizeControl = ({ size, id }: TSizeControlProps) => {
           {...sizeIcon}
         />
       </Button>
-      <Text variant="body16">{size}</Text>
+      <Text variant="body16" className="size">
+        {size}
+      </Text>
       <Button
         disabled={size === 10000}
         onClick={() => increaseSize({ id: id, size: 100 })}
