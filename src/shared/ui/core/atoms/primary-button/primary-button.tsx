@@ -1,4 +1,6 @@
-import { styled, Typography } from "@shared/ui";
+import { styled } from "@shared/ui";
+import { Typography } from "../typography";
+import React from "react";
 import { ReactNode } from "react";
 
 type TButtonProps = {
@@ -10,7 +12,7 @@ type TButtonProps = {
 const Button = styled.button`
   background-color: ${({ theme }) => theme.palette.accent.primary};
   color: ${({ theme }) => theme.palette.text.secondary};
-  height: 50px;
+  height: 40px;
   width: 230px;
   &:hover {
     opacity: 0.5;
@@ -29,14 +31,22 @@ const Button = styled.button`
   }
 `;
 
+const ButtonText = styled(Typography)`
+  color: ${({ theme }) => theme.palette.text.secondary};
+`;
+
 export const PrimaryButton = ({
   children,
   onClick,
   disabled,
 }: TButtonProps) => {
   return (
-    <Button onClick={onClick} disabled={disabled}>
-      {children}
+    <Button onClick={onClick} disabled={disabled} className={"primary-button"}>
+      {React.isValidElement(children) ? (
+        children
+      ) : (
+        <ButtonText variant="button">{children}</ButtonText>
+      )}
     </Button>
   );
 };

@@ -1,9 +1,9 @@
 import { $hasPermission } from "@entities/admin";
 import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
-import { saveCommentEv } from "@entities/comment/model/store";
+import { saveCommentEv, saveCommentFx } from "@entities/comment/model/store";
 import { $userId, fetchFeedBacks } from "@entities/feed-back/model";
 import { TextArea } from "@entities/feed-back/ui/atoms";
-import { PrimaryButton, styled, Typography } from "@shared/ui";
+import { Loader, PrimaryButton, styled } from "@shared/ui";
 import { useStore } from "effector-react";
 import React, { useState } from "react";
 
@@ -21,10 +21,6 @@ const Margin = styled.div`
   margin-top: ${({ theme }) => theme.spacing(0.5)}px;
 `;
 
-const ButtonText = styled(Typography)`
-  color: ${({ theme }) => theme.palette.text.secondary};
-`;
-
 type TCommentFormProps = {
   feedbackId: number;
   productId: number;
@@ -35,6 +31,7 @@ export const CommentForm = ({ feedbackId, productId }: TCommentFormProps) => {
   const [comment, setComment] = useState("");
   const isAdmin = useStore($hasPermission);
   const userId = useStore($userId);
+  const loading = useStore(saveCommentFx.pending);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -65,7 +62,7 @@ export const CommentForm = ({ feedbackId, productId }: TCommentFormProps) => {
   };
 
   return (
-    <Container>
+    <Container className="comment-form">
       <TextArea
         isName={true}
         isActive={true}
@@ -76,7 +73,6 @@ export const CommentForm = ({ feedbackId, productId }: TCommentFormProps) => {
         key={1}
       />
       <Margin />
-
       <TextArea
         isName={false}
         isActive={true}
@@ -87,8 +83,11 @@ export const CommentForm = ({ feedbackId, productId }: TCommentFormProps) => {
         key={2}
       />
       <Margin />
-      <PrimaryButton onClick={handleClick}>
-        <ButtonText variant="body14">Добавить</ButtonText>
+      <PrimaryButton
+        onClick={handleClick}
+        disabled={comment.length === 0 || loading}
+      >
+        {loading ? <Loader /> : "Добавить"}
       </PrimaryButton>
       <Margin />
     </Container>

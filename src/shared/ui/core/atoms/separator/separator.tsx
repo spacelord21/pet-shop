@@ -14,5 +14,5 @@ const Line = styled.div<TSeparatorProps>`
 `;
 
 export const Separator = ({ width }: TSeparatorProps) => {
-  return <Line width={width} />;
+  return <Line width={width} className="separator" />;
 };

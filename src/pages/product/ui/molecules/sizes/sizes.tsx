@@ -34,15 +34,16 @@ type Props = {
 
 export const Sizes = ({ setSize }: Props) => {
   return (
-    <Container>
+    <Container className="sizes">
       {sizes.map((size, index) => (
         <Button
+          className="size-button"
           key={index}
           onClick={() => {
             setSize(size);
           }}
         >
-          <Text variant="body12">{size}</Text>
+          <Text variant="body12" className="size">{size}</Text>
         </Button>
       ))}
     </Container>

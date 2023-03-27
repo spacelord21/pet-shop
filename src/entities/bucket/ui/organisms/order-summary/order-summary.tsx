@@ -26,11 +26,11 @@ export const OrderSummary = ({ totalPrice }: TOrderSummaryProps) => {
   const { isNotDesktop } = useWindowDimensions();
 
   return (
-    <Container isNotDesktop={isNotDesktop}>
+    <Container isNotDesktop={isNotDesktop} className="order-sum">
       <TotalPrice totalPrice={totalPrice} />
       <Separator />
       <PrimaryButton onClick={() => setOrderWidget(true)}>
-        <ButtonText variant="body16">Заказать</ButtonText>
+        Заказать
       </PrimaryButton>
     </Container>
   );

@@ -15,17 +15,6 @@ export const setFormError = createEvent<boolean>();
 
 export const createOrder = createEvent<TContactDetails>();
 
-// createOrder.watch((payload) => {
-//   if (
-//     payload.communicationPlace.length === 0 ||
-//     payload.name.length === 0 ||
-//     payload.phone.length === 0
-//   ) {
-//     setFormError(true);
-//     return;
-//   }
-// });
-
 $formError.on(setFormError, (_, payload) => payload);
 
 $name.on(setName, (_, payload) => payload);

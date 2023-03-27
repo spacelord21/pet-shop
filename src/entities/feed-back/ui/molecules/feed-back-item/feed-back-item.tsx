@@ -61,8 +61,8 @@ export const FeedBackItem = ({ feedBack, hasOwner }: TFeedBackItemProps) => {
   };
 
   return (
-    <Container>
-      <HeaderWrapper>
+    <Container className="feedback-item">
+      <HeaderWrapper className="feedback-header">
         <FeedbackOwner name={name?.length ? name : "Гость"} />
         <CreateTime createTime={createTime} />
       </HeaderWrapper>

@@ -26,7 +26,7 @@ export const Comments = ({
   productId,
 }: TCommentsProps) => {
   return (
-    <Container>
+    <Container className="comments">
       <CommentsList comments={comments} isFullView={isFullView} />
       {isFullView ? (
         <>

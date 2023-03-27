@@ -6,13 +6,7 @@ import { setOrderWidget } from "@entities/order/model";
 import { OrderWindow } from "@entities/order/ui/organisms";
 import { TProduct } from "@entities/products/types";
 import { useWindowDimensions } from "@shared/hooks";
-import {
-  OutlineButton,
-  PrimaryButton,
-  StarRating,
-  styled,
-  Typography,
-} from "@shared/ui";
+import { OutlineButton, PrimaryButton, styled, Typography } from "@shared/ui";
 import { useState } from "react";
 import { DescriptionSlice, OrderForm, TotalPrice } from "../../molecules";
 
@@ -31,7 +25,9 @@ const ProductName = styled(Typography)`
 `;
 
 const ProductPrice = styled(Typography)`
+  margin-top: ${({ theme }) => theme.spacing(0.5)}px;
   color: ${({ theme }) => theme.palette.text.tertiary};
+  font-weight: 500;
 `;
 
 const ProductPriceDescription = styled(Typography)`
@@ -64,7 +60,7 @@ export const ProductDetails = (product: TProductDetailsProps) => {
   };
 
   return (
-    <Container isNotDesktop={isMobile || isTablet}>
+    <Container isNotDesktop={isMobile || isTablet} className="product-template">
       <OrderWindow />
       <ProductName variant="title">{title}</ProductName>
       {/* убрал звезды по заказу */}

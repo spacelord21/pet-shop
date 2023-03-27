@@ -34,15 +34,18 @@ export const Header = () => {
   };
 
   return (
-    <Container>
-      <IconWrapper onClick={clickHandler}>
+    <Container className="bucket-widget header">
+      <IconWrapper onClick={clickHandler} className="icon-wrapper">
         <Icon
+          className="icon-arrow-right"
           icon={"material-symbols:arrow-right-alt"}
           color={theme.palette.text.secondary}
           {...iconSize}
         />
       </IconWrapper>
-      <Title variant="title">Корзина</Title>
+      <Title variant="title" className="title">
+        Корзина
+      </Title>
     </Container>
   );
 };

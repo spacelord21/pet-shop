@@ -23,9 +23,13 @@ type TProductDescProps = {
 
 export const ProductDescription = ({ title, price }: TProductDescProps) => {
   return (
-    <Container>
-      <Title variant="body16">{title}</Title>
-      <Price variant="body16">{price}.00₽</Price>
+    <Container className="product-desc">
+      <Title variant="body16" className="product-name">
+        {title}
+      </Title>
+      <Price variant="body16" className="price">
+        {price}.00₽
+      </Price>
     </Container>
   );
 };

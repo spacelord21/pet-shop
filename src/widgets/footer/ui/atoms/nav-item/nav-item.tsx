@@ -29,7 +29,7 @@ type TNavItemProps = {
 export const NavItem = ({ isActive, url, title }: TNavItemProps) => {
   return (
     <Container href={url} isActive={isActive}>
-      <Text variant="title">{title.toLocaleUpperCase()}</Text>
+      <Text variant="title">{title}</Text>
     </Container>
   );
 };

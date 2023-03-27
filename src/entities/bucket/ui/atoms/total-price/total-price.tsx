@@ -17,7 +17,7 @@ type TTotalPriceProps = {
 
 export const TotalPrice = ({ totalPrice }: TTotalPriceProps) => {
   return (
-    <Container>
+    <Container className="total-price">
       <Title variant="title">Итог</Title>
       <Title variant="title">{totalPrice}.00₽</Title>
     </Container>

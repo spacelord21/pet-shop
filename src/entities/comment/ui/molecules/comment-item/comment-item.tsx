@@ -44,8 +44,8 @@ type TCommentItemProps = {
 export const CommentItem = ({ comment }: TCommentItemProps) => {
   const userId = useStore($userId);
   return (
-    <Container>
-      <AvatarAndName>
+    <Container className="comment-item">
+      <AvatarAndName className="guest-preview">
         <Avatar
           url={comment.isAdmin ? adminAvatar : avatars[comment.avatarId]}
         />

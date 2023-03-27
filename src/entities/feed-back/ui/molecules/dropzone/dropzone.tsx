@@ -133,6 +133,7 @@ export const DropZone = React.memo(
         isDragActive={isDragActive}
         isNotDesktop={isNotDesktop}
         width={width}
+        className="dropzone"
       >
         {children}
       </Container>

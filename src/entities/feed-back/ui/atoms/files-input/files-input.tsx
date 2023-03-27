@@ -7,13 +7,14 @@ const Input = styled.input`
 `;
 const Label = styled.label`
   color: ${({ theme }) => theme.palette.text.primary};
-  width: 100%;
+  width: auto;
 `;
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-left: ${({ theme }) => theme.spacing(9)}px;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
 `;
 
@@ -27,7 +28,7 @@ export const FilesInput = ({
   withLabel,
 }: TFilesInputProps) => {
   return (
-    <Container>
+    <Container className="files-input">
       {withLabel ? (
         <Label htmlFor="files">
           Перетащите файлы, или выберите на компьютере

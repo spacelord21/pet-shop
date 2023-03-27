@@ -15,11 +15,13 @@ const Area = styled.textarea<Pick<TTextAreaProps, "isActive" | "isName">>`
   height: ${({ theme }) => theme.spacing(2.2)}px;
   resize: none;
   border: 2px solid ${({ theme }) => theme.palette.accent.secondary};
+
   ${({ isName, theme }) =>
     !isName &&
     `
     &:focus {
-    height:  ${theme.spacing(6)}px;
+    min-height:  ${theme.spacing(6)}px;
+    overflow-y: auto;
     transition: 0.2s ease-in-out;
     border: 0.5px solid ${theme.palette.accent.primary};
   }
@@ -51,6 +53,7 @@ export const TextArea = ({
 
   return (
     <Area
+      className="text-input"
       isName={isName}
       value={text}
       onChange={handleChange}

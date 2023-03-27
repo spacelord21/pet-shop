@@ -1,5 +1,4 @@
 import { selectors } from "@entities/order/model/order-form";
-import { TCommunicationPlace } from "@entities/order/types";
 import { useWindowDimensions } from "@shared/hooks";
 import { styled } from "@shared/ui";
 import { RadioItem } from "../../atoms";

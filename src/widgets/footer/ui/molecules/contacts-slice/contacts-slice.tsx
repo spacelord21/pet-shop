@@ -21,6 +21,10 @@ const Text = styled(Typography)`
   margin-bottom: ${({ theme }) => theme.spacing(0.2)}px;
 `;
 
+const Margin = styled.div`
+  height: ${({ theme }) => theme.spacing(0.5)}px;
+`;
+
 const NumberLink = styled.a`
   /* margin-top: ${({ theme }) => theme.spacing(2)}px; */
   text-decoration: none;
@@ -29,10 +33,12 @@ const NumberLink = styled.a`
 export const ContactsSlice = () => {
   return (
     <Container>
-      <Title variant="title">КОНТАКТЫ</Title>
+      <Title variant="title">контакты</Title>
+      <Margin />
       <NumberLink href="tel:+79504345555">
         <Text variant="body16">+7 950 434 5555</Text>
       </NumberLink>
+      <Margin />
       <Text variant="body16">babkinan809@mail.ru</Text>
     </Container>
   );

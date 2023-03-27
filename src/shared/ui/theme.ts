@@ -48,7 +48,7 @@ export const theme = {
   },
   typography: {
     title: {
-      size: "21px",
+      size: "20px",
       fontFamily: "Roboto",
       letterSpacing: "0px",
     },
@@ -65,17 +65,17 @@ export const theme = {
     body10: {
       size: "10px",
       fontFamily: "Roboto",
-      letterSpacing: "0px",
+      letterSpacing: "1.5px",
     },
     body12: {
       size: "10px",
       fontFamily: "Roboto",
-      letterSpacing: "0px",
+      letterSpacing: "0.4px",
     },
     body16: {
       size: "16px",
       fontFamily: "Roboto",
-      letterSpacing: "0px",
+      letterSpacing: "0.15px",
     },
     title2: {
       size: "32px",
@@ -85,7 +85,12 @@ export const theme = {
     body14: {
       size: "14px",
       fontFamily: "Roboto",
-      letterSpacing: "0px",
+      letterSpacing: "0.1px",
+    },
+    button: {
+      size: "14px",
+      fontFamily: "Roboto",
+      letterSpacing: "1.25px",
     },
     body24: {
       size: "24px",
