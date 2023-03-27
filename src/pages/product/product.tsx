@@ -1,10 +1,8 @@
 import { TProduct } from "@entities/products/types";
 import { Separator, styled } from "@shared/ui";
 import { Footer, Header, PopUpImage } from "widgets";
-import { ProductDetails, ProductTemplate } from "./ui";
+import { ProductTemplate } from "./ui";
 import { FeedBack } from "@entities/feed-back";
-import { useStore } from "effector-react";
-import { $bucketWidgetActive } from "@entities/bucket/model/store";
 import { BucketWidget } from "widgets/bucket";
 
 const Container = styled.div`

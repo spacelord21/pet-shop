@@ -34,6 +34,8 @@ const Text = styled(Typography)<TIsActive>`
   height: ${({ isActive }) => (isActive ? "auto" : 0)};
   margin-left: ${({ theme }) => theme.spacing(1)}px;
   text-align: justify;
+  opacity: ${({ isActive }) => (isActive ? 1 : 0)};
+  z-index: ${({ isActive }) => (isActive ? 1000 : -1000)};
 `;
 
 const Container = styled.div`
@@ -61,7 +63,7 @@ export const DescriptionSlice = ({
 
   const handleClick = () => {
     setIsPressed((prev) => !prev);
-    if (!isPressed && itemRef && itemRef.current) {
+    if (!isPressed && itemRef.current) {
       itemRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
@@ -75,11 +77,9 @@ export const DescriptionSlice = ({
         </Button>
       </Container>
       <Separator width={isNotDesktop ? 100 : 65} />
-      {isPressed ? (
-        <Text variant="body14" isActive={isPressed} ref={itemRef}>
-          {content}
-        </Text>
-      ) : null}
+      <Text variant="body14" isActive={isPressed} ref={itemRef}>
+        {content}
+      </Text>
     </>
   );
 };
