@@ -36,7 +36,7 @@ const Text = styled(Typography)<TIsActive>`
   margin-left: ${({ theme }) => theme.spacing(1)}px;
   text-align: justify;
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};
-  z-index: ${({ isActive }) => (isActive ? 1000 : -1000)};
+  z-index: ${({ isActive }) => (isActive ? 1 : -1)};
 `;
 
 const Container = styled.div`
