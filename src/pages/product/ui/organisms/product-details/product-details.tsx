@@ -13,6 +13,7 @@ import { DescriptionSlice, OrderForm, TotalPrice } from "../../molecules";
 const Container = styled.div<{ isNotDesktop: boolean }>`
   display: flex;
   flex-direction: column;
+  text-align: ${({ isNotDesktop }) => (isNotDesktop ? "center" : "justify")};
   justify-content: center;
   align-items: ${({ isNotDesktop }) => (isNotDesktop ? "center" : "")};
   margin-left: ${({ theme, isNotDesktop }) =>

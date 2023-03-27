@@ -20,14 +20,16 @@ export const NavSlice = () => {
   const location = useLocation();
   return (
     <Container className="nav-slice">
-      {navItems.map((item) => (
-        <NavItem
-          title={item.title}
-          url={item.link}
-          isActive={location.pathname === item.link}
-          key={item.id}
-        />
-      ))}
+      {navItems.map((item) =>
+        item.link !== "/contacts" ? (
+          <NavItem
+            title={item.title}
+            url={item.link}
+            isActive={location.pathname === item.link}
+            key={item.id}
+          />
+        ) : null
+      )}
     </Container>
   );
 };
