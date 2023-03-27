@@ -35,8 +35,6 @@ const Text = styled(Typography)<TIsActive>`
   z-index: ${({ isActive }) => (isActive ? 1 : -1)};
   margin-left: ${({ theme }) => theme.spacing(1)}px;
   text-align: justify;
-  opacity: ${({ isActive }) => (isActive ? 1 : 0)};
-  z-index: ${({ isActive }) => (isActive ? 1 : -1)};
 `;
 
 const Container = styled.div`
@@ -80,12 +78,7 @@ export const DescriptionSlice = ({
         </Button>
       </Container>
       <Separator width={isNotDesktop ? 100 : 65} />
-      <Text
-        variant="body14"
-        isActive={isPressed}
-        ref={itemRef}
-        className="desc-content"
-      >
+      <Text variant="body14" isActive={isPressed} ref={itemRef}>
         {content}
       </Text>
     </>

@@ -3,7 +3,11 @@ import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
 import { saveCommentEv, saveCommentFx } from "@entities/comment/model/store";
 import { $userId, fetchFeedBacks } from "@entities/feed-back/model";
 import { TextArea } from "@entities/feed-back/ui/atoms";
+<<<<<<< HEAD
 import { Loader, PrimaryButton, styled } from "@shared/ui";
+=======
+import { Loader, PrimaryButton, styled, Typography } from "@shared/ui";
+>>>>>>> 5041e4d (classnames add, fix some bugs)
 import { useStore } from "effector-react";
 import React, { useState } from "react";
 
