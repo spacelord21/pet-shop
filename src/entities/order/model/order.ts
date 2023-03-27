@@ -1,10 +1,18 @@
 import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
 import { $bucket } from "@entities/bucket/model/store";
+import {
+  getDataFromLocaleStorage,
+  setDataInLocaleStorage,
+} from "@entities/persist";
 import { createEffect, createEvent, createStore } from "effector";
-import { useStore } from "effector-react";
+import { persist } from "effector-storage/local";
 import { fetchOrder } from "../api";
-import { TContactDetails, TOrder } from "../types";
+import { TContactDetails, TOrder, TOrderInStorage } from "../types";
 import { createOrder } from "./order-form";
+
+const PERSIST_ORDER_KEY = "order";
+// 2 hours
+const DEFAULT_EXPIRE_ORDER_TIME = 60 * 60 * 2;
 
 export const $orderWidget = createStore<boolean>(false);
 export const setOrderWidget = createEvent<boolean>();
@@ -28,7 +36,32 @@ export const createOrderFx = createEffect<TContactDetails, void, Error>(
   }
 );
 
-createOrder.watch((payload) => createOrderFx(payload));
+createOrder.watch((payload) => {
+  const item = getDataFromLocaleStorage<TOrderInStorage>(
+    PERSIST_ORDER_KEY,
+    DEFAULT_EXPIRE_ORDER_TIME
+  );
+  if (item !== undefined) {
+    const { count }: TOrderInStorage = item;
+    if (count === 2) {
+      createAlert({
+        message:
+          "Вы уже сделали 2 заказа за последние 2 часа, пожалуйста, дождитесь пока с Вами свяжутся.",
+        timeout: DEFAULT_ALERT_TIMEOUT,
+        type: "WARNING",
+      });
+      return;
+    } else {
+      createOrderFx(payload);
+      setDataInLocaleStorage<TOrderInStorage>(PERSIST_ORDER_KEY, {
+        count: count + 1,
+      });
+      return;
+    }
+  }
+  createOrderFx(payload);
+  setDataInLocaleStorage<TOrderInStorage>(PERSIST_ORDER_KEY, { count: 1 });
+});
 
 createOrderFx.failData.watch((payload) => {
   createAlert({
