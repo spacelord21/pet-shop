@@ -18,10 +18,10 @@ const Wrapper = styled.div<{ width: number }>`
   z-index: 100;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ isNotDesktop: boolean }>`
   display: flex;
   background-color: ${({ theme }) => theme.palette.background.primary};
-  height: 107px;
+  height: ${({ isNotDesktop }) => (isNotDesktop ? 70 : 107)}px;
   flex-direction: row;
 `;
 
@@ -55,7 +55,8 @@ const BarsWrapper = styled.div`
   position: fixed;
   right: ${({ theme }) => theme.spacing(1)}px;
   z-index: 5000;
-  top: 35px;
+
+  top: 18px;
   cursor: pointer;
 `;
 
@@ -68,7 +69,7 @@ export const Header = () => {
 
   return (
     <Wrapper width={width} className="header">
-      <Container className="header-body">
+      <Container className="header-body" isNotDesktop={isNotDesktop}>
         <Icon />
         {isNotDesktop ? (
           widgetActive ? (

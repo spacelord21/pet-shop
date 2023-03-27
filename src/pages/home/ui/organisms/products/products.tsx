@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 85%;
+  width: 100%;
   background-color: ${({ theme }) => theme.palette.background.primary};
 `;
 

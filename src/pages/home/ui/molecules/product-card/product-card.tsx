@@ -7,12 +7,13 @@ import { PrimaryButton, styled, Typography } from "@shared/ui";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-  flex: 0 0 32%;
+  flex: 0 0 25%;
   margin-bottom: ${({ theme }) => theme.spacing(2)}px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 const Title = styled(Typography)`
