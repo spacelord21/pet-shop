@@ -11,5 +11,9 @@ type TCreateTimeProps = {
 };
 
 export const CreateTime = ({ createTime }: TCreateTimeProps) => {
-  return <Content variant={"body14"}>{createTime}</Content>;
+  return (
+    <Content variant={"body14"} className="feedback-create-time">
+      {createTime}
+    </Content>
+  );
 };

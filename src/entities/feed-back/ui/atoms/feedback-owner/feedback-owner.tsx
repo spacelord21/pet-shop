@@ -8,5 +8,9 @@ type TFeedbackOwnerProps = {
 };
 
 export const FeedbackOwner = ({ name }: TFeedbackOwnerProps) => {
-  return <Title variant="title">{name}</Title>;
+  return (
+    <Title variant="title" className="feeedback-name">
+      {name}
+    </Title>
+  );
 };

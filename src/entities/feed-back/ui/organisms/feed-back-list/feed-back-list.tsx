@@ -44,7 +44,7 @@ export const FeedBackList = ({ feedBacks }: TFeedBackListProps) => {
   }, [feedbacksLength]);
 
   return (
-    <Container>
+    <Container className="feedback-list">
       {feedBacks.slice(0, viewLength).map((feedback, index) => (
         <FeedBackItem
           feedBack={feedback}

@@ -3,7 +3,7 @@ import {
   setWidgetActive,
 } from "@entities/bucket/model/store";
 import { TProduct } from "@entities/products/types";
-import { OutlineButton, PrimaryButton, styled, Typography } from "@shared/ui";
+import { PrimaryButton, styled, Typography } from "@shared/ui";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -81,8 +81,9 @@ export const ProductCard = ({
             rating: rating,
           });
         }}
-        children={<ButtonContent variant="body16">Добавить</ButtonContent>}
-      />
+      >
+        Добавить
+      </PrimaryButton>
     </Container>
   );
 };

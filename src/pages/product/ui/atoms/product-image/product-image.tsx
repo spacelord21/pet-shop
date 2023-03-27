@@ -16,7 +16,7 @@ const Container = styled.div<{ isNotDesktop: boolean }>`
 export const ProductImage = ({ imageUrl }: TProductImageProps) => {
   const { width, isMobile, isTablet } = useWindowDimensions();
   return (
-    <Container isNotDesktop={isMobile || isTablet}>
+    <Container isNotDesktop={isMobile || isTablet} className="product-image">
       <img
         src={imageUrl}
         width={isMobile || isTablet ? width - 5 : 350}

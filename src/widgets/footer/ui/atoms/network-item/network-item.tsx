@@ -15,7 +15,7 @@ type TNetworkItemProps = {
 export const NetworkItem = ({ iconName, url }: TNetworkItemProps) => {
   return (
     <Container href={url} target="_blank">
-      <Icon icon={iconName} width="30" />
+      <Icon icon={iconName} width={23} />
     </Container>
   );
 };

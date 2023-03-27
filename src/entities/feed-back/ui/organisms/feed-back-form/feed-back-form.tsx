@@ -111,7 +111,11 @@ export const FeedBackForm = React.memo(({ productId }: TFeedBackFormProps) => {
   };
 
   return (
-    <Container isNotDesktop={isNotDesktop} width={width}>
+    <Container
+      isNotDesktop={isNotDesktop}
+      width={width}
+      className="feedback-form"
+    >
       <Header setIsActive={setActiveForm} title={"Ваш отзыв очень важен!"} />
       <StarRatingWithConteiner
         height={30}

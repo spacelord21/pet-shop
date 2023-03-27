@@ -1,3 +1,4 @@
+import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
 import { storeFeedbackInDB, uploadImages } from "@entities/feed-back/api";
 import { TFeedBack } from "@entities/feed-back/types";
 import { createEffect, createEvent, createStore } from "effector";
@@ -59,6 +60,20 @@ export const createFeedbackFx = createEffect<TFeedBack, void, Error>(
 createFeedback.watch((feedback) => createFeedbackFx(feedback));
 
 uploadImagesFx.doneData.watch((payload) => {
+  if (
+    $comment.getState().length > 3000 ||
+    $dignities.getState().length > 3000 ||
+    $disadvantages.getState().length > 3000 ||
+    $name.getState().length > 255
+  ) {
+    createAlert({
+      message:
+        "Максимальная длина поля отзыва равна 3000 символов. Пожалуйста, уменьшите текст.",
+      timeout: DEFAULT_ALERT_TIMEOUT,
+      type: "WARNING",
+    });
+    return;
+  }
   createFeedback({
     name: $name.getState(),
     productId: $productId.getState(),

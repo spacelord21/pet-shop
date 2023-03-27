@@ -33,10 +33,16 @@ export const Header = ({ setIsActive, title }: THeaderProps) => {
   const theme = useTheme();
   const { isNotDesktop } = useWindowDimensions();
   return (
-    <Container>
-      <Title variant={isNotDesktop ? "title" : "body24"}>{title}</Title>
-      <IconWrapper onClick={() => setIsActive(false)}>
+    <Container className="form-header">
+      <Title
+        variant={isNotDesktop ? "title" : "body24"}
+        className="header-title"
+      >
+        {title}
+      </Title>
+      <IconWrapper onClick={() => setIsActive(false)} className="icon-wrapper">
         <Icon
+          className="icon-close"
           icon={"carbon:close-outline"}
           color={theme.palette.accent.primary}
           width={24}

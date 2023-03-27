@@ -24,7 +24,7 @@ export const FeedBackField = ({
 }: TFeedBackFieldProps) => {
   const [isActive, setIsActive] = useState(false);
   return (
-    <Container>
+    <Container className="feedback-input-field">
       <TextArea
         title={title}
         text={text}

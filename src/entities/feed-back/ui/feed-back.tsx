@@ -29,10 +29,6 @@ const Title = styled(Typography)`
   margin-bottom: ${({ theme }) => theme.spacing(1)}px;
 `;
 
-const ButtonText = styled(Typography)`
-  color: ${({ theme }) => theme.palette.text.secondary};
-`;
-
 type TFeedBackProps = {
   productId: number;
 };
@@ -69,14 +65,16 @@ export const FeedBack = ({ productId }: TFeedBackProps) => {
   }, [commentIsPending, deleteCommentPending]);
 
   return (
-    <Container isNotDesktop={isMobile || isTablet} width={width}>
-      <Title variant="title">ВАШИ ОТЗЫВЫ</Title>
+    <Container
+      isNotDesktop={isMobile || isTablet}
+      width={width}
+      className="feedbacks"
+    >
+      <Title variant="title">Ваши отзывы</Title>
       {userId && feedbacks.find((feedback) => feedback.userId === userId) ? (
         <Title variant="body16">У вас уже есть отзыв по этому продукту!</Title>
       ) : (
-        <PrimaryButton onClick={createFeedbackHandler}>
-          <ButtonText variant="body16">Добавить</ButtonText>
-        </PrimaryButton>
+        <PrimaryButton onClick={createFeedbackHandler}>Добавить</PrimaryButton>
       )}
 
       <ModalWindow isActive={modalActive}>

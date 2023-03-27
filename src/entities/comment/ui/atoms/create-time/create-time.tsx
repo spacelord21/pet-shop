@@ -11,5 +11,9 @@ type TCreateTimeProps = {
 };
 
 export const CreateTime = ({ createTime }: TCreateTimeProps) => {
-  return <Text variant="body14">{createTime}</Text>;
+  return (
+    <Text variant="body14" className="comment-create-time">
+      {createTime}
+    </Text>
+  );
 };

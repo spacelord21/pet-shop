@@ -85,7 +85,7 @@ export const DropZoneContent = ({
 
   return (
     <>
-      <Container>
+      <Container className="dropzone-content">
         {files.length ? (
           <ImagesContainer>
             {files.map((file, index) => (
@@ -99,7 +99,7 @@ export const DropZoneContent = ({
               </Wrapper>
             ))}
             {files.length !== 3 ? (
-              <AddingBox isNotDesktop={isNotDesktop}>
+              <AddingBox isNotDesktop={isNotDesktop} className="add-box">
                 <Plus htmlFor="files">+</Plus>
                 <Input
                   id="files"

@@ -5,7 +5,6 @@ import {
   setDataInLocaleStorage,
 } from "@entities/persist";
 import { createEffect, createEvent, createStore } from "effector";
-import { persist } from "effector-storage/local";
 import { fetchOrder } from "../api";
 import { TContactDetails, TOrder, TOrderInStorage } from "../types";
 import { createOrder } from "./order-form";
@@ -13,11 +12,11 @@ import { createOrder } from "./order-form";
 const PERSIST_ORDER_KEY = "order";
 // 2 hours
 const DEFAULT_EXPIRE_ORDER_TIME = 60 * 60 * 2;
-
-export const $orderWidget = createStore<boolean>(false);
 export const setOrderWidget = createEvent<boolean>();
-
-$orderWidget.on(setOrderWidget, (_, payload) => payload);
+export const $orderWidget = createStore<boolean>(false).on(
+  setOrderWidget,
+  (_, payload) => payload
+);
 
 export const $order = createStore<TOrder | null>(null);
 

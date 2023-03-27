@@ -41,9 +41,9 @@ type TImagesListProps = {
 
 export const ImagesList = ({ images }: TImagesListProps) => {
   return (
-    <Wrapper>
+    <Wrapper className="images">
       <Title variant="body16">Фотографии</Title>
-      <Container>
+      <Container className="images-list">
         {images.map((image, index) => (
           <Image
             src={image}

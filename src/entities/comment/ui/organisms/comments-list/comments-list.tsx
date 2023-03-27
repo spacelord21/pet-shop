@@ -1,7 +1,6 @@
 import { TComment } from "@entities/feed-back/types";
 import { useWindowDimensions } from "@shared/hooks";
 import { styled } from "@shared/ui";
-import { FC, useEffect } from "react";
 import { CommentItem } from "../../molecules";
 
 const Container = styled.div`
@@ -27,7 +26,7 @@ export const CommentsList = ({ comments, isFullView }: TCommentsListProps) => {
   const {} = useWindowDimensions();
 
   return (
-    <Container>
+    <Container className="comments-list">
       {comments.length > 0 ? (
         isFullView ? (
           commentsSort(comments).map((comment) => (

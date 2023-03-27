@@ -1,5 +1,7 @@
 import { styled } from "@shared/ui";
+import React from "react";
 import { ReactNode } from "react";
+import { Typography } from "../typography";
 
 type TButtonProps = {
   children: string | ReactNode;
@@ -13,7 +15,7 @@ type TStyledButtonProps = Pick<TButtonProps, "width" | "height">;
 const Button = styled.button<TStyledButtonProps>`
   background-color: ${({ theme }) => theme.palette.background.primary};
   color: ${({ theme }) => theme.palette.text.primary};
-  height: ${({ height }) => height ?? 50}px;
+  height: ${({ height }) => height ?? 40}px;
   width: ${({ width }) => width ?? 230}px;
   border: 0.3px solid black;
   &:hover {
@@ -25,6 +27,10 @@ const Button = styled.button<TStyledButtonProps>`
   }
 `;
 
+const ButtonText = styled(Typography)`
+  color: ${({ theme }) => theme.palette.text.primary};
+`;
+
 export const OutlineButton = ({
   children,
   onClick,
@@ -32,8 +38,19 @@ export const OutlineButton = ({
   height,
 }: TButtonProps) => {
   return (
-    <Button onClick={onClick} width={width} height={height}>
-      {children}
+    <Button
+      onClick={onClick}
+      width={width}
+      height={height}
+      className="outline button"
+    >
+      {React.isValidElement(children) ? (
+        children
+      ) : (
+        <ButtonText variant="button" className="button content">
+          {children}
+        </ButtonText>
+      )}
     </Button>
   );
 };

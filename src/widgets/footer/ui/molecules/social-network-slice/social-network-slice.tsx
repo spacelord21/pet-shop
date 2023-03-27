@@ -26,7 +26,7 @@ const Title = styled(Typography)`
 export const SocialNetworkSlice = () => {
   return (
     <Wrapper>
-      <Title variant="title">СВЯЗЬ В СОЦИАЛЬНЫХ СЕТЯХ</Title>
+      <Title variant="title">связь в социальных сетях</Title>
       <Container>
         {networkItems.map(({ iconName, id, url }) => (
           <NetworkItem iconName={iconName} key={id} url={url} />

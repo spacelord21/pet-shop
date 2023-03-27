@@ -7,4 +7,5 @@ export type TypographyVariants =
   | "title2"
   | "body16"
   | "body14"
-  | "body24";
+  | "body24"
+  | "button";

@@ -1,10 +1,4 @@
-import {
-  createEffect,
-  createEvent,
-  createStore,
-  restore,
-  sample,
-} from "effector";
+import { createEffect, createEvent, createStore, restore } from "effector";
 import { persist } from "effector-storage/local";
 import { TProductInBucket } from "../types";
 import { contain } from "./utils";

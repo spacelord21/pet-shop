@@ -1,3 +1,4 @@
+import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
 import {
   $orderWidget,
   createOrderFx,
@@ -6,17 +7,10 @@ import {
 import { createOrder, selectors } from "@entities/order/model/order-form";
 import { TContactDetails } from "@entities/order/types";
 import { useWindowDimensions } from "@shared/hooks";
-import {
-  Loader,
-  OutlineButton,
-  PrimaryButton,
-  styled,
-  Typography,
-} from "@shared/ui";
+import { Loader, PrimaryButton, styled, Typography } from "@shared/ui";
 import { Header } from "@shared/ui/core/molecules";
 import { useStore } from "effector-react";
 import { useMemo } from "react";
-import { useTheme } from "styled-components";
 import { OrderForm } from "../../molecules";
 
 const Container = styled.div<{ isActive: boolean; isNotDesktop: boolean }>`
@@ -80,6 +74,15 @@ export const OrderWindow = () => {
 
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (phoneNumber.length !== 12) {
+      createAlert({
+        message:
+          "Неверно указан номер, форма - 89111111111. Пожалуйста, повторите.",
+        timeout: DEFAULT_ALERT_TIMEOUT,
+        type: "WARNING",
+      });
+      return;
+    }
     const result: TContactDetails = {
       communicationPlace: communicationPlace,
       name: name,
@@ -93,7 +96,11 @@ export const OrderWindow = () => {
   }, [isMobile, isTablet]);
 
   return (
-    <Container isActive={orderActive} isNotDesktop={isNotDesktop}>
+    <Container
+      isActive={orderActive}
+      isNotDesktop={isNotDesktop}
+      className="order-form"
+    >
       <Window isNotDesktop={isNotDesktop} width={width}>
         <Header setIsActive={setOrderWidget} title={"Оформление заказа!"} />
         <OrderForm />

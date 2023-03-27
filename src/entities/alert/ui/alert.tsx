@@ -55,14 +55,21 @@ export const Alert = ({ alert }: TAlertProps) => {
   const { isNotDesktop, width } = useWindowDimensions();
 
   return (
-    <Container type={alert.type} isNotDesktop={isNotDesktop} width={width}>
-      <IconWrapper onClick={() => removeAlert()}>
+    <Container
+      type={alert.type}
+      isNotDesktop={isNotDesktop}
+      width={width}
+      className="alert"
+    >
+      <IconWrapper onClick={() => removeAlert()} className="close-button">
         <Icon
           icon={"material-symbols:close-rounded"}
           color={theme.palette.text.secondary}
         />
       </IconWrapper>
-      <Title variant="body14">{alert.message}</Title>
+      <Title variant="body14" className="alert-title">
+        {alert.message}
+      </Title>
     </Container>
   );
 };

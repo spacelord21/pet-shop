@@ -1,5 +1,6 @@
 import { $popUpImages, setPopUpImages } from "@entities/feed-back/model";
 import { Icon } from "@iconify/react";
+import { useWindowDimensions } from "@shared/hooks";
 import { styled } from "@shared/ui";
 import { useStore } from "effector-react";
 import { useEffect, useState } from "react";
@@ -8,6 +9,8 @@ import { useTheme } from "styled-components";
 const Wrapper = styled.div<{ isEmpty: boolean }>`
   z-index: 2000;
   position: fixed;
+  width: 100%;
+  height: 100%;
   opacity: ${({ isEmpty }) => (isEmpty ? 1 : 0)};
   width: ${({ isEmpty }) => (isEmpty ? 100 : 0)}%;
   height: ${({ isEmpty }) => (isEmpty ? 100 : 0)}%;
@@ -20,17 +23,26 @@ const Wrapper = styled.div<{ isEmpty: boolean }>`
 
 const LeftArrow = styled.div``;
 
-const RightArrow = styled.div``;
-
-const CloseButton = styled.div`
-  position: relative;
-  top: -230px;
-  right: 35px;
+const RightArrow = styled.div`
+  margin-left: -25px;
 `;
 
-const Image = styled.img`
-  width: 500px;
-  height: 500px;
+const CloseButton = styled.div`
+  height: 30px;
+  position: relative;
+  top: 0;
+`;
+
+const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Image = styled.img<{ isNotDesktop: boolean; deviceWidth: number }>`
+  width: ${({ isNotDesktop, deviceWidth }) =>
+    isNotDesktop ? deviceWidth - 128 : 500}px;
+  height: auto;
+  max-height: 500px;
   border-radius: 5px;
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -43,6 +55,7 @@ export const PopUpImage = () => {
   const [index, setIndex] = useState<number>(0);
   const theme = useTheme();
   const iconSize = { width: 50, height: 50 };
+  const { isNotDesktop, width } = useWindowDimensions();
 
   useEffect(() => {
     setIndex(popUpImages.index);
@@ -64,8 +77,11 @@ export const PopUpImage = () => {
   const rightArrowColor = theme.palette.accent.primary;
 
   return (
-    <Wrapper isEmpty={!!popUpImages.images.length}>
-      <LeftArrow>
+    <Wrapper
+      isEmpty={!!popUpImages.images.length}
+      className="pop-image wrapper"
+    >
+      <LeftArrow className="left-arrow">
         <Icon
           icon={"material-symbols:keyboard-double-arrow-left-sharp"}
           color={leftArrowColor}
@@ -73,8 +89,26 @@ export const PopUpImage = () => {
           {...iconSize}
         />
       </LeftArrow>
-      <Image src={popUpImages.images[index]} />
-      <RightArrow>
+      <ImageContainer className="image">
+        <Image
+          src={popUpImages.images[index]}
+          isNotDesktop={isNotDesktop}
+          deviceWidth={width}
+        />
+        <CloseButton
+          onClick={() => setPopUpImages({ index: 0, images: [] })}
+          className="close-button"
+        >
+          <Icon
+            icon={"carbon:close-outline"}
+            color={theme.palette.accent.primary}
+            width={24}
+            height={24}
+          />
+        </CloseButton>
+      </ImageContainer>
+
+      <RightArrow className="right-arrow">
         <Icon
           icon={"material-symbols:keyboard-double-arrow-right"}
           color={rightArrowColor}
@@ -82,14 +116,6 @@ export const PopUpImage = () => {
           onClick={rightArrowHandlerClick}
         />
       </RightArrow>
-      <CloseButton onClick={() => setPopUpImages({ index: 0, images: [] })}>
-        <Icon
-          icon={"carbon:close-outline"}
-          color={theme.palette.accent.primary}
-          width={24}
-          height={24}
-        />
-      </CloseButton>
     </Wrapper>
   );
 };
