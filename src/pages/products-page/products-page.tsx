@@ -1,8 +1,7 @@
-import { $products, fetchProducts } from "@entities/products/model";
+import { $products } from "@entities/products/model";
 import { Products } from "@pages/home/ui";
 import { Separator, styled, Typography } from "@shared/ui";
 import { useStore } from "effector-react";
-import { useEffect } from "react";
 import { Footer, Header } from "widgets";
 import { BucketWidget } from "widgets/bucket";
 

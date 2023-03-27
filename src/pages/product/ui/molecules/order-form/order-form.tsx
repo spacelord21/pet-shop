@@ -1,5 +1,5 @@
 import { useWindowDimensions } from "@shared/hooks";
-import { OutlineButton, styled, Typography } from "@shared/ui";
+import { styled, Typography } from "@shared/ui";
 import { Sizes } from "../sizes";
 
 const Container = styled.div<{ isNotDesktop: boolean }>`

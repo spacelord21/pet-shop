@@ -7,17 +7,10 @@ import {
 import { createOrder, selectors } from "@entities/order/model/order-form";
 import { TContactDetails } from "@entities/order/types";
 import { useWindowDimensions } from "@shared/hooks";
-import {
-  Loader,
-  OutlineButton,
-  PrimaryButton,
-  styled,
-  Typography,
-} from "@shared/ui";
+import { Loader, PrimaryButton, styled, Typography } from "@shared/ui";
 import { Header } from "@shared/ui/core/molecules";
 import { useStore } from "effector-react";
 import { useMemo } from "react";
-import { useTheme } from "styled-components";
 import { OrderForm } from "../../molecules";
 
 const Container = styled.div<{ isActive: boolean; isNotDesktop: boolean }>`

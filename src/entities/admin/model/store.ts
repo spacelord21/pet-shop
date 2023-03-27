@@ -3,13 +3,7 @@ import { getAllFeedbacks } from "@entities/feed-back/api";
 import { TFeedBackModel } from "@entities/feed-back/api/get-all-feed-backs-by-id/get-all-feed-backs-by-id";
 import { mappedFeedBacks } from "@entities/feed-back/model/mappers";
 import { TFeedBack } from "@entities/feed-back/types";
-import {
-  createEffect,
-  createEvent,
-  createStore,
-  forward,
-  sample,
-} from "effector";
+import { createEffect, createEvent, createStore, forward } from "effector";
 import { persist } from "effector-storage/local";
 import { getPermission } from "../api";
 import { TAdmin } from "../types";

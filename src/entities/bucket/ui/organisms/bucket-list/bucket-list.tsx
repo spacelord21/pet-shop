@@ -1,7 +1,6 @@
 import { TProductInBucket } from "@entities/bucket/types";
 import { useWindowDimensions } from "@shared/hooks";
 import { Separator, styled, Typography } from "@shared/ui";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BucketItem } from "../../molecules";
 

@@ -1,5 +1,5 @@
-import { size, styled, Typography } from "@shared/ui";
-import { useLocation, useNavigate } from "react-router-dom";
+import { styled, Typography } from "@shared/ui";
+import { useLocation } from "react-router-dom";
 import { navItems } from "../nav-items";
 import { Icon, Item } from "./ui/atoms";
 import { Icon as Iconify } from "@iconify/react";
@@ -7,7 +7,7 @@ import { useTheme } from "styled-components";
 import { useStore } from "effector-react";
 import { $bucket } from "@entities/bucket/model/store";
 import { useWindowDimensions } from "@shared/hooks";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { PopUpNavigation } from "widgets/pop-up-navigate";
 
 const Wrapper = styled.div<{ width: number }>`

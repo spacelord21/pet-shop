@@ -1,7 +1,6 @@
 import { useWindowDimensions } from "@shared/hooks";
 import { Separator, styled, Typography } from "@shared/ui";
 import { useState, useRef } from "react";
-import { keyframes } from "styled-components";
 
 const Title = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
@@ -79,7 +78,6 @@ export const DescriptionSlice = ({
         </Button>
       </Container>
       <Separator width={isNotDesktop ? 100 : 65} />
-
       <Text
         variant="body14"
         isActive={isPressed}

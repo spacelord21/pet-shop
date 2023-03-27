@@ -1,4 +1,4 @@
-import { TComment, TFeedBack } from "@entities/feed-back/types";
+import { TComment } from "@entities/feed-back/types";
 import { mainUrl } from "@shared/index";
 import { paths } from "../paths";
 

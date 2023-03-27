@@ -1,7 +1,6 @@
 import { TComment } from "@entities/feed-back/types";
 import { useWindowDimensions } from "@shared/hooks";
 import { styled } from "@shared/ui";
-import { FC, useEffect } from "react";
 import { CommentItem } from "../../molecules";
 
 const Container = styled.div`

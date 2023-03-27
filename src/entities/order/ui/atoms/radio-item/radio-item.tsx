@@ -1,5 +1,4 @@
 import { setCommunicationPlace } from "@entities/order/model/order-form";
-import { TCommunicationPlace } from "@entities/order/types";
 import { styled, Typography } from "@shared/ui";
 
 const Item = styled.div`

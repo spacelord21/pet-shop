@@ -1,7 +1,6 @@
 import { createAlert, DEFAULT_ALERT_TIMEOUT } from "@entities/alert";
 import { TComment } from "@entities/feed-back/types";
-import { createEffect, createEvent, createStore, forward } from "effector";
-import { useStore } from "effector-react";
+import { createEffect, createEvent, forward } from "effector";
 import { deleteComment, saveComment } from "../api";
 
 export const saveCommentEv = createEvent<

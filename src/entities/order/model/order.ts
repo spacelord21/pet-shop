@@ -5,7 +5,6 @@ import {
   setDataInLocaleStorage,
 } from "@entities/persist";
 import { createEffect, createEvent, createStore } from "effector";
-import { persist } from "effector-storage/local";
 import { fetchOrder } from "../api";
 import { TContactDetails, TOrder, TOrderInStorage } from "../types";
 import { createOrder } from "./order-form";
