@@ -64,6 +64,6 @@ persist({
 
 $hasPermission.watch((state) => {
   if (state) {
-    fetchAllFeedbacksFx();
+    // fetchAllFeedbacksFx();
   }
 });

@@ -63,6 +63,7 @@ uploadImagesFx.doneData.watch((payload) => {
     disadvantages: $disadvantages.getState(),
     imagesUrl: payload,
     userId: $userId.getState(),
+    comments: [],
   });
 });
 

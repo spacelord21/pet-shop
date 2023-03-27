@@ -3,7 +3,7 @@ import { Event } from "effector";
 
 type TTextAreaProps = {
   text: string;
-  setText: Event<string>;
+  setText: Event<string> | ((value: string) => void);
   title: string;
   isActive: boolean;
   isName: boolean;
