@@ -78,7 +78,12 @@ export const DescriptionSlice = ({
         </Button>
       </Container>
       <Separator width={isNotDesktop ? 100 : 65} />
-      <Text variant="body14" isActive={isPressed} ref={itemRef}>
+      <Text
+        variant="body14"
+        isActive={isPressed}
+        ref={itemRef}
+        className="desc-content"
+      >
         {content}
       </Text>
     </>
