@@ -21,6 +21,7 @@ import {
   setName,
   setProductId,
   setRating,
+  uploadImagesFx,
   uploadImagesToCloudinary,
 } from "@entities/feed-back/model";
 import { TStarRatingProps } from "@shared/ui/core/organisms/star-rating/star-rating";
@@ -101,6 +102,7 @@ export const FeedBackForm = React.memo(({ productId }: TFeedBackFormProps) => {
   const { files, onDragStateChange, onFilesDrop, removeFile } = useDropZone();
   const { isNotDesktop, width } = useWindowDimensions();
   const loading = useStore(createFeedbackFx.pending);
+  const uploadImagesLoading = useStore(uploadImagesFx.pending);
 
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -167,9 +169,9 @@ export const FeedBackForm = React.memo(({ productId }: TFeedBackFormProps) => {
       </DropZone>
       <PrimaryButton
         onClick={onClickHandler}
-        disabled={loading || rating === 0}
+        disabled={loading || rating === 0 || uploadImagesLoading}
       >
-        {loading ? (
+        {loading || uploadImagesLoading ? (
           <Loader />
         ) : (
           <ButtonText variant="title">Добавить</ButtonText>

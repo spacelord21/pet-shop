@@ -15,4 +15,8 @@ export const paths = {
     method: "GET",
     url: "/feedbacks/get-all",
   },
+  adminDelete: {
+    method: "POST",
+    url: "/feedbacks/admin-delete?",
+  },
 };

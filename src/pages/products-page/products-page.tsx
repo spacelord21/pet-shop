@@ -12,6 +12,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.palette.background.primary};
+  min-height: 100vh;
 `;
 
 const Title = styled(Typography)`

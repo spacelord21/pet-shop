@@ -1,9 +1,14 @@
 import { setPopUpImages } from "@entities/feed-back/model";
-import { styled } from "@shared/ui";
+import { styled, Typography } from "@shared/ui";
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const Image = styled.img`
@@ -24,13 +29,20 @@ const Image = styled.img`
   }
 `;
 
+const Title = styled(Typography)`
+  color: ${({ theme }) => theme.palette.text.primary};
+  margin-top: ${({ theme }) => theme.spacing(1)}px;
+  margin-bottom: ${({ theme }) => theme.spacing(1)}px;
+`;
+
 type TImagesListProps = {
   images: string[];
 };
 
 export const ImagesList = ({ images }: TImagesListProps) => {
   return (
-    <>
+    <Wrapper>
+      <Title variant="body16">Фотографии</Title>
       <Container>
         {images.map((image, index) => (
           <Image
@@ -40,6 +52,6 @@ export const ImagesList = ({ images }: TImagesListProps) => {
           />
         ))}
       </Container>
-    </>
+    </Wrapper>
   );
 };

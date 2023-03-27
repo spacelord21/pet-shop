@@ -1,7 +1,6 @@
-import { $products, fetchProducts } from "@entities/products/model";
+import { $products } from "@entities/products/model";
 import { Separator, styled, Typography } from "@shared/ui";
 import { useStore } from "effector-react";
-import { useEffect } from "react";
 import { Footer, Header } from "widgets";
 import { BucketWidget } from "widgets/bucket";
 import { BackgroundPicture, Products } from "./ui";
@@ -23,6 +22,7 @@ const Title = styled(Typography)`
 
 export const Home = () => {
   const products = useStore($products);
+  const loading = true;
 
   return (
     <Container>
