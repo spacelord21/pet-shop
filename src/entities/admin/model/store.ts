@@ -17,7 +17,7 @@ export const getPermissionFx = createEffect<TAdmin, boolean, Error>(
   }
 );
 
-const fetchAllFeedbacksFx = createEffect<void, TFeedBackModel[], Error>(
+export const fetchAllFeedbacksFx = createEffect<void, TFeedBackModel[], Error>(
   async () => {
     return await getAllFeedbacks();
   }
