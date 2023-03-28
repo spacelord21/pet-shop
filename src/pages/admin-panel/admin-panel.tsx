@@ -1,7 +1,12 @@
 import { PrimaryButton, styled } from "@shared/ui";
 import picture from "../../../public/assets/dog-in-space.png";
 import { useEffect, useState } from "react";
-import { $allFeedbacks, $hasPermission, sendAdminInfo } from "@entities/admin";
+import {
+  $allFeedbacks,
+  $hasPermission,
+  fetchAllFeedbacksFx,
+  sendAdminInfo,
+} from "@entities/admin";
 import { useStore } from "effector-react";
 import { FeedBackList } from "@entities/feed-back/ui/organisms/feed-back-list";
 import { $feedBacks } from "@entities/feed-back/model";
@@ -55,6 +60,10 @@ export const AdminPanel = () => {
       password: password,
     });
   };
+
+  useEffect(() => {
+    fetchAllFeedbacksFx();
+  }, []);
 
   return (
     <Wrapper>
