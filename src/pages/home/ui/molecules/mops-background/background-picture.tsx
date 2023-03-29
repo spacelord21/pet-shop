@@ -5,15 +5,16 @@ import MOPS from "../../../../../../public/assets/mops-bg.png";
 
 const Container = styled.div`
   width: 100%;
-  min-height: 750px;
+  height: 750px;
   display: flex;
   align-items: center;
   position: relative;
   clip-path: inset(0);
+  z-index: 0;
 `;
 
 const Image = styled.img`
-  z-index: 0;
+  z-index: -1;
   position: fixed;
   height: 750px;
   width: 100%;
@@ -26,11 +27,10 @@ const Text = styled(Typography)`
   margin-left: ${({ theme }) => theme.spacing(1)}px;
   text-shadow: 0 2px 0 0px ${({ theme }) => theme.palette.accent.primary},
     0 3px 2px 0px ${({ theme }) => theme.palette.accent.primary};
-  z-index: 10;
 `;
 
 const TextBlock = styled.div<{ isNotDesktop: boolean }>`
-  z-index: 1;
+  z-index: -1;
   margin-left: ${({ theme, isNotDesktop }) =>
     isNotDesktop ? 0 : theme.spacing(2)}px;
   position: fixed;
