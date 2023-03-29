@@ -1,6 +1,7 @@
 import { selectors, setPhoneNumber } from "@entities/order/model/order-form";
 import PhoneInput from "react-phone-number-input/input";
 import { styled } from "@shared/ui";
+import React from "react";
 
 const Input = styled.input<{ hasError: boolean }>`
   width: 100%;
@@ -21,8 +22,19 @@ const Input = styled.input<{ hasError: boolean }>`
 
 export const PhoneNumber = () => {
   const { phoneNumber, formError } = selectors();
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (inputRef.current) {
+      inputRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <PhoneInput
+      ref={inputRef}
+      onClick={handleClick}
       onChange={setPhoneNumber}
       country="RU"
       value={phoneNumber}
