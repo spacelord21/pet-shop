@@ -13,7 +13,7 @@ module.exports = {
   },
   plugins: 
   [
-    new HTMLWebpackPlugin({template:'./public/index.html', favicon: './public/favicon.ico', manifest: './public/manifest.json'}),
+    new HTMLWebpackPlugin({template:'./public/index.html', manifest: "./public/manifest.json", favicon: "./public/icon.ico"}),
     new CleanWebpackPlugin(),
     new SourceMapDevToolPlugin({filename: "[file].map"})
   ],
