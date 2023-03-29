@@ -1,14 +1,29 @@
 import { Route, Routes } from "react-router-dom";
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { ErrorBoundary } from "./error-boundary";
 import { Fallback } from "./fallback";
 import { TProduct } from "@entities/products/types";
-import { NotFound } from "./not-found";
-import { Home } from "./home";
-import { BucketPage } from "./bucket";
-import { ProductsPage } from "./products-page";
-import { Product } from "./product";
-import { AdminPanel } from "./admin-panel";
+
+const Home = lazy(() =>
+  import("./home").then(({ Home }) => ({ default: Home }))
+);
+const BucketPage = lazy(() =>
+  import("./bucket").then(({ BucketPage }) => ({ default: BucketPage }))
+);
+const Product = lazy(() =>
+  import("./product").then(({ Product }) => ({ default: Product }))
+);
+const ProductsPage = lazy(() =>
+  import("./products-page").then(({ ProductsPage }) => ({
+    default: ProductsPage,
+  }))
+);
+const NotFound = lazy(() =>
+  import("./not-found").then(({ NotFound }) => ({ default: NotFound }))
+);
+const AdminPanel = lazy(() =>
+  import("./admin-panel").then(({ AdminPanel }) => ({ default: AdminPanel }))
+);
 
 type TRoutingProps = {
   products: TProduct[];
