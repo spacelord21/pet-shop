@@ -18,6 +18,7 @@ const Container = styled.div`
   align-items: baseline;
   background-color: ${({ theme }) => theme.palette.background.primary};
   width: 100%;
+  z-index: 20;
 `;
 
 export const Footer = () => {

@@ -19,6 +19,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: 100%;
   background-color: ${({ theme }) => theme.palette.background.primary};
+  z-index: 20;
 `;
 
 const RefetchText = styled(Typography)`
