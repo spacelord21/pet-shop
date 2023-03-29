@@ -7,6 +7,7 @@ import { ImagesList } from "../images-list";
 import { useStore } from "effector-react";
 import { Comments } from "@entities/comment";
 import { useState } from "react";
+import { $hasPermission } from "@entities/admin";
 
 const Container = styled.div`
   padding: ${({ theme }) => theme.spacing(1)}px;
@@ -32,7 +33,6 @@ const ButtonText = styled(Typography)`
 const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  /* justify-content: ; */
 `;
 
 type TFeedBackItemProps = {
@@ -54,10 +54,15 @@ export const FeedBackItem = ({ feedBack, hasOwner }: TFeedBackItemProps) => {
 
   const [isFullView, setIsFullView] = useState(false);
   const userId = useStore($userId);
+  const isAdmin = useStore($hasPermission);
 
   const deleteHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    deleteFeedback({ userId: userId, productId: productId });
+    if (isAdmin) {
+      deleteFeedback({ userId: feedBack.userId, productId: productId });
+    } else {
+      deleteFeedback({ userId: userId, productId: productId });
+    }
   };
 
   return (

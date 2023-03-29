@@ -22,7 +22,6 @@ const Title = styled(Typography)`
 
 export const Home = () => {
   const products = useStore($products);
-  const loading = true;
 
   return (
     <Container>
