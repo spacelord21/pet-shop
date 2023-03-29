@@ -1,5 +1,6 @@
 import { styled } from "@shared/ui";
 import { Event } from "effector";
+import React from "react";
 
 type TTextAreaProps = {
   text: string;
@@ -47,12 +48,22 @@ export const TextArea = ({
   isName,
   name,
 }: TTextAreaProps) => {
+  const areaRef = React.useRef<HTMLTextAreaElement>(null);
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
   };
 
+  const handleClick = (e: React.MouseEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    if (areaRef.current) {
+      areaRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <Area
+      ref={areaRef}
+      onClick={handleClick}
       className="text-input"
       isName={isName}
       value={text}

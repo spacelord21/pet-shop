@@ -2,6 +2,7 @@ import { useWindowDimensions } from "@shared/hooks";
 import { size, styled, Typography } from "@shared/ui";
 import { TypographyVariants } from "@shared/ui/types";
 import MOPS from "../../../../../../public/assets/mops-bg.png";
+import DOGS from "../../../../../../public/assets/dogs.png";
 
 const Container = styled.div`
   width: 100%;
@@ -35,11 +36,11 @@ const TextBlock = styled.div<{ isNotDesktop: boolean }>`
   margin-left: ${({ theme, isNotDesktop }) =>
     isNotDesktop ? 0 : theme.spacing(2)}px;
   position: fixed;
-  top: 40%;
+  top: ${({ isNotDesktop }) => (isNotDesktop ? 20 : 40)}%;
 `;
 
 export const BackgroundPicture = () => {
-  const { width, isNotDesktop } = useWindowDimensions();
+  const { width, isNotDesktop, isMobile } = useWindowDimensions();
 
   const handleFontSize = (): TypographyVariants => {
     if (width >= size.mobileS && width <= size.mobileL) {
@@ -50,7 +51,7 @@ export const BackgroundPicture = () => {
 
   return (
     <Container className="pugs background">
-      <Image src={MOPS} width={width} />
+      <Image src={isMobile ? DOGS : MOPS} width={width} />
       <TextBlock isNotDesktop={isNotDesktop} className="text-block">
         <Text variant={handleFontSize()} className="welcome-title">
           ТВОЙ ЛУЧШИЙ
