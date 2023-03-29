@@ -53,7 +53,7 @@ export const TextArea = ({
     setText(event.target.value);
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLTextAreaElement>) => {
+  const handleClick = (e: React.FocusEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
     if (areaRef.current) {
       areaRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -63,7 +63,7 @@ export const TextArea = ({
   return (
     <Area
       ref={areaRef}
-      onClick={handleClick}
+      onFocus={handleClick}
       className="text-input"
       isName={isName}
       value={text}

@@ -24,7 +24,7 @@ export const PhoneNumber = () => {
   const { phoneNumber, formError } = selectors();
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
+  const handleClick = (e: React.FocusEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (inputRef.current) {
       inputRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -34,7 +34,7 @@ export const PhoneNumber = () => {
   return (
     <PhoneInput
       ref={inputRef}
-      onClick={handleClick}
+      onFocus={handleClick}
       onChange={setPhoneNumber}
       country="RU"
       value={phoneNumber}

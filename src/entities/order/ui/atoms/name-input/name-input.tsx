@@ -23,7 +23,7 @@ export const NameInput = () => {
   const { name, formError } = selectors();
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
+  const handleClick = (e: React.FocusEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (inputRef.current) {
       inputRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -32,7 +32,7 @@ export const NameInput = () => {
 
   return (
     <Input
-      onClick={handleClick}
+      onFocus={handleClick}
       hasError={formError && name.length === 0}
       value={name}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
