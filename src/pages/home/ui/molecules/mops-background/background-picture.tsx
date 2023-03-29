@@ -1,7 +1,7 @@
 import { useWindowDimensions } from "@shared/hooks";
 import { size, styled, Typography } from "@shared/ui";
 import { TypographyVariants } from "@shared/ui/types";
-import MOPS from "../../../../../../public/assets/mops-bg.jpg";
+import MOPS from "../../../../../../public/assets/mops-bg.png";
 
 type TContainerAttrs = {
   url: string;
