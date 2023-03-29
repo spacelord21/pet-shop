@@ -16,6 +16,7 @@ const Container = styled.div`
 const Image = styled.img`
   z-index: -1;
   position: fixed;
+  top: 0;
   height: 750px;
   width: 100%;
   object-fit: cover;
@@ -34,6 +35,7 @@ const TextBlock = styled.div<{ isNotDesktop: boolean }>`
   margin-left: ${({ theme, isNotDesktop }) =>
     isNotDesktop ? 0 : theme.spacing(2)}px;
   position: fixed;
+  top: 40%;
 `;
 
 export const BackgroundPicture = () => {
