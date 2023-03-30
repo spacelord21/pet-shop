@@ -41,8 +41,8 @@ const Amount = styled(Typography)`
 `;
 
 const IconWrapper = styled.div`
-  position: fixed;
-  right: 52px;
+  position: absolute;
+  right: 60px;
   top: 40px;
   cursor: pointer;
   background-color: ${({ theme }) => theme.palette.accent.error};
@@ -55,7 +55,6 @@ const BarsWrapper = styled.div`
   position: fixed;
   right: ${({ theme }) => theme.spacing(1)}px;
   z-index: 5000;
-
   top: 18px;
   cursor: pointer;
 `;

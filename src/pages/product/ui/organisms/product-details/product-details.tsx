@@ -1,3 +1,4 @@
+import { createAlert } from "@entities/alert";
 import {
   addProductToBucket,
   setWidgetActive,
@@ -58,6 +59,12 @@ export const ProductDetails = (product: TProductDetailsProps) => {
     e.preventDefault();
     addProductToBucket({ ...product, size: size });
     setOrderWidget(true);
+    createAlert({
+      message:
+        "Доставка по городу Красноярск 200₽(по будням). Если Вы покупаете продукции на 1500₽, то доставка осуществляется бесплатно. Доставка в другие регионы и города обговаривается индивидуально.",
+      type: "WARNING",
+      timeout: 60000,
+    });
   };
 
   return (

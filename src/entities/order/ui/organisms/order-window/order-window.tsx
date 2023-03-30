@@ -10,23 +10,23 @@ import { useWindowDimensions } from "@shared/hooks";
 import { Loader, PrimaryButton, styled, Typography } from "@shared/ui";
 import { Header } from "@shared/ui/core/molecules";
 import { useStore } from "effector-react";
-import { useMemo } from "react";
 import { OrderForm } from "../../molecules";
 
 const Container = styled.div<{ isActive: boolean; isNotDesktop: boolean }>`
-  z-index: ${({ isActive }) => (isActive ? 1000 : -1000)};
+  z-index: ${({ isActive }) => (isActive ? 1000 : -1)};
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.palette.background.tertiary};
-  transition: all 0.5s ease;
   position: fixed;
   top: 0;
   left: 0;
+  transition: all 0.5s ease;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: ${({ isNotDesktop }) => (isNotDesktop ? "column" : "row")};
+  overflow-y: scroll;
 `;
 
 const Window = styled.div<{ isNotDesktop: boolean; width: number }>`
@@ -44,15 +44,16 @@ const Window = styled.div<{ isNotDesktop: boolean; width: number }>`
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 `;
 
-const DescriptionWindow = styled.div`
-  width: 200px;
+const DescriptionWindow = styled.div<{ isNotDesktop: boolean; width: number }>`
+  width: ${({ isNotDesktop, width }) => (isNotDesktop ? width - 40 : 200)}px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.palette.background.primary};
   border-radius: 10px;
   padding: ${({ theme }) => theme.spacing(1)}px;
-  margin-left: ${({ theme }) => theme.spacing(1)}px;
+  margin-left: ${({ theme, isNotDesktop }) =>
+    isNotDesktop ? 0 : theme.spacing(1)}px;
   -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
@@ -62,14 +63,10 @@ const Text = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
 `;
 
-const ButtonText = styled(Typography)`
-  color: ${({ theme }) => theme.palette.text.secondary};
-`;
-
 export const OrderWindow = () => {
   const orderActive = useStore($orderWidget);
   const { communicationPlace, name, phoneNumber } = selectors();
-  const { isMobile, isTablet, width } = useWindowDimensions();
+  const { isNotDesktop, width } = useWindowDimensions();
   const loading = useStore(createOrderFx.pending);
 
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -91,17 +88,13 @@ export const OrderWindow = () => {
     createOrder(result);
   };
 
-  const isNotDesktop = useMemo(() => {
-    return isMobile || isTablet;
-  }, [isMobile, isTablet]);
-
   return (
     <Container
       isActive={orderActive}
       isNotDesktop={isNotDesktop}
-      className="order-form"
+      className="order-window"
     >
-      <Window isNotDesktop={isNotDesktop} width={width}>
+      <Window isNotDesktop={isNotDesktop} width={width} className="order-form">
         <Header setIsActive={setOrderWidget} title={"Оформление заказа!"} />
         <OrderForm />
         <PrimaryButton
@@ -113,14 +106,10 @@ export const OrderWindow = () => {
             loading
           }
         >
-          {loading ? (
-            <Loader />
-          ) : (
-            <ButtonText variant="body14">Оформить</ButtonText>
-          )}
+          {loading ? <Loader /> : "Оформить"}
         </PrimaryButton>
       </Window>
-      <DescriptionWindow>
+      <DescriptionWindow isNotDesktop={isNotDesktop} width={width}>
         <Text variant="body14">
           Пожалуйста, укажите данные, предложенные в форме. С Вами свяжутся в
           ближайщее время для уточнения деталей доставки!

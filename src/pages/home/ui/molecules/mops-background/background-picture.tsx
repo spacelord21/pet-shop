@@ -40,7 +40,7 @@ const TextBlock = styled.div<{ isNotDesktop: boolean }>`
 `;
 
 export const BackgroundPicture = () => {
-  const { width, isNotDesktop, isMobile } = useWindowDimensions();
+  const { width, isNotDesktop } = useWindowDimensions();
 
   const handleFontSize = (): TypographyVariants => {
     if (width >= size.mobileS && width <= size.mobileL) {
@@ -51,7 +51,7 @@ export const BackgroundPicture = () => {
 
   return (
     <Container className="pugs background">
-      <Image src={isMobile ? DOGS : MOPS} width={width} />
+      <Image src={isNotDesktop ? DOGS : MOPS} width={width} />
       <TextBlock isNotDesktop={isNotDesktop} className="text-block">
         <Text variant={handleFontSize()} className="welcome-title">
           ТВОЙ ЛУЧШИЙ

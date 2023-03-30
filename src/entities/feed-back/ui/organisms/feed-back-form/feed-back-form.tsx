@@ -41,6 +41,7 @@ const Container = styled.div<{ isNotDesktop: boolean; width: number }>`
   -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  overflow-y: auto;
 `;
 
 const StarRatingContainer = styled.div`
