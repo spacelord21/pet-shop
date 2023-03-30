@@ -4,6 +4,9 @@ import { Footer, Header, PopUpImage } from "widgets";
 import { ProductTemplate } from "./ui";
 import { FeedBack } from "@entities/feed-back";
 import { BucketWidget } from "widgets/bucket";
+import { useStore } from "effector-react";
+import { $orderWidget } from "@entities/order/model";
+import { $formModal } from "@entities/feed-back/model";
 
 const Container = styled.div`
   display: flex;
@@ -14,13 +17,14 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ modalActive: boolean }>`
   background-color: ${({ theme }) => theme.palette.background.primary};
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: ${({ modalActive }) => (modalActive ? "fixed" : "")};
 `;
 
 const Block = styled.div`
@@ -32,8 +36,10 @@ const Block = styled.div`
 type TProductProps = TProduct;
 
 export const Product = (product: TProductProps) => {
+  const orderModal = useStore($orderWidget);
+  const feedbackModal = useStore($formModal);
   return (
-    <Wrapper className="product-page">
+    <Wrapper className="product-page" modalActive={orderModal || feedbackModal}>
       <BucketWidget />
       <PopUpImage />
       <Header />

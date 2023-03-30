@@ -6,7 +6,11 @@ import { useEffect, useMemo } from "react";
 import { $bucket, fetchBucketFromStorage } from "../model/store";
 import { BucketList, OrderSummary } from "./organisms";
 
-const Container = styled.div<{ isNotDesktop: boolean }>`
+type TContainerProps = {
+  isNotDesktop: boolean;
+};
+
+const Container = styled.div<TContainerProps>`
   display: flex;
   background-color: ${({ theme }) => theme.palette.background.primary};
   width: 100%;

@@ -18,6 +18,7 @@ const Container = styled.div<Pick<TModalWindowProps, "isActive">>`
   align-items: center;
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};
   z-index: 1000;
+  overflow-y: auto;
 `;
 
 export const ModalWindow = ({ isActive, children }: TModalWindowProps) => {
