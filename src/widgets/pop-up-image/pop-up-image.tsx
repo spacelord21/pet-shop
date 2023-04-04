@@ -9,6 +9,7 @@ import { useTheme } from "styled-components";
 const Wrapper = styled.div<{ isEmpty: boolean }>`
   z-index: 2000;
   position: fixed;
+  top: 0;
   width: 100%;
   height: 100%;
   opacity: ${({ isEmpty }) => (isEmpty ? 1 : 0)};
