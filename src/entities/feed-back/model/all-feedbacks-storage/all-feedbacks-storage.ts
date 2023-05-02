@@ -9,6 +9,7 @@ import { createEffect, createEvent, createStore, sample } from "effector";
 import { createFeedbackFx } from "../form-model";
 import { $userId } from "../local-storage-model";
 import { mappedFeedBacks } from "../mappers";
+import { toDate } from "./date-parser";
 
 export const $sortType = createStore<TSortType>("RATING");
 export const $feedBacks = createStore<TFeedBack[]>([]);
@@ -74,6 +75,7 @@ sample({
   fn: (source) => {
     const feedbacks: TFeedBack[] = mappedFeedBacks(source);
     feedbacks.sort(compareFunction);
+    feedbacks.sort(dateOfCreation);
     return feedbacks;
   },
   target: $feedBacks,
@@ -91,4 +93,8 @@ const compareFunction = (item1: TFeedBack, item2: TFeedBack) => {
     return 0;
   }
   return 0;
+};
+
+const dateOfCreation = (item1: TFeedBack, item2: TFeedBack) => {
+  return toDate(item2.createTime) - toDate(item1.createTime);
 };
