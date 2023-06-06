@@ -18,6 +18,6 @@ export const networkItems: TNetworkItem[] = [
   {
     id: 3,
     iconName: "basil:viber-outline",
-    url: "viber://chat?number=%2B79504345555",
+    url: "viber://contact?number=%2B79504345555",
   },
 ];

@@ -42,11 +42,12 @@ module.exports = {
   },
   resolve: {
     plugins: [new TsconfigPathsPlugin()],
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', ".css"],
   },
   devServer: {
     port: 3000,
     historyApiFallback: true,
+    hot: true
   }, 
   devtool: "eval-cheap-source-map"
 }

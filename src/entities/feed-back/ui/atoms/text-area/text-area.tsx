@@ -1,8 +1,9 @@
-import { styled } from "@shared/ui";
 import { Event } from "effector";
 import React from "react";
+import "./style.css";
+import { Container, Area, Label } from "./styles";
 
-type TTextAreaProps = {
+export type TTextAreaProps = {
   text: string;
   setText: Event<string> | ((value: string) => void);
   title: string;
@@ -10,35 +11,6 @@ type TTextAreaProps = {
   isName: boolean;
   name: string;
 };
-
-const Area = styled.textarea<Pick<TTextAreaProps, "isActive" | "isName">>`
-  width: 100%;
-  height: ${({ theme }) => theme.spacing(2.2)}px;
-  resize: none;
-  border: 2px solid ${({ theme }) => theme.palette.accent.secondary};
-
-  ${({ isName, theme }) =>
-    !isName &&
-    `
-    &:focus {
-    min-height:  ${theme.spacing(6)}px;
-    overflow-y: auto;
-    transition: 0.2s ease-in-out;
-    border: 0.5px solid ${theme.palette.accent.primary};
-  }
-  &:not(:focus) {
-    height: ${theme.spacing(2.2)}px;
-    transition: 0.2s ease-in-out;
-  }
-  `}
-  border-radius: 10px;
-  font-family: ${({ theme }) => theme.typography.body14.fontFamily};
-  font-size: ${({ theme }) => theme.typography.body14.size};
-  color: ${({ theme }) => theme.palette.text.tertiary};
-  text-align: left;
-  padding: 8px;
-  overflow: hidden;
-`;
 
 export const TextArea = ({
   text,
@@ -56,21 +28,27 @@ export const TextArea = ({
   const handleClick = (e: React.FocusEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
     if (areaRef.current) {
-      areaRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      areaRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
 
   return (
-    <Area
-      ref={areaRef}
-      onFocus={handleClick}
-      className="text-input"
-      isName={isName}
-      value={text}
-      onChange={handleChange}
-      placeholder={title}
-      isActive={isActive}
-      name={name}
-    />
+    <Container className="group">
+      <Area
+        ref={areaRef}
+        onFocus={handleClick}
+        className="text-input"
+        isName={isName}
+        id={name}
+        value={text}
+        onChange={handleChange}
+        placeholder={title}
+        isActive={isActive}
+        name={name}
+      />
+      <Label className="label" htmlFor={name}>
+        {title}
+      </Label>
+    </Container>
   );
 };

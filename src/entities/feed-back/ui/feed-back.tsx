@@ -80,6 +80,7 @@ export const FeedBack = ({ productId }: TFeedBackProps) => {
       <ModalWindow isActive={modalActive}>
         <FeedBackForm productId={productId} />
       </ModalWindow>
+
       <FeedBackList feedBacks={feedbacks} />
     </Container>
   );

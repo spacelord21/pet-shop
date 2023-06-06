@@ -30,7 +30,7 @@ export const Comments = ({
       <CommentsList comments={comments} isFullView={isFullView} />
       {isFullView ? (
         <>
-          <Separator />
+          {/* <Separator /> */}
           <CommentForm feedbackId={feedbackId} productId={productId} />
         </>
       ) : null}

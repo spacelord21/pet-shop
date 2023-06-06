@@ -2,14 +2,13 @@ import { selectors, setName } from "@entities/order/model/order-form";
 import { styled } from "@shared/ui";
 import React from "react";
 
-const Input = styled.input<{ hasError: boolean }>`
+const Input = styled.input`
   width: 100%;
   height: ${({ theme }) => theme.spacing(2.2)}px;
   resize: none;
-  border: 2px solid
-    ${({ theme, hasError }) =>
-      hasError ? theme.palette.accent.error : theme.palette.accent.secondary};
-  border-radius: 10px;
+  outline: none;
+  border: 1px solid ${({ theme }) => theme.palette.accent.secondary};
+  border-radius: 6px;
   font-family: ${({ theme }) => theme.typography.body14.fontFamily};
   font-size: ${({ theme }) => theme.typography.body14.size};
   color: ${({ theme }) => theme.palette.text.tertiary};
@@ -20,7 +19,7 @@ const Input = styled.input<{ hasError: boolean }>`
 `;
 
 export const NameInput = () => {
-  const { name, formError } = selectors();
+  const { name } = selectors();
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const handleClick = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -33,7 +32,6 @@ export const NameInput = () => {
   return (
     <Input
       onFocus={handleClick}
-      hasError={formError && name.length === 0}
       value={name}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         setName(e.target.value)

@@ -12,6 +12,11 @@ import { $hasPermission } from "@entities/admin";
 const Container = styled.div`
   padding: ${({ theme }) => theme.spacing(1)}px;
   width: 100%;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(49, 48, 82, 0.08);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(49, 48, 82, 0.08);
+  box-shadow: 0px 5px 10px 2px rgba(49, 48, 82, 0.08);
+  border-radius: 6px;
+  margin-bottom: ${({ theme }) => theme.spacing(1.5)}px;
 `;
 
 const HeaderWrapper = styled.div`
@@ -117,7 +122,7 @@ export const FeedBackItem = ({ feedBack, hasOwner }: TFeedBackItemProps) => {
         isFullView={isFullView}
         productId={productId!}
       />
-      <Separator />
+      {/* <Separator /> */}
     </Container>
   );
 };

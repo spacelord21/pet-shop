@@ -3,7 +3,7 @@ import {
   setWidgetActive,
 } from "@entities/bucket/model/store";
 import { TProduct } from "@entities/products/types";
-import { PrimaryButton, styled, Typography } from "@shared/ui";
+import { AddToCartButton, PrimaryButton, styled, Typography } from "@shared/ui";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -14,6 +14,10 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: ${({ theme }) => theme.spacing(1)}px;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(49, 48, 82, 0.08);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(49, 48, 82, 0.08);
+  box-shadow: 0px 5px 10px 2px rgba(49, 48, 82, 0.08);
+  padding: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 const Title = styled(Typography)`
@@ -70,7 +74,7 @@ export const ProductCard = ({
         </ContentBody>
       </ClickableWrapper>
 
-      <PrimaryButton
+      <AddToCartButton
         onClick={() => {
           setWidgetActive(true);
           addProductToBucket({
@@ -82,9 +86,7 @@ export const ProductCard = ({
             rating: rating,
           });
         }}
-      >
-        Добавить
-      </PrimaryButton>
+      />
     </Container>
   );
 };

@@ -21,7 +21,7 @@ export const OrderForm = () => {
       <NameInput />
       <PhoneNumber />
       <Description variant="body16">
-        Выберите предпочитаемое средство связи(можно несколько)
+        Выберите предпочитаемое средство связи (можно несколько)
       </Description>
       <ComChoose />
     </Container>

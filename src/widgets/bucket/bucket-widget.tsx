@@ -4,58 +4,37 @@ import { Separator, styled } from "@shared/ui";
 import { useStore } from "effector-react";
 import { Footer, Header } from "./ui/molecules";
 import { BucketList } from "./ui/organisms";
+import { CSSTransition } from "react-transition-group";
 
 type TWrapperProps = {
-  isActive: boolean;
   isNotDesktop: boolean;
 };
+const duration = 500;
 
 const Wrapper = styled.div<TWrapperProps>`
   z-index: 1999;
   position: fixed;
+  top: 0;
   height: 100%;
   width: ${({ isNotDesktop }) => (isNotDesktop ? 100 : 25)}%;
   right: 0;
   background-color: ${({ theme }) => theme.palette.background.primary};
-  animation: ${({ isActive }) => (isActive ? "show-bucket" : "hide-bucket")} 1s
-    normal;
   overflow-y: scroll;
-  @keyframes show-bucket {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-    }
+  border: 1px solid ${({ theme }) => theme.palette.accent.primary};
+  &.modal-transition-enter {
+    transform: translateX(100%);
   }
-  @keyframes hide-bucket {
-    0% {
-      opacity: 1;
-      transform: translateX(0px);
-    }
-    50% {
-      opacity: 0.5;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(400px);
-    }
+  &.modal-transition-enter-active {
+    transition: transform ${duration}ms;
+    transform: translateX(0);
   }
-`;
-
-const Container = styled.div<{ isActive: boolean }>`
-  z-index: ${({ isActive }) => (isActive ? 1000 : -1000)};
-  opacity: ${({ isActive }) => (isActive ? 1 : 0)};
-  width: 100%;
-  height: 100%;
-  background-color: ${({ theme }) => theme.palette.background.tertiary};
-  transition: all 0.5s ease-in;
-  position: fixed;
-  top: 0;
-  left: 0;
+  &.modal-transition-exit {
+    transform: translateX(0);
+  }
+  &.modal-transition-exit-active {
+    transition: transform ${duration}ms;
+    transform: translateX(100%);
+  }
 `;
 
 export const BucketWidget = () => {
@@ -63,18 +42,23 @@ export const BucketWidget = () => {
   const isActive = useStore($bucketWidgetActive);
   const { isNotDesktop } = useWindowDimensions();
 
+  const bucketContent = (
+    <Wrapper isNotDesktop={isNotDesktop} className="bucket-widget-body">
+      <Header />
+      <BucketList products={products} />
+      <Separator />
+      <Footer />
+    </Wrapper>
+  );
+
   return (
-    <Container isActive={isActive} className="bucket-widget-container">
-      <Wrapper
-        isActive={isActive}
-        isNotDesktop={isNotDesktop}
-        className="bucket-widget-body"
-      >
-        <Header />
-        <BucketList products={products} />
-        <Separator />
-        <Footer />
-      </Wrapper>
-    </Container>
+    <CSSTransition
+      in={isActive}
+      timeout={duration}
+      unmountOnExit
+      classNames={"modal-transition"}
+    >
+      {bucketContent}
+    </CSSTransition>
   );
 };

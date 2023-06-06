@@ -7,6 +7,7 @@ import { $alert, Alert } from "@entities/alert";
 import { $products, fetchProducts } from "@entities/products/model";
 import { useEffect } from "react";
 import { createUserId } from "@entities/feed-back/model";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const Container = styled.div`
   background-color: #fffaf5;
@@ -20,12 +21,26 @@ export const App = () => {
     createUserId();
   }, []);
 
+  const alertShow = Boolean(alert);
+
   return (
     <Container>
       <RobotoFontStyle>
         <AppThemeProvider>
           <BrowserRouter>
-            {alert ? <Alert alert={alert} /> : null}
+            <TransitionGroup>
+              {alert && (
+                <CSSTransition
+                  in={alertShow}
+                  timeout={200}
+                  unmountOnExit
+                  classNames={"alert-transition"}
+                >
+                  <Alert alert={alert} />
+                </CSSTransition>
+              )}
+            </TransitionGroup>
+
             <Routing products={products} />
           </BrowserRouter>
         </AppThemeProvider>

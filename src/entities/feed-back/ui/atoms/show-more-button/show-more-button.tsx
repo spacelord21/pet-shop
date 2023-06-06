@@ -1,9 +1,7 @@
 import { styled, Typography } from "@shared/ui";
-import { useEffect } from "react";
 
 const Text = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
-  border-bottom: ${({ theme }) => theme.palette.accent.primary} 1px solid;
   cursor: pointer;
   &:hover {
     opacity: 0.7;
@@ -23,14 +21,14 @@ export const ShowMoreButton = ({
 }: TShowMoreButtonProps) => {
   return quantity === 0 || quantity < 0 ? (
     feedbacksLength === 0 ? (
-      <Text variant="body14">Отзывов еще нет</Text>
+      <Text variant="body16">Отзывов еще нет</Text>
     ) : feedbacksLength === 1 ? null : (
-      <Text variant="body14" onClick={handleClick}>
+      <Text variant="body16" onClick={handleClick}>
         Скрыть отзывы
       </Text>
     )
   ) : (
-    <Text variant="body14" onClick={handleClick}>
+    <Text variant="body16" onClick={handleClick}>
       Показать еще {quantity} отзыва(ов)
     </Text>
   );

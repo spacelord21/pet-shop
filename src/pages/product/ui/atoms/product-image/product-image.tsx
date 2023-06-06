@@ -11,6 +11,9 @@ const Container = styled.div<{ isNotDesktop: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(49, 48, 82, 0.08);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(49, 48, 82, 0.08);
+  box-shadow: 0px 5px 10px 2px rgba(49, 48, 82, 0.08);
 `;
 
 export const ProductImage = ({ imageUrl }: TProductImageProps) => {
