@@ -23,6 +23,6 @@ export const networkItems: TNetworkItem[] = [
   {
     id: 3,
     iconName: "mdi:instagram",
-    url: "",
+    url: "instagram://user?username=mydog124",
   },
 ];

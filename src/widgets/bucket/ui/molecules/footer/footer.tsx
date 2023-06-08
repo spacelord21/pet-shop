@@ -1,16 +1,13 @@
 import { setWidgetActive } from "@entities/bucket/model/store";
-import { PrimaryButton, styled, Typography } from "@shared/ui";
+import { PrimaryButton, styled } from "@shared/ui";
 import { useNavigate } from "react-router-dom";
+import { TotalPrice } from "../total-price";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 114px;
-`;
-
-const ButtonText = styled(Typography)`
-  color: ${({ theme }) => theme.palette.text.secondary};
 `;
 
 export const Footer = () => {
