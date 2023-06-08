@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import { TItemType } from "widgets/nav-items";
 import { useTheme } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useWindowDimensions } from "@shared/hooks";
 
 type TIsActiveItem = {
   isActive: boolean;
@@ -10,8 +11,12 @@ type TIsActiveItem = {
   widgetActive?: boolean;
 };
 
-const Text = styled(Typography)`
-  color: ${({ theme }) => theme.palette.text.primary};
+const Text = styled(Typography)<{ isNotDesktop: boolean }>`
+  ${({ theme, isNotDesktop }) =>
+    isNotDesktop &&
+    `
+    color: ${theme.palette.text.secondary};
+  `}
   font-weight: 300;
 `;
 
@@ -22,16 +27,17 @@ const Container = styled.div<TIsActiveItem>`
   align-items: center;
   margin: ${({ theme }) => theme.spacing(1)}px;
   text-decoration: none;
-  opacity: ${({ isActive }) => (isActive ? 0.5 : 1)};
+  color: ${({ theme }) => theme.palette.text.primary};
   cursor: pointer;
   &:hover {
-    opacity: 0.5;
+    opacity: 0.7;
     transition: 0.5s ease;
   }
-  &:not(:hover) {
-    opacity: ${({ isActive }) => (isActive ? 0.5 : 1)};
-    transition: 0.5s ease-out;
-  }
+  ${({ isActive, theme }) =>
+    isActive &&
+    `
+     opacity: 0.7;
+  `}
 `;
 
 type TItemProps = TItemType & TIsActiveItem;
@@ -39,7 +45,6 @@ type TItemProps = TItemType & TIsActiveItem;
 export const Item = ({
   title,
   iconName,
-  id,
   link,
   isActive,
   setActive,
@@ -47,6 +52,7 @@ export const Item = ({
 }: TItemProps) => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const { isNotDesktop } = useWindowDimensions();
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -61,11 +67,17 @@ export const Item = ({
 
   return (
     <Container onClick={handleClick} isActive={isActive} className="nav-item">
-      <Text variant="title">{title}</Text>
+      <Text variant="title" isNotDesktop={isNotDesktop}>
+        {title}
+      </Text>
       <Icon
         className="nav-item-icon"
         icon={iconName}
-        color={theme.palette.accent.primary}
+        color={
+          isNotDesktop
+            ? theme.palette.text.secondary
+            : theme.palette.accent.primary
+        }
         width={title ? 18 : 23}
         height={title ? 18 : 23}
       />

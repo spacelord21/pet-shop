@@ -6,6 +6,7 @@ const Text = styled(Typography)`
   &:hover {
     opacity: 0.7;
   }
+  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
 `;
 
 type TShowMoreButtonProps = {

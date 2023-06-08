@@ -1,0 +1,49 @@
+.icon {
+  background-size: 400% 400%;
+  -webkit-animation: gradient-bg 5s ease infinite;
+  -moz-animation: gradient-bg 5s ease infinite;
+  animation: gradient-bg 3s linear infinite;
+}
+
+@-webkit-keyframes gradient-bg {
+  0%{
+    background-position:10% 0%;
+  }
+  50%{
+    background-position: 100% 100%;
+  }
+  100%{
+    background-position:10% 0%;
+  }
+}
+@-moz-keyframes gradient-bg {
+  0%{
+    background-position:10% 0%;
+  }
+  50%{
+    background-position:91% 100%;
+  }
+  100%{
+    background-position:10% 0%;
+  }
+}
+@keyframes gradient-bg { 
+  0%{
+    background-position: 0% 0%;
+  }
+  20% {
+    background-position: 20% 20%;
+  }
+  40%{
+    background-position: 40% 40%;
+  }
+  60%{
+    background-position: 50% 0%;
+  }
+  80%{
+    background-position: 60% 30%;
+  }
+  100%{
+    background-position: 0% 70%;
+  }
+}

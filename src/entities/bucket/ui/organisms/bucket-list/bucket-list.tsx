@@ -92,10 +92,13 @@ export const BucketList = ({ products }: TBucketListProps) => {
       width={width}
       className="bucket-list"
     >
-      <Title variant="title" key={"my cart"} className="title">
+      <Title
+        variant={isNotDesktop ? "title" : "title2"}
+        key={"my cart"}
+        className="title"
+      >
         Моя корзина
       </Title>
-      {/* <Separator /> */}
       {products.length ? (
         <TransitionGroup>
           {products.map((product, index) => (
@@ -106,9 +109,6 @@ export const BucketList = ({ products }: TBucketListProps) => {
             >
               <Wrapper>
                 <BucketItem {...product} />
-                {/* {index !== products.length - 1 ? (
-                  <Separator key={product.id + 100} />
-                ) : null} */}
               </Wrapper>
             </CSSTransition>
           ))}

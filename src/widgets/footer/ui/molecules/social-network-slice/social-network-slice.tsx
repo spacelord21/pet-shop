@@ -17,10 +17,13 @@ const Wrapper = styled.div`
     width: 100%;
     margin-top: ${({ theme }) => theme.spacing(1)}px;
   }
+  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
 `;
 
 const Title = styled(Typography)`
-  color: ${({ theme }) => theme.palette.text.primary};
+  color: ${({ theme }) => theme.palette.text.secondary};
+  text-transform: uppercase;
+  font-weight: 300;
 `;
 
 export const SocialNetworkSlice = () => {
@@ -29,7 +32,7 @@ export const SocialNetworkSlice = () => {
       <Title variant="title">связь в социальных сетях</Title>
       <Container>
         {networkItems.map(({ iconName, id, url }) => (
-          <NetworkItem iconName={iconName} key={id} url={url} />
+          <NetworkItem iconName={iconName} key={id} url={url} id={id} />
         ))}
       </Container>
     </Wrapper>

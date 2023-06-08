@@ -10,6 +10,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  margin-bottom: ${({ theme }) => theme.spacing(3)}px;
 `;
 
 const Wrapper = styled.div`

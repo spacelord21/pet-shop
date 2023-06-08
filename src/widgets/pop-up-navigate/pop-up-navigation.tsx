@@ -11,12 +11,13 @@ const ModalPanel = styled.div`
   align-items: center;
   flex-direction: column;
   position: fixed;
-  width: 100%;
+  right: 0;
+  width: 65%;
   height: 100vh;
   z-index: 100;
-  background-color: ${({ theme }) => theme.palette.background.primary};
+  background-color: ${({ theme }) => theme.palette.accent.primary};
   &.modal-transition-enter {
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
   &.modal-transition-enter-active {
     transition: transform ${duration}ms;
@@ -27,7 +28,7 @@ const ModalPanel = styled.div`
   }
   &.modal-transition-exit-active {
     transition: transform ${duration}ms;
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
 `;
 
@@ -36,6 +37,9 @@ const NavList = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
 `;
 
 type TPopUpNavigationProps = {
@@ -47,17 +51,9 @@ export const PopUpNavigation = ({
   isActive,
   setActive,
 }: TPopUpNavigationProps) => {
-  const theme = useTheme();
-
   const modal = (
     <ModalPanel>
       <NavList className="nav-list">
-        <Icon
-          icon={"material-symbols:close-rounded"}
-          color={theme.palette.accent.primary}
-          onClick={() => setActive(false)}
-          width={23}
-        />
         <Items isActive={isActive} setActive={setActive} />
       </NavList>
     </ModalPanel>

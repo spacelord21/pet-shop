@@ -19,6 +19,7 @@ const OrderInfo = styled(Typography)`
   text-align: center;
   width: 90%;
   line-height: 20px;
+  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
 `;
 
 type TOrderSummaryProps = {

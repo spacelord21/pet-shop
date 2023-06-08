@@ -1,31 +1,28 @@
-import { Icon as Iconify } from "@iconify/react";
-import { useTheme } from "styled-components";
-import { styled } from "@shared/ui";
-
-const BarsWrapper = styled.div`
-  position: fixed;
-  right: ${({ theme }) => theme.spacing(1)}px;
-  z-index: 5000;
-  top: 18px;
-  cursor: pointer;
-`;
+import "./style.css";
+import { SetStateAction } from "react";
 
 type TNavBarsProps = {
-  setWidgetActive: (value: boolean) => void;
+  setWidgetActive: React.Dispatch<SetStateAction<boolean>>;
+  open: boolean;
 };
 
-export const NavBars = ({ setWidgetActive }: TNavBarsProps) => {
-  const theme = useTheme();
+export const NavBars = ({ setWidgetActive, open }: TNavBarsProps) => {
+  const onClickHandler = (e: React.MouseEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    setWidgetActive((prev) => !prev);
+  };
   return (
-    <BarsWrapper
-      onClick={() => setWidgetActive(true)}
-      onTouchEnd={() => setWidgetActive(true)}
+    <label
+      className="container"
+      onClick={onClickHandler}
+      style={{ zIndex: 5000 }}
     >
-      <Iconify
-        icon={"uil:bars"}
-        color={theme.palette.accent.primary}
-        width={40}
-      />
-    </BarsWrapper>
+      <input type="checkbox" checked={open} />
+      <div className={"checkmark" + `${open ? " active" : ""}`}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </label>
   );
 };

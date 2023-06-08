@@ -15,11 +15,12 @@ const Wrapper = styled.div<{ width: number }>`
   top: 0;
   width: ${({ width }) => width}px;
   z-index: 100;
+  text-transform: uppercase;
 `;
 
 const Container = styled.div<{ isNotDesktop: boolean }>`
   display: flex;
-  background-color: ${({ theme }) => theme.palette.background.primary};
+  background: ${({ theme }) => theme.palette.background.primary};
   height: ${({ isNotDesktop }) => (isNotDesktop ? 70 : 107)}px;
   flex-direction: row;
 `;
@@ -50,7 +51,7 @@ export const Header = () => {
 
   const view = isNotDesktop ? (
     <>
-      {!open && <NavBars setWidgetActive={setOpen} />}
+      <NavBars setWidgetActive={setOpen} open={open} />
       <CSSTransition
         in={open}
         timeout={timeout}
