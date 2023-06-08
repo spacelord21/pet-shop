@@ -17,19 +17,19 @@ const Container = styled.div<{ isModalOpen: boolean }>`
 
 const FootContainer = styled.div`
   width: 100%;
-  position: absolute;
-  bottom: 0;
+  /* position: absolute; */
+  /* bottom: 0; */
 `;
 
 export const BucketPage = () => {
   const isModalOpen = useStore($orderWidget);
   return (
-    <Container isModalOpen={isModalOpen}>
-      <Header />
-      <Bucket />
-      <FootContainer>
-        <Footer />
-      </FootContainer>
-    </Container>
+    <>
+      <Container isModalOpen={isModalOpen}>
+        <Header />
+        <Bucket />
+      </Container>
+      <Footer />
+    </>
   );
 };
