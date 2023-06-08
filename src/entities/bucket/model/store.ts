@@ -32,7 +32,7 @@ $bucket.on(addProductToBucket, (state, payload) => {
     increaseSize({ id: payload.id, size: payload.size });
     return;
   }
-  return [...state, payload];
+  return [payload, ...state];
 });
 $bucket.on(removeAllProductsFromBucketById, (state, payload) =>
   state.filter((product) => product.id !== payload)

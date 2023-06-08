@@ -35,9 +35,7 @@ export const ProductsPage = () => {
       <Block />
       <Title variant="title2">НАШИ ПРОДУКТЫ</Title>
       <Products products={products} />
-      <Separator />
       <Footer />
-      <Separator />
     </Container>
   );
 };

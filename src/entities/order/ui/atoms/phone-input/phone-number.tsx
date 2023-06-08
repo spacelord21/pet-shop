@@ -3,14 +3,13 @@ import PhoneInput from "react-phone-number-input/input";
 import { styled } from "@shared/ui";
 import React from "react";
 
-const Input = styled.input<{ hasError: boolean }>`
+const Input = styled.input`
   width: 100%;
   height: ${({ theme }) => theme.spacing(2.2)}px;
   resize: none;
-  border: 2px solid
-    ${({ theme, hasError }) =>
-      hasError ? theme.palette.accent.error : theme.palette.accent.secondary};
-  border-radius: 10px;
+  outline: none;
+  border: 1px solid ${({ theme }) => theme.palette.accent.secondary};
+  border-radius: 6px;
   font-family: ${({ theme }) => theme.typography.body14.fontFamily};
   font-size: ${({ theme }) => theme.typography.body14.size};
   color: ${({ theme }) => theme.palette.text.tertiary};
@@ -40,7 +39,6 @@ export const PhoneNumber = () => {
       value={phoneNumber}
       withCountryCallingCode={false}
       inputComponent={Input}
-      hasError={phoneNumber.length === 0 && formError}
       placeholder="Введите номер телефона"
       smartCaret={true}
     />

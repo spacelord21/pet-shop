@@ -51,10 +51,8 @@ export const Product = (product: TProductProps) => {
         <Block />
         <ProductTemplate {...product} />
         <FeedBack productId={product.id} />
-        <Separator />
       </Container>
       <Footer />
-      <Separator />
     </Wrapper>
   );
 };

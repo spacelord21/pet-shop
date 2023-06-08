@@ -14,6 +14,8 @@ const Button = styled.button`
   color: ${({ theme }) => theme.palette.text.secondary};
   height: 40px;
   width: 230px;
+  border: none;
+  border-radius: 6px;
   &:hover {
     opacity: 0.5;
     transition: 0.5s ease;

@@ -76,7 +76,6 @@ export const FeedBack = ({ productId }: TFeedBackProps) => {
       ) : (
         <PrimaryButton onClick={createFeedbackHandler}>Добавить</PrimaryButton>
       )}
-
       <ModalWindow isActive={modalActive}>
         <FeedBackForm productId={productId} />
       </ModalWindow>

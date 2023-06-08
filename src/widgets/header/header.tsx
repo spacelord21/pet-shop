@@ -1,14 +1,13 @@
 import { styled, Typography } from "@shared/ui";
-import { useLocation } from "react-router-dom";
-import { navItems } from "../nav-items";
-import { Icon, Item } from "./ui/atoms";
-import { Icon as Iconify } from "@iconify/react";
-import { useTheme } from "styled-components";
+import { Icon as ShopIcon, NavBars, NavPanel } from "./ui";
 import { useStore } from "effector-react";
 import { $bucket } from "@entities/bucket/model/store";
 import { useWindowDimensions } from "@shared/hooks";
-import { useState } from "react";
 import { PopUpNavigation } from "widgets/pop-up-navigate";
+import { useState } from "react";
+import { CSSTransition } from "react-transition-group";
+
+const timeout = 200;
 
 const Wrapper = styled.div<{ width: number }>`
   display: block;
@@ -16,21 +15,14 @@ const Wrapper = styled.div<{ width: number }>`
   top: 0;
   width: ${({ width }) => width}px;
   z-index: 100;
+  text-transform: uppercase;
 `;
 
 const Container = styled.div<{ isNotDesktop: boolean }>`
   display: flex;
-  background-color: ${({ theme }) => theme.palette.background.primary};
+  background: ${({ theme }) => theme.palette.background.primary};
   height: ${({ isNotDesktop }) => (isNotDesktop ? 70 : 107)}px;
   flex-direction: row;
-`;
-
-const NavPanel = styled.div`
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  right: 50px;
-  top: 30px;
 `;
 
 const Amount = styled(Typography)`
@@ -51,58 +43,34 @@ const IconWrapper = styled.div`
   height: 18px;
 `;
 
-const BarsWrapper = styled.div`
-  position: fixed;
-  right: ${({ theme }) => theme.spacing(1)}px;
-  z-index: 5000;
-  top: 18px;
-  cursor: pointer;
-`;
-
 export const Header = () => {
-  const location = useLocation();
-  const theme = useTheme();
   const products = useStore($bucket);
   const { width, isNotDesktop } = useWindowDimensions();
-  const [widgetActive, setWidgetActive] = useState(false);
+  const [open, setOpen] = useState(false);
+  const showCartIcon = products.length && !isNotDesktop;
+
+  const view = isNotDesktop ? (
+    <>
+      <NavBars setWidgetActive={setOpen} open={open} />
+      <CSSTransition
+        in={open}
+        timeout={timeout}
+        classNames={"modal-transition"}
+        unmountOnExit
+      >
+        <PopUpNavigation isActive={open} setActive={setOpen} />
+      </CSSTransition>
+    </>
+  ) : (
+    <NavPanel />
+  );
 
   return (
     <Wrapper width={width} className="header">
       <Container className="header-body" isNotDesktop={isNotDesktop}>
-        <Icon />
-        {isNotDesktop ? (
-          widgetActive ? (
-            <PopUpNavigation
-              isActive={widgetActive}
-              setActive={setWidgetActive}
-            />
-          ) : (
-            <BarsWrapper
-              onClick={() => setWidgetActive(true)}
-              onTouchEnd={() => setWidgetActive(true)}
-            >
-              <Iconify
-                icon={"uil:bars"}
-                color={theme.palette.accent.primary}
-                width={40}
-              />
-            </BarsWrapper>
-          )
-        ) : (
-          <NavPanel>
-            {navItems.map((item) => (
-              <Item
-                key={item.id}
-                iconName={item.iconName}
-                title={item.title}
-                id={item.id}
-                link={item.link}
-                isActive={item.link === location.pathname}
-              />
-            ))}
-          </NavPanel>
-        )}
-        {products.length && !isNotDesktop ? (
+        <ShopIcon />
+        {view}
+        {showCartIcon ? (
           <IconWrapper>
             <Amount variant="body12">{products.length}</Amount>
           </IconWrapper>

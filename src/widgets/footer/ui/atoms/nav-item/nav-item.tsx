@@ -13,11 +13,12 @@ const Container = styled.a<TIsActiveItem>`
   &:not(:hover) {
     opacity: ${({ isActive }) => (isActive ? 0.5 : 1)};
   }
-  margin-bottom: ${({ theme }) => theme.spacing(1)}px;
+  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
 `;
 
 const Text = styled(Typography)`
-  color: ${({ theme }) => theme.palette.text.primary};
+  color: ${({ theme }) => theme.palette.text.secondary};
+  font-weight: 300;
 `;
 
 type TNavItemProps = {

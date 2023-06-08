@@ -76,7 +76,7 @@ export const ProductDetails = (product: TProductDetailsProps) => {
       <ProductPriceDescription variant="body12">
         *указанная цена за 100 грамм
       </ProductPriceDescription>
-      <OrderForm setSize={setSize} />
+      <OrderForm setSize={setSize} size={size} />
       <TotalPrice size={size} price={price} />
       <Block />
       <PrimaryButton onClick={addToCartHandler}>

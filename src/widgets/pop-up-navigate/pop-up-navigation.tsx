@@ -1,49 +1,34 @@
 import { Icon } from "@iconify/react";
 import { styled } from "@shared/ui";
-import { useLocation } from "react-router-dom";
+import { createPortal } from "react-dom";
 import { useTheme } from "styled-components";
-import { Item } from "widgets/header/ui/atoms";
-import { navItems } from "widgets/nav-items";
+import { Items } from "./items";
+const duration = 200;
 
-const Container = styled.div``;
-
-const ModalPanel = styled.div<{ isActive: boolean }>`
+const ModalPanel = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: fixed;
-  width: 100%;
+  right: 0;
+  width: 65%;
   height: 100vh;
   z-index: 100;
-  background-color: ${({ theme }) => theme.palette.background.primary};
-  animation: ${({ isActive }) => (isActive ? "show-modal" : "hide-modal")} 1s
-    forwards;
-  @keyframes show-modal {
-    0% {
-      opacity: 0;
-      transform: translateX(500px);
-    }
-    50% {
-      opacity: 0.7;
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0px);
-    }
+  background-color: ${({ theme }) => theme.palette.accent.primary};
+  &.modal-transition-enter {
+    transform: translateX(100%);
   }
-  @keyframes hide-modal {
-    0% {
-      opacity: 1;
-      transform: translateX(0px);
-    }
-    50% {
-      opacity: 0.7;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(400px);
-    }
+  &.modal-transition-enter-active {
+    transition: transform ${duration}ms;
+    transform: translateX(0);
+  }
+  &.modal-transition-exit {
+    transform: translateX(0);
+  }
+  &.modal-transition-exit-active {
+    transition: transform ${duration}ms;
+    transform: translateX(100%);
   }
 `;
 
@@ -52,6 +37,9 @@ const NavList = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
 `;
 
 type TPopUpNavigationProps = {
@@ -63,30 +51,13 @@ export const PopUpNavigation = ({
   isActive,
   setActive,
 }: TPopUpNavigationProps) => {
-  const location = useLocation();
-  const theme = useTheme();
-  return (
-    <ModalPanel isActive={isActive} className="modal-panel">
-      <NavList className="nav list">
-        <Icon
-          icon={"material-symbols:close-rounded"}
-          color={theme.palette.accent.primary}
-          onClick={() => setActive(false)}
-          width={23}
-        />
-        {navItems.map((item, index) => (
-          <Item
-            widgetActive={isActive}
-            setActive={setActive}
-            key={index}
-            iconName={item.iconName}
-            id={item.id}
-            link={item.link}
-            title={item.title}
-            isActive={item.link === location.pathname}
-          />
-        ))}
+  const modal = (
+    <ModalPanel>
+      <NavList className="nav-list">
+        <Items isActive={isActive} setActive={setActive} />
       </NavList>
     </ModalPanel>
   );
+
+  return modal;
 };

@@ -10,6 +10,8 @@ type TContainerProps = {
   width: number;
 };
 
+const duration = 200;
+
 const Container = styled.div<Pick<TAlert, "type"> & TContainerProps>`
   display: flex;
   justify-content: center;
@@ -34,6 +36,20 @@ const Container = styled.div<Pick<TAlert, "type"> & TContainerProps>`
   z-index: 1200;
   border-radius: 10px;
   padding: ${({ theme }) => theme.spacing(1)}px;
+  &.alert-transition-enter {
+    transform: translateY(-100%);
+  }
+  &.alert-transition-enter-active {
+    transition: transform ${duration}ms linear;
+    transform: translateY(0);
+  }
+  &.alert-transition-exit {
+    transform: translateY(0);
+  }
+  &.alert-transition-exit-active {
+    transition: transform ${duration}ms linear;
+    transform: translateY(-100%);
+  }
 `;
 
 const IconWrapper = styled.div`

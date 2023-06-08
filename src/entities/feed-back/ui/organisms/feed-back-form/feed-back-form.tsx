@@ -29,6 +29,8 @@ import { Header } from "@shared/ui/core/molecules";
 import { useWindowDimensions } from "@shared/hooks";
 import { useStore } from "effector-react";
 
+const duration = 200;
+
 const Container = styled.div<{ isNotDesktop: boolean; width: number }>`
   width: ${({ isNotDesktop, width }) => (isNotDesktop ? width - 16 : 678)}px;
   display: flex;
@@ -42,6 +44,23 @@ const Container = styled.div<{ isNotDesktop: boolean; width: number }>`
   -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   overflow-y: auto;
+  &.modal-enter {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  &.modal-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all ${duration}ms ease;
+  }
+  &.modal-exit {
+    opacity: 1;
+  }
+  &.modal-exit-active {
+    opacity: 0;
+    transform: scale(0);
+    transition: all ${duration}ms ease;
+  }
 `;
 
 const StarRatingContainer = styled.div`

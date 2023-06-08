@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import { styled, Typography } from "@shared/ui";
 
 const Container = styled.div`
@@ -13,12 +14,16 @@ const Container = styled.div`
 `;
 
 const Title = styled(Typography)`
-  color: ${({ theme }) => theme.palette.text.primary};
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.palette.text.secondary};
+  font-weight: 300;
+  margin-bottom: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 const Text = styled(Typography)`
-  color: ${({ theme }) => theme.palette.text.primary};
+  color: ${({ theme }) => theme.palette.text.secondary};
   margin-bottom: ${({ theme }) => theme.spacing(0.2)}px;
+  font-weight: 300;
 `;
 
 const Margin = styled.div`
@@ -26,8 +31,18 @@ const Margin = styled.div`
 `;
 
 const NumberLink = styled.a`
-  /* margin-top: ${({ theme }) => theme.spacing(2)}px; */
   text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.1s linear;
+  }
+`;
+
+const Iconify = styled(Icon)`
+  margin-right: ${({ theme }) => theme.spacing(1)}px;
+  color: ${({ theme }) => theme.palette.text.secondary};
 `;
 
 export const ContactsSlice = () => {
@@ -36,10 +51,14 @@ export const ContactsSlice = () => {
       <Title variant="title">контакты</Title>
       <Margin />
       <NumberLink href="tel:+79504345555">
+        <Iconify icon={"ic:baseline-phone"} />
         <Text variant="body16">+7 950 434 5555</Text>
       </NumberLink>
       <Margin />
-      <Text variant="body16">babkinan809@mail.ru</Text>
+      <NumberLink href="mailto:babkinan809@mail.ru?subject=ПРОСТО_ВКУСНО">
+        <Iconify icon={"bxl:gmail"} />
+        <Text variant="body16">babkinan809@mail.ru</Text>
+      </NumberLink>
     </Container>
   );
 };

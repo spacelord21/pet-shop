@@ -16,14 +16,15 @@ const Text = styled(Typography)`
 
 type Props = {
   setSize: (value: number) => void;
+  size: number;
 };
 
-export const OrderForm = ({ setSize }: Props) => {
+export const OrderForm = ({ setSize, size }: Props) => {
   const { isNotDesktop } = useWindowDimensions();
   return (
     <Container isNotDesktop={isNotDesktop} className="size-choose">
       <Text variant="body14">Количество</Text>
-      <Sizes setSize={setSize} />
+      <Sizes setSize={setSize} activeSize={size} />
     </Container>
   );
 };

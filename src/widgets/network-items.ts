@@ -11,13 +11,18 @@ export const networkItems: TNetworkItem[] = [
     url: "https://t.me/Anastasiya_Vladimirovna",
   },
   {
+    id: 4,
+    iconName: "bxl:gmail",
+    url: "mailto:babkinan809@mail.ru?subject=ПРОСТО_ВКУСНО",
+  },
+  {
     id: 2,
     iconName: "ic:baseline-whatsapp",
     url: "https://wa.me/79504345555",
   },
   {
     id: 3,
-    iconName: "basil:viber-outline",
-    url: "viber://chat?number=%2B79504345555",
+    iconName: "mdi:instagram",
+    url: "instagram://user?username=mydog124",
   },
 ];

@@ -1,19 +1,19 @@
 import { styled } from "@shared/ui";
 import { useLocation } from "react-router-dom";
 import { navItems } from "widgets/nav-items";
-import { NavItem } from "../../atoms";
+import { Icon, NavItem } from "../../atoms";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: ${({ theme }) => theme.spacing(1)}px;
   @media ${({ theme }) => theme.device.mobileS} {
     width: 100%;
-    margin-top: ${({ theme }) => theme.spacing(1)}px;
+    margin-top: ${({ theme }) => theme.spacing(4)}px;
   }
   width: 32%;
   justify-content: center;
   align-items: center;
+  text-transform: uppercase;
 `;
 
 export const NavSlice = () => {

@@ -40,10 +40,15 @@ export const Header = ({ setIsActive, title }: THeaderProps) => {
       >
         {title}
       </Title>
-      <IconWrapper onClick={() => setIsActive(false)} className="icon-wrapper">
+      <IconWrapper
+        onClick={() => {
+          setIsActive(false);
+        }}
+        className="icon-wrapper"
+      >
         <Icon
           className="icon-close"
-          icon={"carbon:close-outline"}
+          icon={"material-symbols:close-rounded"}
           color={theme.palette.accent.primary}
           width={24}
           height={24}

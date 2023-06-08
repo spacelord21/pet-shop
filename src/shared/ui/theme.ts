@@ -18,11 +18,14 @@ export const theme = {
       secondary: "#f7f7f7",
       tertiary: "#EDE9E470",
       quaternary: "#D9D9D9",
+      dark: "#302F51",
+      lightDark: "#57557D",
     },
     text: {
       primary: "#302F51",
-      secondary: "#FFFFFF",
+      secondary: "#FFFAF5",
       tertiary: "#57557D",
+      quaternary: "#BBE8B4",
     },
     accent: {
       primary: "#313052",
@@ -34,6 +37,10 @@ export const theme = {
       lightGreen: "#83f28f",
       dark: "#232831",
       error: "#dc3545",
+      telegram: "#03A9F4",
+      whatsapp: "#25d366",
+      instagram: "#cc39a4",
+      gmail: "#ea4335",
     },
   },
   device: {

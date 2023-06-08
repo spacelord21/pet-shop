@@ -30,9 +30,7 @@ export const Home = () => {
       <BackgroundPicture />
       <Title variant="title2">ПРОДУКТЫ</Title>
       <Products products={products} />
-      <Separator />
       <Footer />
-      <Separator />
     </Container>
   );
 };

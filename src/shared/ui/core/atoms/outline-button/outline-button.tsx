@@ -18,6 +18,7 @@ const Button = styled.button<TStyledButtonProps>`
   height: ${({ height }) => height ?? 40}px;
   width: ${({ width }) => width ?? 230}px;
   border: 0.3px solid black;
+  border-radius: 6px;
   &:hover {
     opacity: 0.7;
     transition: 0.5s ease;

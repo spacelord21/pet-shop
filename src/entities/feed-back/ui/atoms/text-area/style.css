@@ -1,0 +1,49 @@
+.group {
+  transition: all .3s ease;
+}
+
+.text-input:focus::placeholder {
+  opacity: 0;
+}
+
+.text-input:placeholder-shown + .label {
+  opacity: 0;
+}
+
+.label {
+  letter-spacing: 0.8px;
+}
+
+.text-input:focus + .label {
+  color: #302F51;
+  position: absolute;
+  top: -7px;
+  left: 16px;
+  background-color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Roboto";
+  opacity: 1;
+}
+
+.text-input:not(:focus) + label,
+.text-input:not(:placeholder-shown) + .label {
+  color: #57557D;
+  position: absolute;
+  top: -8px;
+  left: 16px;
+  background-color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Roboto";
+  height: auto;
+  opacity: 1;
+}
+
+.text-input:not(:placeholder-shown)  {
+  margin-bottom: 12px;
+}
+
+.text-input:placeholder-shown {
+  margin-bottom: 8px;
+}

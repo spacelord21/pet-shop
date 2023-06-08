@@ -1,6 +1,7 @@
 import { useWindowDimensions } from "@shared/hooks";
 import { Separator, styled, Typography } from "@shared/ui";
-import { useState, useRef } from "react";
+import { useState } from "react";
+import { CSSTransition } from "react-transition-group";
 
 const Title = styled(Typography)`
   color: ${({ theme }) => theme.palette.text.primary};
@@ -10,7 +11,6 @@ const Title = styled(Typography)`
   -webkit-user-select: none;
   user-select: none;
   margin-left: ${({ theme }) => theme.spacing(0)}px;
-  margin-top: ${({ theme }) => theme.spacing(0.5)}px;
 `;
 
 const Button = styled(Typography)`
@@ -21,20 +21,28 @@ const Button = styled(Typography)`
   -webkit-user-select: none;
   user-select: none;
   margin-right: ${({ theme }) => theme.spacing(1)}px;
+  font-weight: 400;
 `;
 
 type TIsActive = {
   isActive: boolean;
 };
 
+const duration = 200;
+
 const Text = styled(Typography)<TIsActive>`
   color: ${({ theme }) => theme.palette.text.tertiary};
   width: 300px;
-  height: ${({ isActive }) => (isActive ? "auto" : 0)};
-  opacity: ${({ isActive }) => (isActive ? 1 : 0)};
-  z-index: ${({ isActive }) => (isActive ? 1 : -1)};
-  margin-left: ${({ theme }) => theme.spacing(1)}px;
   text-align: justify;
+  line-height: 22px;
+  padding: ${({ theme }) => theme.spacing(1)}px;
+`;
+
+const DescContainer = styled.div`
+  margin-top: ${({ theme }) => theme.spacing(0)}px;
+  &.desc-slice-exit-done {
+    max-height: 0;
+  }
 `;
 
 const Container = styled.div`
@@ -57,14 +65,10 @@ export const DescriptionSlice = ({
   title,
 }: TDescriptionSliceProps) => {
   const [isPressed, setIsPressed] = useState(false);
-  const itemRef = useRef<HTMLDivElement>(null);
   const { isNotDesktop } = useWindowDimensions();
 
   const handleClick = () => {
     setIsPressed((prev) => !prev);
-    if (!isPressed && itemRef.current) {
-      itemRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
   };
 
   return (
@@ -77,15 +81,21 @@ export const DescriptionSlice = ({
           {isPressed ? "-" : "+"}
         </Button>
       </Container>
-      <Separator width={isNotDesktop ? 100 : 65} />
-      <Text
-        variant="body14"
-        isActive={isPressed}
-        ref={itemRef}
-        className="desc-content"
+
+      <CSSTransition
+        in={isPressed}
+        timeout={duration}
+        classNames={"desc-slice"}
+        unmountOnExit
       >
-        {content}
-      </Text>
+        <DescContainer>
+          <Text variant="body14" isActive={isPressed} className="desc-content">
+            {content}
+          </Text>
+        </DescContainer>
+      </CSSTransition>
+
+      <Separator width={isNotDesktop ? 100 : 65} />
     </>
   );
 };

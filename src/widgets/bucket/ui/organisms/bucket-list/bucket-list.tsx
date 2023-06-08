@@ -1,7 +1,10 @@
 import { TProductInBucket } from "@entities/bucket/types";
 import { Separator, styled } from "@shared/ui";
-import { useMemo } from "react";
+import { createRef, useMemo, useState } from "react";
 import { ProductItem, TotalPrice } from "../../molecules";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+
+const duration = 500;
 
 const Container = styled.div`
   display: flex;
@@ -25,6 +28,13 @@ const ProductsWrapper = styled.div`
 const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  &.item-transition-exit {
+    transform: translateX(0);
+  }
+  &.item-transition-exit-active {
+    transition: transform ${duration}ms;
+    transform: translateX(100%);
+  }
 `;
 
 type TBucketListProps = {
@@ -43,12 +53,20 @@ export const BucketList = ({ products }: TBucketListProps) => {
   return (
     <Container>
       <ProductsWrapper>
-        {products.map((product, index) => (
-          <ItemWrapper key={index}>
-            <ProductItem {...product} key={product.id} />
-            <Separator width={100} key={index + 1000} />
-          </ItemWrapper>
-        ))}
+        <TransitionGroup>
+          {products.map((product, index) => (
+            <CSSTransition
+              timeout={duration}
+              classNames={"item-transition"}
+              key={product.id}
+            >
+              <ItemWrapper>
+                <ProductItem {...product} key={product.id} />
+                <Separator width={100} />
+              </ItemWrapper>
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
       </ProductsWrapper>
       <TotalPrice totalPrice={totalPrice} />
     </Container>
