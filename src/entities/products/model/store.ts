@@ -35,8 +35,14 @@ fetchProducts.watch(() => {
   }
 });
 
-$products.on(fetchProductsFx.doneData, (_, payload) => payload);
-$products.on(fillProducts, (_, payload) => payload);
+const FILTER_ID = 9; // нет в наличии
+
+$products.on(fetchProductsFx.doneData, (_, payload) =>
+  payload.filter((item) => item.id != FILTER_ID)
+);
+$products.on(fillProducts, (_, payload) =>
+  payload.filter((item) => item.id != FILTER_ID)
+);
 
 fetchProductsFx.failData.watch((payload) => {
   createAlert({
