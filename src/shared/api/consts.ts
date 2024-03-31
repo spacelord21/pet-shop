@@ -1,1 +1,1 @@
-export const mainUrl = "https://prosto-vkusno124.store/api/v1";
+export const mainUrl = "https://server.prosto-vkusno124.ru/api/v1";
